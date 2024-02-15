@@ -1,6 +1,5 @@
 <?php
 
-//Muevete >:C
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Users', function(Blueprint $table){
-            $table->string('DNI')->primary();
-            $table->string('Name');
-            $table->string('Password');
-            $table->string('Email');
-            $table->string('Type');
-            $table->string('Phone');
+        Schema::create('User', function(Blueprint $table){
+            $table->id();
+            $table->string('DNI', 9)->nullable(false);
+            $table->string('name', 30)->nullable(false);
+            $table->string('password', 30)->nullable(false);
+            $table->string('email', 50)->nullable(false);
+            $table->string('type', 50)->nullable(false);
+            $table->integer('phone')->nullable(false);
         });
 
-        //tamos \o.o/
     }
 
     /**
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('User');
     }
 };

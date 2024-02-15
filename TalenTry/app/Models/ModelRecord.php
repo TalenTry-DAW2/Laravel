@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ModelRecord extends Model
 {
     use HasFactory;
+    protected $table ="Record";
+
+    protected $fillable = [
+        'DNI',
+        'score',
+        'StartDate',
+        'FinishDate'
+    ];
 }

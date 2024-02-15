@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Record', function(Blueprint $table){
-            $table->id();
-            $table->string('DNI');
+        Schema::create('Record', function (Blueprint $table) {
+            $table->integer('RecordID')->primary();
+            $table->string('DNI')->nullable(false);
+            $table->double('score')->nullable(false);
+            $table->timestamp('StartDate')->nullable(false);
+            $table->timestamp('FinishDate')->nullable(false);
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('Record');
     }
 };
