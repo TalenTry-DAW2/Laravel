@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Answer', function(Blueprint $table){
-            $table->integer('AnswerID', 32)->primary();
-            $table->string('answer', 100)->nullable(false);
-            $table->integer('QuestionID', 32)->nullable(false);
-            $table->integer('QuestionPoints', 4)->nullable(false);
+            $table->integer('AnswerID')->primary();
+            $table->string('answer')->nullable(false);
+            $table->integer('QuestionID')->nullable(false);
+            $table->integer('QuestionPoints')->nullable(false);
+
+            $table->foreign('QuestionID')->references('QuestionID')->on('Question');
         });
     }
 

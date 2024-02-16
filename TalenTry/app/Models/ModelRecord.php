@@ -16,4 +16,9 @@ class ModelRecord extends Model
         'StartDate',
         'FinishDate'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'DNI', 'DNI');
+    }
 }

@@ -14,4 +14,14 @@ class ModelQuestion extends Model
         'question',
         'CategoryID'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'CategoryID', 'CategoryID');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'QuestionID', 'QuestionID');
+    }
 }

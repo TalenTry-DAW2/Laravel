@@ -15,4 +15,9 @@ class ModelAnswer extends Model
         'QuestionID',
         'QuestionPoints'
     ];
+    
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'QuestionID', 'QuestionID');
+    }
 }

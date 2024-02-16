@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +16,10 @@ return new class extends Migration
             $table->integer('RecordID')->primary();
             $table->string('DNI')->nullable(false);
             $table->double('score')->nullable(false);
-            $table->timestamp('StartDate')->nullable(false);
-            $table->timestamp('FinishDate')->nullable(false);
+            $table->date('StartDate')->nullable(false);
+            $table->date('FinishDate')->nullable(false);
+
+            $table->foreign('DNI')->references('DNI')->on('User');
         });
     }
 

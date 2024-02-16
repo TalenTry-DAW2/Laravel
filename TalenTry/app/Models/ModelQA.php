@@ -17,4 +17,19 @@ class ModelQA extends Model
         'StartDate',
         'FinishDate'
     ];
+
+    public function record()
+    {
+        return $this->belongsTo(Record::class, 'RecordID', 'RecordID');
+    }
+
+    public function answer()
+    {
+        return $this->belongsTo(Answer::class, 'AnswerID', 'AnswerID');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'QuestionID', 'QuestionID');
+    }
 }

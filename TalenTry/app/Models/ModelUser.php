@@ -17,4 +17,9 @@ class ModelUser extends Model
         'type',
         'phone'
     ];
+
+    public function records()
+    {
+        return $this->hasMany(Record::class, 'DNI', 'DNI');
+    }
 }
