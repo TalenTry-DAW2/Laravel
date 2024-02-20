@@ -17,11 +17,11 @@ class ModelQuestion extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'CategoryID', 'CategoryID');
+        return $this->belongsTo(ModelCategory::class, 'CategoryID', 'CategoryID');
     }
 
     public function answers()
     {
-        return $this->hasMany(Answer::class, 'QuestionID', 'QuestionID');
+        return $this->hasMany(ModelAnswer::class, 'QuestionID', 'QuestionID');
     }
 }

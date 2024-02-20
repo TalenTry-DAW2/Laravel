@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ModelUser;
+use App\Models\ModelUsers;
 use Illuminate\Support\Facades\Auth;
 
 class ControllerUser extends Controller
@@ -19,7 +20,7 @@ class ControllerUser extends Controller
                 return response()->json(['message' => 'Usuario no encontrado.'], 404);
             }
 
-            $user = Auth::Modeluser();
+            $user = Auth::Modelusers();
 
             if (!password_verify($request->input('password'), $user->password)) {
                 // Incorrect password
@@ -39,7 +40,7 @@ class ControllerUser extends Controller
     // Display a listing of the resource.
     public function index()
     {
-        $users = ModelUser::all();
+        $users = ModelUsers::all();
         // return view('users.index', compact('users'));
     }
 
@@ -53,21 +54,21 @@ class ControllerUser extends Controller
     public function store(Request $request)
     {
         // Validation logic goes here
-        $user = ModelUser::create($request->all());
+        $user = ModelUsers::create($request->all());
         // return redirect()->route('users.index')->with('success', 'User created successfully');
     }
 
     // Display the specified resource.
     public function show($id)
     {
-        $user = ModelUser::findOrFail($id);
+        $user = ModelUsers::findOrFail($id);
         // return view('users.show', compact('user'));
     }
 
     // Show the form for editing the specified resource.
     public function edit($id)
     {
-        $user = ModelUser::findOrFail($id);
+        $user = ModelUsers::findOrFail($id);
         // return view('users.edit', compact('user'));
     }
 
@@ -75,7 +76,7 @@ class ControllerUser extends Controller
     public function update(Request $request, $id)
     {
         // Validation logic goes here
-        $user = ModelUser::findOrFail($id);
+        $user = ModelUsers::findOrFail($id);
         $user->update($request->all());
         // return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
@@ -83,7 +84,7 @@ class ControllerUser extends Controller
     // Remove the specified resource from storage.
     public function destroy($id)
     {
-        $user = ModelUser::findOrFail($id);
+        $user = ModelUsers::findOrFail($id);
         $user->delete();
         // return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }

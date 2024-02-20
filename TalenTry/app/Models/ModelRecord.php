@@ -19,6 +19,6 @@ class ModelRecord extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'DNI', 'DNI');
+        return $this->belongsTo(ModelUsers::class, 'DNI', 'DNI');
     }
 }

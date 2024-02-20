@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('User', function(Blueprint $table){
+        Schema::create('Users', function(Blueprint $table){
             $table->string('DNI')->primary();
             $table->string('name')->nullable(false);
             $table->string('password')->nullable(false);
             $table->string('email')->nullable(false);
-            $table->string('type')->nullable(false);
+            $table->enum('type', ['Usuario', 'Empresa', 'Administrador'])->nullable(false);
             $table->integer('phone')->nullable(false);
         });
 

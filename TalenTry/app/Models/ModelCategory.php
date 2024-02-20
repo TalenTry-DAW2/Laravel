@@ -16,6 +16,6 @@ class ModelCategory extends Model
 
     public function questions()
     {
-        return $this->hasMany(Question::class, 'CategoryID', 'CategoryID');
+        return $this->hasMany(ModelQuestion::class, 'CategoryID', 'CategoryID');
     }
 }

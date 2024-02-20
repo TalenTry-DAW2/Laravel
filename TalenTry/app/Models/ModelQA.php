@@ -20,16 +20,16 @@ class ModelQA extends Model
 
     public function record()
     {
-        return $this->belongsTo(Record::class, 'RecordID', 'RecordID');
+        return $this->belongsTo(ModelRecord::class, 'RecordID', 'RecordID');
     }
 
     public function answer()
     {
-        return $this->belongsTo(Answer::class, 'AnswerID', 'AnswerID');
+        return $this->belongsTo(ModelAnswer::class, 'AnswerID', 'AnswerID');
     }
 
     public function question()
     {
-        return $this->belongsTo(Question::class, 'QuestionID', 'QuestionID');
+        return $this->belongsTo(ModelQuestion::class, 'QuestionID', 'QuestionID');
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('StartDate')->nullable(false);
             $table->date('FinishDate')->nullable(false);
 
-            $table->foreign('DNI')->references('DNI')->on('User');
+            $table->foreign('DNI')->references('DNI')->on('Users');
         });
     }
 
