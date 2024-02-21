@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ModelUser;
 use App\Models\ModelUsers;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +11,10 @@ class ControllerUser extends Controller
     //Funcion de login
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email|max:255|exists:users',
+              'password' => 'required|min:3|max:255',
+          ]);
 
         try {
             if (!Auth::attempt($credentials)) {
@@ -30,7 +32,7 @@ class ControllerUser extends Controller
             // Successful login
             $token = $user->createToken('api-token')->plainTextToken;
 
-            return response()->json(['message' => 'Inicio de sesion exitoso', 'token' => $token]);
+            return response()->json(['message' => 'Inicio de sesion exitoso', 'token' => $token],200);
         } catch (\Exception $e) {
             // Database error or other unexpected error
             return response()->json(['message' => 'Hubo un error, vuelva a intentarlo en unos minutos.', 'error' => $e->getMessage()], 500);
@@ -53,9 +55,31 @@ class ControllerUser extends Controller
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
-        // Validation logic goes here
-        $user = ModelUsers::create($request->all());
-        // return redirect()->route('users.index')->with('success', 'User created successfully');
+        try {
+            $request->validate([
+                'DNI' => 'required',
+                'name' => 'required',
+                'password' => 'required',
+                'email' => 'required|email',
+                'type' => 'required|in:Usuario,Empresa,Administrador',
+                'phone' => 'requried',
+            ]);
+
+            $validatedData['password'] = bcrypt($request['password']);
+
+            $user = ModelUsers::create($validatedData);
+            return response()->json(['message' => 'User registered successfully']);
+            // $usuario = new ModelUsers([
+            //     'DNI' => $request->input('DNI'),
+            //     'name' => $request->input('name'),
+            //     'password' => $request->input('password'),
+            //     'email' => $request->input('email'),
+            //     'type' => $request->input('type'),
+            //     'phone' => $request->input('phone'),
+            // ]);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
+        }
     }
 
     // Display the specified resource.
