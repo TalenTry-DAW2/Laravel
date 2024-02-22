@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ControllerUser extends Controller
 {
+
     //Funcion de login
     public function login(Request $request)
     {
@@ -22,13 +23,13 @@ class ControllerUser extends Controller
                 return response()->json(['message' => 'Usuario no encontrado.'], 404);
             }
 
-            $user = Auth::Modelusers();
+             $user = Auth::user();
 
-            if (!password_verify($request->input('password'), $user->password)) {
-                // Incorrect password
-                return response()->json(['message' => 'La contraseña no es correcta'], 401);
-            }
-
+             if (!password_verify($request->input('password'), $user->password)) {
+                 // Incorrect password
+                 return response()->json(['message' => 'La contraseña no es correcta'], 401);
+             }
+            
             // Successful login
             $token = $user->createToken('api-token')->plainTextToken;
 
@@ -65,9 +66,6 @@ class ControllerUser extends Controller
                 'phone' => 'required',
             ]);
 
-
-            //$validatedData['password'] = bcrypt($request['password']);
-            //$user = ModelUsers::create($validatedData);
             $pHash = bcrypt($request->input('password'));
             $usuario = new ModelUsers([
                 'DNI' => $request->input('DNI'),
