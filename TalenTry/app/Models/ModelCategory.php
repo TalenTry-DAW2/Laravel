@@ -18,4 +18,7 @@ class ModelCategory extends Model
     {
         return $this->hasMany(ModelQuestion::class, 'CategoryID', 'CategoryID');
     }
+
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }

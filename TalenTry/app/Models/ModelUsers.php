@@ -11,6 +11,7 @@ class ModelUsers extends Model
     protected $table ="Users";
 
     protected $fillable = [
+        'DNI',
         'name',
         'password',
         'email',
@@ -35,4 +36,7 @@ class ModelUsers extends Model
     {
         return $this->hasMany(ModelRecord::class, 'DNI', 'DNI');
     }
+
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }

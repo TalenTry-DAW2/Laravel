@@ -62,21 +62,23 @@ class ControllerUser extends Controller
                 'password' => 'required',
                 'email' => 'required|email',
                 'type' => 'required|in:Usuario,Empresa,Administrador',
-                'phone' => 'requried',
+                'phone' => 'required',
             ]);
 
-            $validatedData['password'] = bcrypt($request['password']);
 
-            $user = ModelUsers::create($validatedData);
+            //$validatedData['password'] = bcrypt($request['password']);
+            //$user = ModelUsers::create($validatedData);
+            $pHash = bcrypt($request->input('password'));
+            $usuario = new ModelUsers([
+                'DNI' => $request->input('DNI'),
+                'name' => $request->input('name'),
+                'password' => $pHash,
+                'email' => $request->input('email'),
+                'type' => $request->input('type'),
+                'phone' => $request->input('phone'),
+            ]);
+            $usuario->save();
             return response()->json(['message' => 'User registered successfully']);
-            // $usuario = new ModelUsers([
-            //     'DNI' => $request->input('DNI'),
-            //     'name' => $request->input('name'),
-            //     'password' => $request->input('password'),
-            //     'email' => $request->input('email'),
-            //     'type' => $request->input('type'),
-            //     'phone' => $request->input('phone'),
-            // ]);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
         }

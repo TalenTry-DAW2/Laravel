@@ -20,4 +20,7 @@ class ModelAnswer extends Model
     {
         return $this->belongsTo(Question::class, 'QuestionID', 'QuestionID');
     }
+
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }

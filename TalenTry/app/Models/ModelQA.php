@@ -32,4 +32,7 @@ class ModelQA extends Model
     {
         return $this->belongsTo(ModelQuestion::class, 'QuestionID', 'QuestionID');
     }
+
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }

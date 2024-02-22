@@ -21,4 +21,7 @@ class ModelRecord extends Model
     {
         return $this->belongsTo(ModelUsers::class, 'DNI', 'DNI');
     }
+
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }

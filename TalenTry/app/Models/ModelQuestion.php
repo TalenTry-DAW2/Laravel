@@ -24,4 +24,7 @@ class ModelQuestion extends Model
     {
         return $this->hasMany(ModelAnswer::class, 'QuestionID', 'QuestionID');
     }
+
+    const UPDATED_AT = null;
+    const CREATED_AT = null;
 }
