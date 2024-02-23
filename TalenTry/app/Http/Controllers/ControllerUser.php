@@ -33,11 +33,34 @@ class ControllerUser extends Controller
             // Successful login
             $token = $user->createToken('api-token')->plainTextToken;
 
-            return response()->json(['message' => 'Inicio de sesion exitoso', 'token' => $token],200);
+            return response()->json([
+                'message' => 'Inicio de sesión exitoso',
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'role' => $user->rol,
+            ],200);
         } catch (\Exception $e) {
             // Database error or other unexpected error
             return response()->json(['message' => 'Hubo un error, vuelva a intentarlo en unos minutos.', 'error' => $e->getMessage()], 500);
         };
+    }
+
+
+    //cierra la sesion !!!!!!!!!!no esta bien hecha!!!!!!!!!!
+    public function logout(Request $request)
+    {
+        try {
+            // Revoke the current user's access token, effectively logging them out
+            if (Auth::check()) { return response()->json(['message' => 'Sesion cerrada correctamente'], 200);
+                Auth::user()->tokens()->delete(); // Logout the user by revoking tokens
+               
+            }
+
+            
+        } catch (\Exception $e) {
+            // Handle any exceptions that occur during the process
+            return response()->json(['message' => 'Ha ocurrido un error al hacer logout: ' . $e->getMessage()], 500);
+        }
     }
 
     // Display a listing of the resource.
