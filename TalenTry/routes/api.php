@@ -16,9 +16,17 @@ use App\Http\Controllers\ControllerUser;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    // return $request->user();
+     
 });
+Route::post('/logout',[ControllerUser::class, 'logout']);
+// Route::middleware(['auth.user'])->group(function () {
+//    Route::post('/logout', [ControllerUser::class, 'logout']); 
+//     // Add more routes that require authentication here
+// });
 
 Route::post('/login',[ControllerUser::class, 'login']);
-Route::post('/logout',[ControllerUser::class, 'logout']);
 Route::post('/registro',[ControllerUser::class, 'store']);
+
+
+
