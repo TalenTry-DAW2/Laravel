@@ -37,7 +37,7 @@ class ControllerUser extends Controller
                 'message' => 'Inicio de sesión exitoso',
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'role' => $user->rol,
+                'type' => $user->type,
             ], 200);
         } catch (\Exception $e) {
             // Database error or other unexpected error
@@ -47,21 +47,21 @@ class ControllerUser extends Controller
 
 
     //cierra la sesion
-    public function logout()
-    {
+    public function logout() {
+
         try {
             // Busca el usuario
             $user = Auth::guard('sanctum')->user();
 
             if ($user) {
-                //elimina el token de acceso del usuario
+                // Y elimina el token de acceso del usuario
                 $user->currentAccessToken()->delete();
 
                 // Devuelve un OK
-                return response()->json(['message' => 'Se ha cerrado la sesión correctamente.'], 200);
+                return response()->json(['message' => 'Se ha cerrado la sesión de forma satisfactoria'], 200);
             } else {
                 // Si no se ha podido encontrar el usuario
-                return response()->json(['message' => 'Usuario no encontrado.'], 404);
+                return response()->json(['message' => 'User not found'], 404);
             }
 
         } catch (\Exception $e) {
