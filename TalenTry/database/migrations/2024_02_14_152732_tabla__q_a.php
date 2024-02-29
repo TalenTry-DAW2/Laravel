@@ -13,16 +13,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('QA', function (Blueprint $table) {
-            $table->integer('QAID')->primary();
-            $table->integer('RecordID')->nullable(false);
-            $table->integer('AnswerID')->nullable(false);
-            $table->integer('QuestionID')->nullable(false);
-            $table->date('StartDate')->nullable(false);
-            $table->date('FinishDate')->nullable(false);
-
+            $table->id('QAID', 32); // This will automatically create an auto-incrementing primary key
+            $table->unsignedBigInteger('RecordID')->notnull();
+            $table->unsignedBigInteger('QuestionID')->notnull();
+            $table->string('answer', 100)->notnull();
+            $table->date('StartDate')->notnull();
+            $table->date('FinishDate')->notnull();
+    
             // Foreign key constraints
             $table->foreign('RecordID')->references('RecordID')->on('Record');
-            $table->foreign('AnswerID')->references('AnswerID')->on('Answer');
             $table->foreign('QuestionID')->references('QuestionID')->on('Question');
         });
     }

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Category', function(Blueprint $table){
-            $table->id('CategoryID', 4);
-            $table->string('CategoryName', 50)->notnull();
+        Schema::create('QA', function (Blueprint $table) {
+            $table->id('CompanyID', 8); // This will automatically create an auto-incrementing primary key
+            $table->string('name', 100)->notnull();
+            $table->string('NIF', 9)->nullable(false);
+            $table->string('password', 30)->nullable(false);
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Category');
+        //
     }
 };

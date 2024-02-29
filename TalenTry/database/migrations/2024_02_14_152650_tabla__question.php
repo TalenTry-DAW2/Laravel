@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Question', function (Blueprint $table) {
-            $table->integer('QuestionID')->primary();
-            $table->string('question')->nullable(false);
-            $table->integer('CategoryID')->nullable(false);
-
-            $table->foreign('CategoryID')->references('CategoryID')->on('Category');
+            $table->id('QuestionID'); // This will automatically create an auto-incrementing primary key
+            $table->string('question', 100)->notnull();
+            $table->unsignedBigInteger('CategoryID')->notnull();
+    
+            $table->foreign('CategoryID')->references('CategoryID')->on('category'); // Adjust the table name if needed
         });
     }
+
 
     /**
      * Reverse the migrations.

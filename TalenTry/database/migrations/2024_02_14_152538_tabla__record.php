@@ -13,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Record', function (Blueprint $table) {
-            $table->integer('RecordID')->primary();
-            $table->string('DNI')->nullable(false);
-            $table->double('score')->nullable(false);
+            $table->id('RecordID', 24); // This will automatically create an auto-incrementing primary key
+            $table->unsignedBigInteger('UserID')->nullable(false); // Adjusted data type to match Users table
+            $table->double('score', 5, 2)->nullable(false);
             $table->date('StartDate')->nullable(false);
             $table->date('FinishDate')->nullable(false);
-
-            $table->foreign('DNI')->references('DNI')->on('Users');
+    
+            $table->foreign('UserID')->references('UserID')->on('Users');
         });
     }
 
