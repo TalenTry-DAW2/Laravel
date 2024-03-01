@@ -18,8 +18,10 @@ Route::post('/login',[ControllerUser::class, 'login']);
 Route::post('/registro',[ControllerUser::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout',[ControllerUser::class, 'logout']);
-});
+  
+});Route::post('/logout',[ControllerUser::class, 'logout'])->name('logout');  
+
+
 
 
 

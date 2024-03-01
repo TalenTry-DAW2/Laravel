@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name', 30)->nullable(false);
             $table->string('email', 50)->unique()->nullable(false);
             $table->string('phone')->unique()->nullable(false);
-            $table->string('password', 30)->nullable(false);
+            $table->string('password')->nullable(false);
             $table->enum('type', ['Usuario', 'Empresa', 'Administrador'])->nullable(false);
             $table->boolean('visibility')->default(false)->nullable(false);
             $table->timestamp('email_verified_at')->nullable();

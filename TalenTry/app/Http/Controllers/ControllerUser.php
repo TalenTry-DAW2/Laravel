@@ -18,27 +18,23 @@ class ControllerUser extends Controller
         ]);
 
         try {
-            if (!Auth::attempt($credentials)) {
-                // Usuario no existe
-                return response()->json(['message' => 'Usuario no encontrado.'], 404);
-            }
+            if (Auth::attempt($credentials)) {
 
-            $user = Auth::user();
+                // Si las credenciales son correctas
+                $user = Auth::user();
+                $token = $user->createToken('authToken')->plainTextToken;
+                $type = Auth::user()->type;
 
-            if (!password_verify($request->input('password'), $user->password)) {
-                // Incorrect password
-                return response()->json(['message' => 'La contraseña no es correcta'], 401);
-            }
-
-            // Successful login
-            $token = $user->createToken('api-token')->plainTextToken;
-
-            return response()->json([
-                'message' => 'Inicio de sesión exitoso',
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'type' => $user->type,
-            ], 200);
+                // Deuvelve el token de acceso y el tipo de token
+                return response()->json([
+                    'access_token' => $token,
+                    'token_type' => 'bearer',
+                    'role' => $type,
+                ], 200);
+            } else {
+                // Si no, deuvelve credenciales incorrectas
+                return response()->json(['message' => 'Credenciales incorrectas'], 401);
+            } 
         } catch (\Exception $e) {
             // Database error or other unexpected error
             return response()->json(['message' => 'Hubo un error, vuelva a intentarlo en unos minutos.', 'error' => $e->getMessage()], 500);
