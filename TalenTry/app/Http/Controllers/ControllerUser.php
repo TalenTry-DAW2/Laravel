@@ -57,7 +57,7 @@ class ControllerUser extends Controller
                 return response()->json(['message' => 'Se ha cerrado la sesión de forma satisfactoria'], 200);
             } else {
                 // Si no se ha podido encontrar el usuario
-                return response()->json(['message' => 'User not found'], 404);
+                return response()->json(['message' => 'Usuario no encontrado.'], 404);
             }
 
         } catch (\Exception $e) {
