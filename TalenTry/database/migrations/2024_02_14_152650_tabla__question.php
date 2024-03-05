@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Question', function (Blueprint $table) {
-            $table->id('QuestionID'); // This will automatically create an auto-incrementing primary key
+            $table->id('QuestionID',10); // This will automatically create an auto-incrementing primary key
             $table->string('question', 100)->notnull();
             $table->unsignedBigInteger('CategoryID')->notnull();
     

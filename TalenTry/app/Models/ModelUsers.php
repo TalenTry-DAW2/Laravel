@@ -20,22 +20,21 @@ class ModelUsers extends Authenticatable
         'name',
         'password',
         'email',
-        'type',
         'phone'
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($model) {
-            // Ensure the 'type' attribute is one of the specified options
-            $allowedTypes = ['Usuario', 'Empresa', 'Administrador'];
-            if (!in_array($model->type, $allowedTypes)) {
-                throw new \InvalidArgumentException("Invalid 'type' value");
-            }
-        });
-    }
+    //     static::creating(function ($model) {
+    //         // Ensure the 'type' attribute is one of the specified options
+    //         $allowedTypes = ['Usuario', 'Empresa', 'Administrador'];
+    //         if (!in_array($model->type, $allowedTypes)) {
+    //             throw new \InvalidArgumentException("Invalid 'type' value");
+    //         }
+    //     });
+    // }
 
     public function records()
     {

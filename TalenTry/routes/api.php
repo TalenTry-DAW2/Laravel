@@ -17,8 +17,11 @@ use App\Http\Controllers\ControllerUser;
 Route::post('/login',[ControllerUser::class, 'login']);
 Route::post('/registro',[ControllerUser::class, 'store']);
 
-Route::middleware('auth:sanctum')->group(function () {
-  Route::post('/logout',[ControllerUser::class, 'logout'])->name('logout');  
+Route::middleware('auth:sanctum')->group(function () { 
+  Route::post('/logout',[ControllerUser::class, 'logout'])->name('logout');
+  Route::post('/entrevista',[ControllerRecord::class, 'index']);
+  Route::post('/entrevista',[ControllerRecord::class, 'index']);
+  Route::post('/entrevista',[ControllerRecord::class, 'index']);
 });
 
 

@@ -88,7 +88,6 @@ class ControllerUser extends Controller
                 'name' => 'required',
                 'password' => 'required',
                 'email' => 'required|email',
-                'type' => 'required|in:Usuario,Empresa,Administrador',
                 'phone' => 'required',
             ]);
 
@@ -98,7 +97,6 @@ class ControllerUser extends Controller
                 'name' => $request->input('name'),
                 'password' => $pHash,
                 'email' => $request->input('email'),
-                'type' => $request->input('type'),
                 'phone' => $request->input('phone'),
             ]);
             $usuario->save();

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('Answer', function (Blueprint $table) {
             $table->id('AnswerID'); // This will automatically create an auto-incrementing primary key
-            $table->string('answer', 100)->notnull();
+            $table->string('answer')->length(100)->notnull();
             $table->unsignedBigInteger('QuestionID')->notnull();
-            $table->integer('QuestionPoints')->notnull();
+            $table->integer('QuestionPoints')->length(4)->notnull();
     
             $table->foreign('QuestionID')->references('QuestionID')->on('Question'); // Adjust the table name if needed
         });

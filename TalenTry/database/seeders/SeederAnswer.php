@@ -16,11 +16,9 @@ class SeederAnswer extends Seeder
     {
         for($i =0; $i<=10; $i++)
         {
-            $numeroAleatorio = random_int(0,100);
-            $numeroAleatorio2 = random_int(0,100);
+            $numeroAleatorio2 = random_int(0,10);
             $numeroAleatoriod = random_int(0,100)/10;
             DB::table('Answer')->insert([
-                'AnswerID' => $numeroAleatorio,
                 'answer' => str::random(10),
                 'QuestionID' => $numeroAleatorio2,
                 'QuestionPoints' => $numeroAleatoriod,

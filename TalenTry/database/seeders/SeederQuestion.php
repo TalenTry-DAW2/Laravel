@@ -14,11 +14,11 @@ class SeederQuestion extends Seeder
      */
     public function run(): void
     {
-        $numeroAleatorio = random_int(0,100);
+        $numeroAleatorio = random_int(0,10);
+        $numeroAleatorio2 = random_int(0,10);
         DB::table('Question')->insert([
-            'QuestionID' => $numeroAleatorio,
-            'question' => 1,
-            'CategoryID' => 1,
+            'question' => $numeroAleatorio,
+            'CategoryID' => $numeroAleatorio2,
         ]);
     }
 }

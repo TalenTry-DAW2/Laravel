@@ -14,11 +14,9 @@ class SeederUser extends Seeder
      */
     public function run(): void
     {
-        $numeroAleatorio = random_int(0,100);
-        $numeroAleatorio2 = random_int(0,100);
+
         DB::table('QA')->insert([
-            'UserID' => $numeroAleatorio,
-            'DNI' => '12345678K',
+            'DNI' => str::random(9),
             'name' => str::random(10),
             'password' => str::random(10),
             'email' => 'test@test.com',
