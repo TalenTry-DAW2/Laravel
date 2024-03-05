@@ -17,8 +17,8 @@ class SeederQA extends Seeder
         $numeroAleatorio = random_int(0,100);
         DB::table('QA')->insert([
             'QAID' => $numeroAleatorio,
-            'RecordID' => $numeroAleatorio,
-            'AnswerID' => $numeroAleatorio,
+            'RecordID' => 1,
+            'AnswerID' => 1,
             'StartDate' => "1-1-2024",
         ]);
     }
