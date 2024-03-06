@@ -12,8 +12,9 @@ class ModelQA extends Model
 
     protected $fillable = [
         'RecordID',
-        'AnswerID',
         'QuestionID',
+        'answer',
+        'QuestionPoints',
         'StartDate',
         'FinishDate'
     ];
@@ -21,11 +22,6 @@ class ModelQA extends Model
     public function record()
     {
         return $this->belongsTo(ModelRecord::class, 'RecordID', 'RecordID');
-    }
-
-    public function answer()
-    {
-        return $this->belongsTo(ModelAnswer::class, 'AnswerID', 'AnswerID');
     }
 
     public function question()

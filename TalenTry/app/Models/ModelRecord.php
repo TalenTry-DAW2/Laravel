@@ -11,7 +11,7 @@ class ModelRecord extends Model
     protected $table ="Record";
 
     protected $fillable = [
-        'DNI',
+        'UserID',
         'score',
         'StartDate',
         'FinishDate'
@@ -19,7 +19,7 @@ class ModelRecord extends Model
 
     public function user()
     {
-        return $this->belongsTo(ModelUsers::class, 'DNI', 'DNI');
+        return $this->belongsTo(ModelUsers::class, 'UserID', 'UserID');
     }
 
     const UPDATED_AT = null;

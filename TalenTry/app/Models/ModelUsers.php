@@ -20,7 +20,9 @@ class ModelUsers extends Authenticatable
         'name',
         'password',
         'email',
-        'phone'
+        'phone',
+        'type',
+        'visibility'
     ];
 
     // protected static function boot()

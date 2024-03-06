@@ -19,9 +19,15 @@ Route::post('/registro',[ControllerUser::class, 'store']);
 
 Route::middleware('auth:sanctum')->group(function () { 
   Route::post('/logout',[ControllerUser::class, 'logout'])->name('logout');
-  Route::post('/entrevista',[ControllerRecord::class, 'index']);
-  Route::post('/entrevista',[ControllerRecord::class, 'index']);
-  Route::post('/entrevista',[ControllerRecord::class, 'index']);
+  //rutas de entrevista
+  Route::prefix('/entrevista')->group(function () {
+    Route::post('/',[ControllerRecord::class, 'index']);
+    Route::get('/{id}',[ControllerRecord::class, 'show']);
+    Route::post('/create',[ControllerRecord::class, 'create']);
+    Route::post('/destroy',[ControllerRecord::class, 'destroy']);
+    Route::post('/',[ControllerRecord::class, 'index']);
+
+});
 });
 
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB; //libreria nos permite hacer insert
 use Illuminate\Support\Str; //liberaria para funciones str
+use Illuminate\Support\Carbon;
 
 class SeederRecord extends Seeder
 {
@@ -15,14 +16,19 @@ class SeederRecord extends Seeder
     public function run(): void
     {
         {
-            $numeroAleatorio = random_int(0,10);
-            $numeroAleatorio2 = random_int(0,10);
-            DB::table('QA')->insert([
-                'UserID' => $numeroAleatorio,
-                'score' => $numeroAleatorio2,
-                'StartDate' => "1-1-2024",
-                'FinishDate' => "1-1-2024",
-            ]);
+            for ($i=0; $i < 10; $i++) { 
+                $numeroAleatorio = random_int(1,10);
+                $numeroAleatorio2 = random_int(1,10);
+                $startDate = Carbon::createFromFormat('m/d/Y', '1/1/2024')->format('Y-m-d');
+                $finishDate = Carbon::createFromFormat('m/d/Y', '1/1/2024')->format('Y-m-d');
+                DB::table('Record')->insert([
+                    'UserID' => $numeroAleatorio,
+                    'score' => $numeroAleatorio2,
+                    'StartDate' => $startDate,
+                    'FinishDate' => $finishDate,
+                ]);
+            }
+
         }
     }
 }

@@ -14,15 +14,17 @@ class SeederUser extends Seeder
      */
     public function run(): void
     {
+        for ($i=0; $i < 10; $i++) { 
+            $numero_aleatorio = mt_rand(100000000, 999999999);
+            DB::table('Users')->insert([
+                'DNI' => str::random(9),
+                'name' => str::random(10),
+                'password' => str::random(10),
+                'email' => str::random(10) . '@test.com',
+                'type' => 'Usuario',
+                'phone' => $numero_aleatorio,
+            ]);
+        }
 
-        DB::table('QA')->insert([
-            'DNI' => str::random(9),
-            'name' => str::random(10),
-            'password' => str::random(10),
-            'email' => 'test@test.com',
-            'type' => 'Usuario',
-            'phone' => 69420911,
-            'visbility' => true,
-        ]);
     }
 }
