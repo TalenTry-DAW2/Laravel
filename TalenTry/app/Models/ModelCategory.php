@@ -11,7 +11,8 @@ class ModelCategory extends Model
     protected $table ="Category";
 
     protected $fillable = [
-        'CategoryName'
+        'CategoryName',
+        'description'
     ];
 
     public function questions()

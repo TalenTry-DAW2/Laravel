@@ -12,22 +12,23 @@ class ControllerQA extends Controller
     {
         try {
             $QA = ModelQA::all();
-            return response()-json([$QA]);
+            return response() - json([$QA], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $th->getMessage()], 500);
         }
     }
 
     // Store a newly created resource in storage.
-    public function store(Request $request)
+   public function store(Request $request)
     {
         try {
             $request->validate([
                 'UserID' => 'required',
                 'score' => 'required',
-                'Startdate' => 'required|date',
+                'StartDate' => 'required|date',
                 'FinishDate' => 'required|date',
             ]);
+            DB::beginTransaction();
             //creates a new record with the record model
             $QA = new ModelQA([
                 'UserID' => $request->input('UserID'),
@@ -35,19 +36,13 @@ class ControllerQA extends Controller
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
             ]);
-            //create esta en proceso!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            DB::beginTransaction();
             //save in database
             $QA->save();
-            // Create an instance of ControllerQA
-            $QA = new ControllerQA();
-            // Call the function from ControllerQA
-            $QA->store($request);
             DB::commit();
-            
+            return true;
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al guardar la entrevista: ' . $th->getMessage()], 500);
+            return false;
         }
     }
 
@@ -55,8 +50,8 @@ class ControllerQA extends Controller
     public function show($id)
     {
         try {
-            $QA= ModelQA::findOrFail($id);
-            return response()->json([$record],200);
+            $QA = ModelQA::findOrFail($id);
+            return response()->json([$QA], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
         }
@@ -73,10 +68,10 @@ class ControllerQA extends Controller
                 'StartDate' => 'required|date',
                 'FinishDate' => 'required|date',
             ]);
-    
+
             // Validation logic goes here
             $QA = ModelQA::findOrFail($id);
-    
+
             // Use the update method to update the record
             $QA->update([
                 'UserID' => $request->input('UserID'),
@@ -84,7 +79,7 @@ class ControllerQA extends Controller
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
             ]);
-    //update esta en proceso!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //update esta en proceso!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             return 9;
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
@@ -97,12 +92,12 @@ class ControllerQA extends Controller
     {
         DB::beginTransaction();
         $QA = ModelQA::findOrFail($id);
-        if($QA->delete()){
+        if ($QA->delete()) {
             DB::commit();
             return true;
-            }else{
-                DB::rollback();
-                return false;
-            }
+        } else {
+            DB::rollback();
+            return false;
+        }
     }
 }

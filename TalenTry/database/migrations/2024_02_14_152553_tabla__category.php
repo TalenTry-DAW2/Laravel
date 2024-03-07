@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('Category', function(Blueprint $table){
             $table->id('CategoryID', 4);
             $table->string('CategoryName', 50)->notnull();
+            $table->string('description', 200)->default('null');
         });
     }
 
