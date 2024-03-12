@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerQA;
 use App\Models\ModelRecord;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerRecord extends Controller
 {
@@ -12,7 +13,7 @@ class ControllerRecord extends Controller
     public function index()
     {
         try {
-            $records = ModelRecords::all();
+            $records = ModelRecord::all();
             return response()->json([$records], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
@@ -54,17 +55,29 @@ class ControllerRecord extends Controller
         }
     }
 
-    // Display the specified resource.
-    public function show($id)
+    // Display the user's resource.
+    public function show()
     {
+        $user = Auth::guard('sanctum')->user();
         try {
-            $record = ModelRecord::findOrFail($id);
-            return response()->json([$record], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
+            $records = ModelRecord::where('UserID', $user->UserID)->get();
+            return response()->json([$records], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e->getMessage()], 500);
         }
-        // return view('users.show', compact('user'));
     }
+
+        // Display the specified user's resource.
+        public function showone($id)
+        {
+            $user = Auth::guard('sanctum')->user();
+            try {
+                $records = ModelRecord::where('UserID', $user->UserID)->where('RecordID', $id)->firstOrFail();
+                return response()->json([$records], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e->getMessage()], 500);
+            }
+        }
 
     // Update the specified resource in storage.
     public function update(Request $request, $id)
@@ -87,12 +100,10 @@ class ControllerRecord extends Controller
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
             ]);
-            //update esta en proceso!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            return 9;
+            return response()->json(['message' => 'Se ha actualizado la entrevista correctamente.'], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
         }
-        // return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
     // Remove the specified resource from storage.

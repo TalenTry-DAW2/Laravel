@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ModelRecord extends Model
 {
     use HasFactory;
-    protected $table ="Record";
+    protected $table ="record";
 
     protected $fillable = [
         'UserID',

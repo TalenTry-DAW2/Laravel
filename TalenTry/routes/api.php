@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerUser;
+use App\Http\Controllers\ControllerRecord;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,13 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::post('/logout',[ControllerUser::class, 'logout'])->name('logout');
   //rutas de entrevista
   Route::prefix('/entrevista')->group(function () {
-    Route::post('/',[ControllerRecord::class, 'index']);
-    Route::get('/{id}',[ControllerRecord::class, 'show']);
+    Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/',[ControllerRecord::class, 'index']);
+    });
+    Route::get('/',[ControllerRecord::class, 'show']);
+    Route::get('/{id}',[ControllerRecord::class, 'showone']);
     Route::post('/create',[ControllerRecord::class, 'create']);
-    Route::post('/destroy',[ControllerRecord::class, 'destroy']);
-    Route::post('/',[ControllerRecord::class, 'index']);
-
+    Route::delete('/destroy',[ControllerRecord::class, 'destroy']);
 });
 });
 
