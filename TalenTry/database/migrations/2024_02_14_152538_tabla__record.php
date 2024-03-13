@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id('RecordID', 24); // This will automatically create an auto-incrementing primary key
             $table->unsignedBigInteger('UserID')->nullable(false); // Adjusted data type to match Users table
             $table->double('score', 5, 2)->nullable(false);
-            $table->date('StartDate')->nullable(false);
-            $table->date('FinishDate')->nullable(false);
+            $table->dateTime('StartDate')->nullable(false);
+            $table->dateTime('FinishDate')->nullable(false);
     
             $table->foreign('UserID')->references('UserID')->on('Users');
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ModelUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ControllerUser extends Controller
 {
@@ -86,8 +87,8 @@ class ControllerUser extends Controller
             $request->validate([
                 'DNI' => 'required',
                 'name' => 'required',
-                'password' => 'required',
                 'email' => 'required|email',
+                'password' => 'required',
                 'phone' => 'required',
             ]);
 
@@ -95,8 +96,8 @@ class ControllerUser extends Controller
             $usuario = new ModelUsers([
                 'DNI' => $request->input('DNI'),
                 'name' => $request->input('name'),
-                'password' => $pHash,
                 'email' => $request->input('email'),
+                'password' => $pHash,
                 'phone' => $request->input('phone'),
             ]);
             $usuario->save();

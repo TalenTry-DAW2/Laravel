@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use app\Http\Models\ModelQA;
+use Illuminate\Support\Facades\DB;
 
 class ControllerQA extends Controller
 {
@@ -20,29 +21,43 @@ class ControllerQA extends Controller
 
     // Store a newly created resource in storage.
    public function store(Request $request)
-    {
+    {!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         try {
-            $request->validate([
-                'UserID' => 'required',
-                'score' => 'required',
-                'StartDate' => 'required|date',
-                'FinishDate' => 'required|date',
-            ]);
+            $recordsData = $request->json()->get('respuestas');
+            foreach ($recordsData as $recordData) {  
             DB::beginTransaction();
-            //creates a new record with the record model
-            $QA = new ModelQA([
-                'UserID' => $request->input('UserID'),
-                'score' => $request->input('score'),
-                'StartDate' => $request->input('StartDate'),
-                'FinishDate' => $request->input('FinishDate'),
+            dd($recordData);
+            $startDate = \Carbon\Carbon::parse($recordData->StartDate)->toDateTimeString();
+            $recordData->merge(['StartDate' => $startDate]);
+            $finishDate = \Carbon\Carbon::parse($recordData->FinishDate)->toDateTimeString();
+            $recordData->merge(['FinishDate' => $finishDate]);
+            $recordData->validate([
+                $recordData['RecordID']=> 'required',
+                $recordData['QuestionID']=> 'required',
+                $recordData['answer']=> 'required',
+                $recordData['QuestionPoints']=> 'required',
+                $recordData['StartDate']=> 'required|date_format:Y-m-d H:i:s',
+                $recordData['FinishDate']=> 'required|date_format:Y-m-d H:i:s',
             ]);
-            //save in database
-            $QA->save();
-            DB::commit();
-            return true;
+                $QA = new ModelQA([
+                    'RecordID' => $recordData['RecordID'],
+                    'QuestionID' => $recordData['QuestionID'],
+                    'answer' => $recordData['answer'],
+                    'QuestionPoints' => $recordData['QuestionPoints'],
+                    'StartDate' => $recordData['StartDate'],
+                    'FinishDate' => $recordData['FinishDate'],
+                ]);
+                if($QA->save()){
+                 DB::commit();
+                 return response()->json(['saved'=>true],200);    
+                }else{
+                    DB::rollBack();
+                }      
+            }
+                  
         } catch (\Throwable $th) {
             DB::rollBack();
-            return false;
+            return response()->json(['message'=>'hubo un error en:'.$th],500);
         }
     }
 
@@ -55,18 +70,21 @@ class ControllerQA extends Controller
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
         }
-        // return view('users.show', compact('user'));
     }
 
     // Update the specified resource in storage.
     public function update(Request $request, $id)
     {
         try {
+            $startDate = \Carbon\Carbon::parse($request->input('StartDate'))->toDateTimeString();
+            $request->merge(['StartDate' => $startDate]);
+            $finishDate = \Carbon\Carbon::parse($request->input('FinishDate'))->toDateTimeString();
+            $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
                 'UserID' => 'required',
                 'score' => 'required',
-                'StartDate' => 'required|date',
-                'FinishDate' => 'required|date',
+                'StartDate' => 'required|date_format:Y-m-d H:i:s',
+                'FinishDate' => 'required|date_format:Y-m-d H:i:s',
             ]);
 
             // Validation logic goes here
@@ -79,12 +97,11 @@ class ControllerQA extends Controller
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
             ]);
-            //update esta en proceso!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            return 9;
+                DB::commit();
+                 return response()->json(['saved'=>true],200);  
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
         }
-        // return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
     // Remove the specified resource from storage.

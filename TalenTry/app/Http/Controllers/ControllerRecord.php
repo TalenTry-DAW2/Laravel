@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerQA;
 use App\Models\ModelRecord;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ControllerRecord extends Controller
 {
@@ -24,11 +25,15 @@ class ControllerRecord extends Controller
     public function store(Request $request)
     {
         try {
+            $startDate = \Carbon\Carbon::parse($request->input('StartDate'))->toDateTimeString();
+            $request->merge(['StartDate' => $startDate]);
+            $finishDate = \Carbon\Carbon::parse($request->input('FinishDate'))->toDateTimeString();
+            $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
                 'UserID' => 'required',
                 'score' => 'required',
-                'StartDate' => 'required|date',
-                'FinishDate' => 'required|date',
+                'StartDate' => 'required|date_format:Y-m-d H:i:s',
+                'FinishDate' => 'required|date_format:Y-m-d H:i:s',
             ]);
             //creates a ner record with the record model
             $record = new ModelRecord([
@@ -39,15 +44,14 @@ class ControllerRecord extends Controller
             ]);
             DB::beginTransaction();
             //save in database
-            $record->save();
-            // Create an instance of ControllerQA
-            $QA = new ControllerQA();
-            if ($QA->store($request)) {
-                DB::commit();
-                return response()->json(['message' => 'Entrevista guardada correctamente'], 200);
-            } else {
-                throw new \Exception('Error a la hora de guardar la entrevista.');
+            ;
+            if($record->save()){
+               DB::commit();
+                return response()->json(['saved'=>true],200);  
+            }else{
+                throw "No se pudo guardar la entrevista";
             }
+               
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -83,11 +87,15 @@ class ControllerRecord extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $startDate = \Carbon\Carbon::parse($request->input('StartDate'))->toDateTimeString();
+            $request->merge(['StartDate' => $startDate]);
+            $finishDate = \Carbon\Carbon::parse($request->input('FinishDate'))->toDateTimeString();
+            $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
                 'UserID' => 'required',
                 'score' => 'required',
-                'StartDate' => 'required|date',
-                'FinishDate' => 'required|date',
+                'StartDate' => 'required|date_format:Y-m-d H:i:s',
+                'FinishDate' => 'required|date_format:Y-m-d H:i:s',
             ]);
 
             // Validation logic goes here

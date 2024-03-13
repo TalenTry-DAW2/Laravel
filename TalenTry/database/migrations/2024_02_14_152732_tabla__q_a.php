@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('RecordID')->notnull();
             $table->unsignedBigInteger('QuestionID')->notnull();
             $table->string('answer', 100)->notnull();
-            $table->date('StartDate')->notnull();
-            $table->date('FinishDate')->notnull();
+            $table->dateTime('StartDate')->notnull();
+            $table->dateTime('FinishDate')->notnull();
     
             // Foreign key constraints
             $table->foreign('RecordID')->references('RecordID')->on('Record');
