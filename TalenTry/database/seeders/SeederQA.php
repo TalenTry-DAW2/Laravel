@@ -24,6 +24,7 @@ class SeederQA extends Seeder
             'RecordID' => $numeroAleatorio,
             'QuestionID' => $numeroAleatorio2,
             'Answer' => $numeroAleatorio3,
+            'QuestionPoints'=>$numeroAleatorio3 * $numeroAleatorio2/$numeroAleatorio,
             'StartDate' => $startDate,
             'FinishDate'=> $finishDate,
         ]);

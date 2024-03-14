@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('RecordID')->notnull();
             $table->unsignedBigInteger('QuestionID')->notnull();
             $table->string('answer', 100)->notnull();
+            $table->double('QuestionPoints', 5, 2)->notnull();
             $table->dateTime('StartDate')->notnull();
             $table->dateTime('FinishDate')->notnull();
     

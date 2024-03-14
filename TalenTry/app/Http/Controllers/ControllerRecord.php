@@ -7,6 +7,7 @@ use App\Http\Controllers\ControllerQA;
 use App\Models\ModelRecord;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ControllerRecord extends Controller
 {
@@ -25,15 +26,15 @@ class ControllerRecord extends Controller
     public function store(Request $request)
     {
         try {
-            $startDate = \Carbon\Carbon::parse($request->input('StartDate'))->toDateTimeString();
+            $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
             $request->merge(['StartDate' => $startDate]);
-            $finishDate = \Carbon\Carbon::parse($request->input('FinishDate'))->toDateTimeString();
+            $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
             $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
                 'UserID' => 'required',
                 'score' => 'required',
-                'StartDate' => 'required|date_format:Y-m-d H:i:s',
-                'FinishDate' => 'required|date_format:Y-m-d H:i:s',
+                'StartDate' => 'required',
+                'FinishDate' => 'required',
             ]);
             //creates a ner record with the record model
             $record = new ModelRecord([
@@ -43,16 +44,14 @@ class ControllerRecord extends Controller
                 'FinishDate' => $request->input('FinishDate'),
             ]);
             DB::beginTransaction();
-            //save in database
+                //save in database
             ;
-            if($record->save()){
-               DB::commit();
-                return response()->json(['saved'=>true],200);  
-            }else{
+            if ($record->save()) {
+                DB::commit();
+                return response()->json(['saved' => true], 200);
+            } else {
                 throw "No se pudo guardar la entrevista";
             }
-               
-
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
@@ -71,31 +70,31 @@ class ControllerRecord extends Controller
         }
     }
 
-        // Display the specified user's resource.
-        public function showone($id)
-        {
-            $user = Auth::guard('sanctum')->user();
-            try {
-                $records = ModelRecord::where('UserID', $user->UserID)->where('RecordID', $id)->firstOrFail();
-                return response()->json([$records], 200);
-            } catch (\Exception $e) {
-                return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e->getMessage()], 500);
-            }
+    // Display the specified user's resource.
+    public function showone($id)
+    {
+        $user = Auth::guard('sanctum')->user();
+        try {
+            $records = ModelRecord::where('UserID', $user->UserID)->where('RecordID', $id)->firstOrFail();
+            return response()->json([$records], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e->getMessage()], 500);
         }
+    }
 
     // Update the specified resource in storage.
     public function update(Request $request, $id)
     {
         try {
-            $startDate = \Carbon\Carbon::parse($request->input('StartDate'))->toDateTimeString();
+            $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
             $request->merge(['StartDate' => $startDate]);
-            $finishDate = \Carbon\Carbon::parse($request->input('FinishDate'))->toDateTimeString();
+            $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
             $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
                 'UserID' => 'required',
                 'score' => 'required',
-                'StartDate' => 'required|date_format:Y-m-d H:i:s',
-                'FinishDate' => 'required|date_format:Y-m-d H:i:s',
+                'StartDate' => 'required',
+                'FinishDate' => 'required',
             ]);
 
             // Validation logic goes here
