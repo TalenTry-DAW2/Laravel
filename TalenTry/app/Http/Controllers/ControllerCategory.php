@@ -11,17 +11,18 @@ class ControllerCategory extends Controller
 
     public function index(){
         try {
-            $QA = ModelCategory::findOrFail();
-            return response()->json([$QA], 200);
+            $category = ModelCategory::all();
+            return response()->json($category, 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
         }
     }
 
-    public function show($id){
+    public function show(Request $request){
         try {
-            $QA = ModelCategory::findOrFail($id);
-            return response()->json([$QA], 200);
+            $id = $request->get('id');
+            $QA = ModelCategory::where('CategoryID', $id)->firstOrFail();
+            return response()->json($QA, 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
         }

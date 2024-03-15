@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerUser;
 use App\Http\Controllers\ControllerRecord;
 use App\Http\Controllers\ControllerQA;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ControllerCategory;
+use App\Http\Controllers\ControllerQuestion;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,13 +53,14 @@ Route::prefix('/QA')->group(function () {
   //guarda todas las respuestas que recibe
   Route::post('/create',[ControllerQA::class, 'store']);
 });
+Route::prefix('/categoria')->group(function () {
+  Route::get('/all',[ControllerCategory::class, 'index']);
+  Route::get('/',[ControllerCategory::class, 'show']);
+});
 Route::prefix('/pregunta')->group(function () {
-
+  Route::get('/',[ControllerQuestion::class, 'showCategory']);
 });
 Route::prefix('/respuesta')->group(function () {
-
-});
-Route::prefix('/empresa')->group(function () {
 
 });
 Route::prefix('/share')->group(function () {
