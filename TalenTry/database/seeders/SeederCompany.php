@@ -15,11 +15,13 @@ class SeederCompany extends Seeder
     public function run(): void
     {
         {
-            DB::table('Company')->insert([
-                'name' => str::random(10),
-                'NIF' => str::random(9),
-                'address' => str::random(15),
-                'password' => str::random(10),
+            DB::table('Users')->insert([
+                'DNI' => '12345678K',
+                'name' => 'TestEmpresa',
+                'password' => '456789123',
+                'email' => 'TestEmpresa@test.com',
+                'type' => 'Empresa',
+                'visibility' => false,
             ]);
         }
     }
