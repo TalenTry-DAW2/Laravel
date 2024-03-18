@@ -74,12 +74,6 @@ class ControllerUser extends Controller
         // return view('users.index', compact('users'));
     }
 
-    // Show the form for creating a new resource.
-    public function create()
-    {
-        // return view('users.create');
-    }
-
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
@@ -111,14 +105,7 @@ class ControllerUser extends Controller
     public function show($id)
     {
         $user = ModelUsers::findOrFail($id);
-        // return view('users.show', compact('user'));
-    }
-
-    // Show the form for editing the specified resource.
-    public function edit($id)
-    {
-        $user = ModelUsers::findOrFail($id);
-        // return view('users.edit', compact('user'));
+        
     }
 
     // Update the specified resource in storage.
