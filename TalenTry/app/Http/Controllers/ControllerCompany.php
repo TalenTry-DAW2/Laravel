@@ -42,10 +42,10 @@ class ControllerCompany extends Controller
                 'password' => 'required',
             ]);
             $company = new ModelCompany([
-                'name' => $request['RecordID'],
-                'NIF' => $request['QuestionID'],
-                'address' => $request['answer'],
-                'password' => $request['QuestionPoints'],
+                'name' => $request['name'],
+                'NIF' => $request['NIF'],
+                'address' => $request['address'],
+                'password' => $request['password'],
             ]);
             if ($comapny->save()) {
                 DB::commit();
@@ -54,6 +54,53 @@ class ControllerCompany extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json(['message' => 'Hubo un error en:' . $th], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $request->validate([
+                'name' => 'required',
+                'NIF' => 'required',
+                'address' => 'required',
+                'password' => 'required',
+            ]);
+
+            // Validation logic goes here
+            $company = ModelQA::findOrFail($id);
+
+            // Use the update method to update the record
+            $company->update([
+                'name' => $request->input('name'),
+                'NIF' => $request->input('NIF'),
+                'address' => $request->input('address'),
+                'password' => $request->input('password'),
+            ]);
+            DB::commit();
+            return response()->json(['saved' => true], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar le empresa: ' . $th->getMessage()], 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+            
+            $company = ModelCompany::findOrFail($id);
+            $company->delete();
+            
+            DB::commit();
+            
+            return response()->json(['success' => true, 'message' => 'Empresa eliminada correctamente'],200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            return response()->json(['success' => false, 'message' => 'No se pudo eliminar'],500);
         }
     }
 }

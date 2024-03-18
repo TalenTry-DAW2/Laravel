@@ -71,6 +71,7 @@ class ControllerQA extends Controller
     public function update(Request $request, $id)
     {
         try {
+            DB::beginTransaction();
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
              $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
@@ -95,19 +96,24 @@ class ControllerQA extends Controller
             DB::commit();
             return response()->json(['saved' => true], 200);
         } catch (\Throwable $th) {
+            DB::rollBack();
             return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
         }
     }
 
     // Remove the specified resource from storage.
     public function destroy($id)
-    {
-        DB::beginTransaction();
-        $QA = ModelQA::findOrFail($id);
-        if ($QA->delete()) {
+    { 
+        try {
+            DB::beginTransaction();
+            $relatedQAs = ModelQA::where('RecordID', $id)->get();
+            // Delete all related QA records
+            foreach ($relatedQAs as $relatedQA) {
+                $relatedQA->delete();
+            }
             DB::commit();
-            return true;
-        } else {
+            return  true;
+        } catch (\Exception $e) {
             DB::rollback();
             return false;
         }

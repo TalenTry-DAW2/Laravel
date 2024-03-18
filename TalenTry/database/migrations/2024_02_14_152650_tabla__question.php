@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('Question', function (Blueprint $table) {
             $table->id('QuestionID',10); // This will automatically create an auto-incrementing primary key
-            $table->string('question', 100)->notnull();
+            $table->string('question')->length(255)->notnull();
             $table->unsignedBigInteger('CategoryID')->notnull();
     
             $table->foreign('CategoryID')->references('CategoryID')->on('category'); // Adjust the table name if needed
