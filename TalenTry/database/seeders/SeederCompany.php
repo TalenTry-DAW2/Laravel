@@ -15,13 +15,11 @@ class SeederCompany extends Seeder
     public function run(): void
     {
         {
-            DB::table('Users')->insert([
-                'DNI' => '12345678K',
-                'name' => 'TestEmpresa',
-                'password' => '456789123',
-                'email' => 'TestEmpresa@test.com',
-                'type' => 'Empresa',
-                'visibility' => false,
+            DB::table('Company')->insert([
+                'name' => 'EmpresaGenerica1',
+                'NIF' => '123456789D',
+                'address' => 'MiKasa 2',
+                'password' => '123456789D',
             ]);
         }
     }

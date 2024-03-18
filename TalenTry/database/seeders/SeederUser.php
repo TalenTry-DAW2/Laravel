@@ -29,9 +29,8 @@ class SeederUser extends Seeder
                 'password' => '987654321',
                 'email' => 'TestAdministrador@test.com',
                 'type' => 'Administrador',
+                'phone' => 69420124,
                 'visibility' => false,
             ]);
-
-
     }
 }

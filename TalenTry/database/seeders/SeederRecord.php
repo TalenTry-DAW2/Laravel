@@ -17,12 +17,11 @@ class SeederRecord extends Seeder
     {
         {
             for ($i=0; $i < 10; $i++) { 
-                $numeroAleatorio = random_int(1,10);
                 $numeroAleatorio2 = random_int(1,10);
                 $startDate = Carbon::createFromFormat('m/d/Y', '1/1/2024')->format('Y-m-d');
                 $finishDate = Carbon::createFromFormat('m/d/Y', '1/1/2024')->format('Y-m-d');
                 DB::table('Record')->insert([
-                    'UserID' => $numeroAleatorio,
+                    'UserID' => 1,
                     'score' => $numeroAleatorio2,
                     'StartDate' => $startDate,
                     'FinishDate' => $finishDate,
