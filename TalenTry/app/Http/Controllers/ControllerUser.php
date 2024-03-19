@@ -66,6 +66,7 @@ class ControllerUser extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = $request->input('password');
+        $user->phone = $request->input('phone');
         $user->save();
         return response()->json('Usuario actualizado correctamente');
     }
