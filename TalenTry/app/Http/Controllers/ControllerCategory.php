@@ -33,7 +33,7 @@ class ControllerCategory extends Controller
         $QA = new ModelCategory();
         $QA->CategoryName = $request->input('CateGoryName');
         $QA->description = $request->input('description');
-
+        $QA->save();
         return response()->json('Categoria creada correctamente');
     }
 
