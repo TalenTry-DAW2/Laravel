@@ -20,14 +20,12 @@ use App\Http\Controllers\ControllerQuestion;
 |
 */
 
-Route::middleware('!auth:sanctum')->group(function () {
   // Routes accessible only to unauthenticated users using Sanctum
   Route::post('/registro',[ControllerUser::class, 'store']);
 
   Route::post('/login',[ControllerUser::class, 'login']);
 
   Route::post('/registroEmpresa',[ControllerCompany::class, 'store']);
-});
 
 
 Route::middleware('auth:sanctum')->group(function () { 
@@ -143,10 +141,3 @@ Route::middleware('auth:sanctum')->group(function () {
   });
 
 });
-
-
-
-
-
-
-
