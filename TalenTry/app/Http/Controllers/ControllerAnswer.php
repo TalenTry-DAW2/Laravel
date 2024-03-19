@@ -42,14 +42,13 @@ class ControllerAnswer extends Controller
                 'QuestionPoints' => 'required',
             ]);
             DB::beginTransaction();
-            //creates a ner record with the record model
-            $record = new ModelAnswer([
+            $answer = new ModelAnswer([
                 'answer' => $request->input('answer'),
                 'QuestionID' => $request->input('QuestionID'),
                 'QuestionPoints' => $request->input('QuestionPoints'),
             ]);
                 //save in database
-            if ($record->save()) {
+            if ($answer->save()) {
                 DB::commit();
                 return response()->json(['saved' => true], 200);
             }
@@ -93,8 +92,8 @@ class ControllerAnswer extends Controller
         try {
             DB::beginTransaction();
             
-            $company = ModelAnswer::findOrFail($id);
-            $company->delete();
+            $answer = ModelAnswer::findOrFail($id);
+            $answer->delete();
             
             DB::commit();
             
