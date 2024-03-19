@@ -48,22 +48,37 @@ class ControllerUser extends Controller
     // Display the specified resource.
     public function show($id)
     {
-        //$user = ModelUsers::findOrFail($id);
+        $user = ModelUsers::find($id);
+        if (!$user) {
+            return response()->json('Usuario no encontrado');
+        }
+        return response()->json($user);
     }
 
     // Update the specified resource in storage.
     public function update(Request $request, $id)
     {
-        // Validation logic goes here
-        //$user = ModelUsers::findOrFail($id);
-        //$user->update($request->all());
+        $user = ModelUsers::find($id);
+        if (!$user) {
+            return response()->json('Usuario no encontrado');
+        }
+        $user->DNI = $request->input('DNI');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
+        return response()->json('Usuario actualizado correctamente');
     }
 
     // Remove the specified resource from storage.
     public function destroy($id)
     {
-        //$user = ModelUsers::findOrFail($id);
-        //$user->delete();
+        $user = ModelUsers::find($id);
+        if (!$user) {
+            return response()->json(['Usuario no encontrado']);
+        }
+        $user->delete();
+        return response()->json(['Usuario borrado']);
     }
 
     //Funcion de login

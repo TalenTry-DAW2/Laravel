@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ModelCompany;
+use App\Models\ModelUsers;
 use Illuminate\Support\Facades\DB;
 
 class ControllerCompany extends Controller
@@ -48,7 +49,7 @@ class ControllerCompany extends Controller
                 'address' => $request['address'],
                 'password' => $request['password'],
             ]);
-            if ($comapny->save()) {
+            if ($company->save()) {
                 DB::commit();
                 return response()->json(['saved' => true], 200);
             }
