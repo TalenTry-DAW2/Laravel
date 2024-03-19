@@ -10,6 +10,62 @@ use Illuminate\Support\Facades\DB;
 class ControllerUser extends Controller
 {
 
+    // Display a listing of the resource.
+    public function index()
+    {
+        $users = ModelUsers::all();
+    }
+
+    // Store a newly created resource in storage.
+    public function store(Request $request)
+    {
+        try {
+            $request->validate([
+                'DNI' => 'required',
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+                'phone' => 'required',
+            ]);
+            DB::beginTransaction();
+            $pHash = bcrypt($request->input('password'));
+            $usuario = new ModelUsers([
+                'DNI' => $request->input('DNI'),
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $pHash,
+                'phone' => $request->input('phone'),
+            ]);
+            $usuario->save();
+            DB::commit();
+            return response()->json(['message' => 'User registered successfully']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
+        }
+    }
+
+    // Display the specified resource.
+    public function show($id)
+    {
+        //$user = ModelUsers::findOrFail($id);
+    }
+
+    // Update the specified resource in storage.
+    public function update(Request $request, $id)
+    {
+        // Validation logic goes here
+        //$user = ModelUsers::findOrFail($id);
+        //$user->update($request->all());
+    }
+
+    // Remove the specified resource from storage.
+    public function destroy($id)
+    {
+        //$user = ModelUsers::findOrFail($id);
+        //$user->delete();
+    }
+
     //Funcion de login
     public function login(Request $request)
     {
@@ -42,7 +98,6 @@ class ControllerUser extends Controller
         };
     }
 
-
     //cierra la sesion
     public function logout() {
 
@@ -65,63 +120,5 @@ class ControllerUser extends Controller
             // Si hay algun error se muestra
             return response()->json(['message' => 'Ha ocurrido un error al hacer logout: ' . $e->getMessage()], 500);
         }
-    }
-
-    // Display a listing of the resource.
-    public function index()
-    {
-        $users = ModelUsers::all();
-        // return view('users.index', compact('users'));
-    }
-
-    // Store a newly created resource in storage.
-    public function store(Request $request)
-    {
-        try {
-            $request->validate([
-                'DNI' => 'required',
-                'name' => 'required',
-                'email' => 'required|email',
-                'password' => 'required',
-                'phone' => 'required',
-            ]);
-
-            $pHash = bcrypt($request->input('password'));
-            $usuario = new ModelUsers([
-                'DNI' => $request->input('DNI'),
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'password' => $pHash,
-                'phone' => $request->input('phone'),
-            ]);
-            $usuario->save();
-            return response()->json(['message' => 'User registered successfully']);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
-        }
-    }
-
-    // Display the specified resource.
-    public function show($id)
-    {
-        $user = ModelUsers::findOrFail($id);
-        
-    }
-
-    // Update the specified resource in storage.
-    public function update(Request $request, $id)
-    {
-        // Validation logic goes here
-        $user = ModelUsers::findOrFail($id);
-        $user->update($request->all());
-        // return redirect()->route('users.index')->with('success', 'User updated successfully');
-    }
-
-    // Remove the specified resource from storage.
-    public function destroy($id)
-    {
-        $user = ModelUsers::findOrFail($id);
-        $user->delete();
-        // return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }

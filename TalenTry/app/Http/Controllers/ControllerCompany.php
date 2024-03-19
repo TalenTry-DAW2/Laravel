@@ -29,7 +29,7 @@ class ControllerCompany extends Controller
         }
     }
 
-    //cre una empresa nueva
+    //crea una empresa nueva
     public function store(Request $request)
     {
         try {
@@ -53,10 +53,11 @@ class ControllerCompany extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            return response()->json(['message' => 'Hubo un error en:' . $th], 500);
+            return response()->json(['message' => 'Hubo un error en:' . $th->getMessage()], 500);
         }
     }
 
+    //actualiza la informacion de una empresa (funcion de empresa o admin!)
     public function update(Request $request, $id)
     {
         try {
@@ -86,6 +87,7 @@ class ControllerCompany extends Controller
         }
     }
 
+    //elimina la empresa (funcion de admin!)
     public function destroy($id)
     {
         try {

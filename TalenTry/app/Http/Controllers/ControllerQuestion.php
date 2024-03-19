@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class ControllerQuestion extends Controller
 {
+
+    //carga n numero de preguntas con sus respuestas de la categoria especificada y tantas como se hayan indicado.
     public function showCategory(Request $request)
     {
         try {

@@ -19,51 +19,116 @@ use App\Http\Controllers\ControllerQuestion;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post('/login',[ControllerUser::class, 'login']);
-Route::post('/registro',[ControllerUser::class, 'store']);
+
+Route::middleware('!auth:sanctum')->group(function () {
+  // Routes accessible only to unauthenticated users using Sanctum
+  Route::post('/registro',[ControllerUser::class, 'store']);
+
+  Route::post('/login',[ControllerUser::class, 'login']);
+
+  Route::post('/registroEmpresa',[ControllerCompany::class, 'store']);
+});
+
 
 Route::middleware('auth:sanctum')->group(function () { 
-  Route::post('/logout',[ControllerUser::class, 'logout'])->name('logout');
-  //rutas de entrevista
-  Route::prefix('/entrevista')->group(function () {
-    Route::middleware(['auth:sanctum', 'check.role:Administrador'])->group(function () {
-      //enseña TODAS las entrevistas
-    Route::get('/all',[ControllerRecord::class, 'index']);
-        //elimina la entrevista que se ha seleccionado
-    Route::delete('/destroy',[ControllerRecord::class, 'destroy']);
-    });
-    //enseña todas la entrevistas del usuario
-    Route::get('/',[ControllerRecord::class, 'show']);
-    //enseña la entrevista especificada si es del usuario
-    Route::get('/{id}',[ControllerRecord::class, 'showone']);
-    //guarda una entrevista a nombre del usuario actual
-    Route::post('/create',[ControllerRecord::class, 'store']);
+  
+  //funciones de controlador User
+  Route::post('/logout',[ControllerUser::class, 'logout']);
 
-});
-});
-Route::prefix('/QA')->group(function () {
-  Route::middleware(['auth:sanctum', 'check.role:Administrador'])->group(function () {
-    //enseña TODAS las respuestas de personas
-  Route::get('/all',[ControllerQA::class, 'index']);
-      //elimina la respuesta que se ha seleccionado
-  Route::delete('/destroy',[ControllerQA::class, 'destroy']);
+  Route::prefix('/user')->group(function () {
+    //Route::get('/',[ControllerUser::class, 'index']);
   });
-  //enseña todas la entrevistas del usuario
-  Route::get('/',[ControllerQA::class, 'show']);
-  //guarda todas las respuestas que recibe
-  Route::post('/create',[ControllerQA::class, 'store']);
-});
-Route::prefix('/categoria')->group(function () {
-  Route::get('/all',[ControllerCategory::class, 'index']);
-  Route::get('/',[ControllerCategory::class, 'show']);
-});
-Route::prefix('/pregunta')->group(function () {
-  Route::get('/',[ControllerQuestion::class, 'showCategory']);
-});
-Route::prefix('/respuesta')->group(function () {
 
-});
-Route::prefix('/share')->group(function () {
+  //funciones de controlador Share
+  Route::prefix('/share')->group(function () {
+    Route::get('/',[ControllerShare::class, 'show']);
+  });
+
+  //funciones de controlador Company
+  Route::prefix('/company')->group(function () {
+    Route::get('/',[ControllerCompany::class, 'index']);
+    Route::get('/{id}',[ControllerCompany::class, 'show']);
+  });
+  
+  //funciones de controlador Category
+  Route::prefix('/category')->group(function () {
+    Route::get('/',[ControllerCategory::class, 'index']);
+    Route::get('/{id}',[ControllerCategory::class, 'show']);
+  });
+
+  //funciones de controlador Question
+  Route::prefix('/question')->group(function () {
+   // Route::get('/',[ControllerQuestion::class, 'index']);
+    Route::get('/getFromCategory',[ControllerQuestion::class, 'showCategory']);
+  });
+
+  //funciones de controlador Answer
+  Route::prefix('/answer')->group(function () {
+   // Route::get('/',[ControllerAnswer::class, 'index']);
+    Route::get('/getFromQuestion/{id}',[ControllerAnswer::class, 'showQuestion']);
+  });
+
+  //funciones de controlador Record
+  Route::prefix('/record')->group(function () {
+    Route::get('/',[ControllerRecord::class, 'show']);
+    Route::get('/{id}',[ControllerRecord::class, 'showOne']);
+  });
+
+  //funciones de controlador QA
+  Route::prefix('/QA')->group(function () {
+    Route::get('/{id}',[ControllerQA::class, 'show']);
+    Route::get('/store',[ControllerQA::class, 'store']);
+  });
+ 
+  Route::middleware(['auth:sanctum', 'check.role:Usuario'])->group(function () {
+
+  //funciones de controlador Share
+  Route::prefix('/share')->group(function () {
+    Route::post('/store',[ControllerShare::class, 'store']);
+    Route::put('/update',[ControllerShare::class, 'update']);
+  });
+  }); 
+
+  Route::middleware(['auth:sanctum', 'check.role:Empresa'])->group(function () {
+
+    //funciones de controlador Company
+    Route::prefix('/company')->group(function () {
+      Route::put('/update/{id}',[ControllerCompany::class, 'update']);
+    });
+
+    //funciones de controlador Record
+    Route::prefix('/record')->group(function () {
+      Route::get('/store',[ControllerRecord::class, 'store']);
+      Route::get('/update/{id}',[ControllerRecord::class, 'update']);
+  });
+
+    //funciones de controlador QA
+    Route::prefix('/QA')->group(function () {
+      Route::get('/showQuestionAnswers',[ControllerQA::class, 'showQuestionAnswers']);
+    });
+
+  });
+
+  Route::middleware(['auth:sanctum', 'check.role:Administrador'])->group(function () {
+
+    //funciones de controlador Company
+    Route::prefix('/company')->group(function () {
+      Route::delete('/destroy/{id}',[ControllerCompany::class, 'destroy']);
+    });
+
+    //funciones de controlador Record
+    Route::prefix('/record')->group(function () {
+      Route::get('/destroy/{id}',[ControllerRecord::class, 'destroy']);
+    });
+
+    //funciones de controlador QA
+    Route::prefix('/QA')->group(function () {
+      Route::get('/',[ControllerQA::class, 'index']);
+      Route::get('/update/{id}',[ControllerQA::class, 'update']);
+      Route::get('/destroy/{id}',[ControllerQA::class, 'destroy']);
+    });
+
+  });
 
 });
 

@@ -8,7 +8,7 @@ use App\Models\ModelCategory;
 
 class ControllerCategory extends Controller
 {
-
+    //muestra todas las categorias
     public function index(){
         try {
             $category = ModelCategory::all();
@@ -18,9 +18,9 @@ class ControllerCategory extends Controller
         }
     }
 
-    public function show(Request $request){
+    //muestra la categoria pedida
+    public function show($id){
         try {
-            $id = $request->get('id');
             $QA = ModelCategory::where('CategoryID', $id)->firstOrFail();
             return response()->json($QA, 200);
         } catch (\Throwable $th) {

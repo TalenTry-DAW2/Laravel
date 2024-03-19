@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class ControllerQA extends Controller
 {
-    // Display a listing of the resource.
+    // devuelve todas las respuestas hechas en entrevistas (funcion de admin!)
     public function index()
     {
         try {
@@ -20,18 +20,18 @@ class ControllerQA extends Controller
         }
     }
 
-    // Display the specified resource.
+    // muestra las respuestas de una entrevista en concreto.
     public function show($id)
     {
         try {
-            $QA = ModelQA::findOrFail($id);
+            $QA = ModelQA::where('RecordID', $id)->get();
             return response()->json([$QA], 200);
         } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $th->getMessage()], 500);
         }
     }
 
-    // Store a newly created resource in storage.
+    // guarda la respuesta de la entrevista (1 a la vez).
     public function store(Request $request)
     {
         try {
@@ -67,7 +67,7 @@ class ControllerQA extends Controller
         }
     }
 
-    // Update the specified resource in storage.
+    // Actualiza la puntacion / tiempo en una respuesta de entrevista (!funcion de admin!).
     public function update(Request $request, $id)
     {
         try {
@@ -77,7 +77,6 @@ class ControllerQA extends Controller
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
              $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
-                'UserID' => 'required',
                 'score' => 'required',
                 'StartDate' => 'required',
                 'FinishDate' => 'required',
@@ -88,7 +87,6 @@ class ControllerQA extends Controller
 
             // Use the update method to update the record
             $QA->update([
-                'UserID' => $request->input('UserID'),
                 'score' => $request->input('score'),
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
@@ -101,7 +99,7 @@ class ControllerQA extends Controller
         }
     }
 
-    // Remove the specified resource from storage.
+    // elimina la respuesta especifica de la entrevista (!funcion de admin!).
     public function destroy($id)
     { 
         try {
@@ -117,5 +115,26 @@ class ControllerQA extends Controller
             DB::rollback();
             return false;
         }
+    }
+
+    //funciones para estadisticas!!--!!--!!--!!
+
+    // muestra todas las respuestas de una pregunta en concreto (funcion de empresa!).!!!!!!!!!!!por comprobar!!!!!!!!!!!!!
+    public function showQuestionAnswers($id, $comanyID)
+    {
+         try {
+            $QA = DB::table('QA')
+            ->join('Record', 'QA.RecordID', '=', 'Record.RecordID')
+            ->join('Share', 'Record.UserID', '=', 'Share.UserID')
+            ->where('QuestionID', $id)
+            ->where('Share.CompanyID', '=', $comanyID)
+            ->where('Share.ExpiredDate', '>=', $currentDate)
+            ->select('QA.*')
+            ->get();
+
+             return response()->json([$QA], 200);
+         } catch (\Throwable $th) {
+             return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la pregunta: ' . $th->getMessage()], 500);
+         }
     }
 }
