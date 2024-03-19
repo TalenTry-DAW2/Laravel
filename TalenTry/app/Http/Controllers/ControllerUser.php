@@ -13,7 +13,12 @@ class ControllerUser extends Controller
     // Display a listing of the resource.
     public function index()
     {
+        try {
         $users = ModelUsers::all();
+            return response()->json([$users],200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar los usuarios: ' . $e], 500);
+        }
     }
 
     // Store a newly created resource in storage.
@@ -38,21 +43,23 @@ class ControllerUser extends Controller
             ]);
             $usuario->save();
             DB::commit();
-            return response()->json(['message' => 'User registered successfully']);
-        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Usuario registtrado'],200);
+        } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $e], 500);
         }
     }
 
     // Display the specified resource.
     public function show($id)
     {
-        $user = ModelUsers::find($id);
-        if (!$user) {
-            return response()->json('Usuario no encontrado');
+        try {
+             $user = ModelUsers::find($id);
+            return response()->json([$user],200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['Usuario no encontrado: '.$e],404);
         }
-        return response()->json($user);
     }
 
     // Update the specified resource in storage.
@@ -110,7 +117,7 @@ class ControllerUser extends Controller
             } 
         } catch (\Exception $e) {
             // Database error or other unexpected error
-            return response()->json(['message' => 'Hubo un error, vuelva a intentarlo en unos minutos.', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Hubo un error, vuelva a intentarlo en unos minutos.', 'error' => $e], 500);
         };
     }
 
@@ -134,7 +141,7 @@ class ControllerUser extends Controller
 
         } catch (\Exception $e) {
             // Si hay algun error se muestra
-            return response()->json(['message' => 'Ha ocurrido un error al hacer logout: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al hacer logout: ' . $e], 500);
         }
     }
 }
