@@ -27,8 +27,8 @@ class ControllerQuestion extends Controller
                 $i++;
             }
             return response()->json($respuestas, 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $e], 500);
         }
     }
 }

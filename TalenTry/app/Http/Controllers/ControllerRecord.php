@@ -17,8 +17,8 @@ class ControllerRecord extends Controller
         try {
             $records = ModelRecord::all();
             return response()->json([$records], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
         }
     }
 
@@ -30,7 +30,7 @@ class ControllerRecord extends Controller
             $records = ModelRecord::where('UserID', $user->UserID)->get();
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
         }
     }
 
@@ -42,7 +42,7 @@ class ControllerRecord extends Controller
             $records = ModelRecord::where('UserID', $user->UserID)->where('RecordID', $id)->firstOrFail();
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
         }
     }
 
@@ -75,9 +75,9 @@ class ControllerRecord extends Controller
             } else {
                 throw "No se pudo guardar la entrevista";
             }
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $e], 500);
         }
     }
 
@@ -106,14 +106,14 @@ class ControllerRecord extends Controller
             ]);
             DB::commit();
             return response()->json(['message' => 'Se ha actualizado la entrevista correctamente.'], 200);
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $e], 500);
         }
     }
 
     // elimina la entrevista especificada (!funcion de admin!)
-    public function destroy($id)
+    public function delete($id)
     {
         try {
             DB::beginTransaction();
@@ -124,12 +124,10 @@ class ControllerRecord extends Controller
             if ($QA->delete($id)) {
                 DB::commit();
                 return response()->json(['message' => 'Entrevista guardada correctamente'], 200);
-            } else {
-                throw new \Exception('Error a la hora de eliminar la entrevista.');
             }
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
         }
     }
 }

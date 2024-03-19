@@ -13,8 +13,8 @@ class ControllerCategory extends Controller
         try {
             $category = ModelCategory::all();
             return response()->json($category, 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $e], 500);
         }
     }
 
@@ -23,8 +23,8 @@ class ControllerCategory extends Controller
         try {
             $QA = ModelCategory::where('CategoryID', $id)->firstOrFail();
             return response()->json($QA, 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $e], 500);
         }
     }
 }

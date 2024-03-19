@@ -15,8 +15,8 @@ class ControllerQA extends Controller
         try {
             $QA = ModelQA::all();
             return response()->json([$QA], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $e], 500);
         }
     }
 
@@ -26,8 +26,8 @@ class ControllerQA extends Controller
         try {
             $QA = ModelQA::where('RecordID', $id)->get();
             return response()->json([$QA], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $e], 500);
         }
     }
 
@@ -61,9 +61,9 @@ class ControllerQA extends Controller
                 DB::commit();
                 return response()->json(['saved' => true], 200);
             }
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'hubo un error en:' . $th], 500);
+            return response()->json(['message' => 'hubo un error en:' . $e], 500);
         }
     }
 
@@ -93,9 +93,9 @@ class ControllerQA extends Controller
             ]);
             DB::commit();
             return response()->json(['saved' => true], 200);
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $e], 500);
         }
     }
 
@@ -133,8 +133,8 @@ class ControllerQA extends Controller
             ->get();
 
              return response()->json([$QA], 200);
-         } catch (\Throwable $th) {
-             return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la pregunta: ' . $th->getMessage()], 500);
+         } catch (\Exception $e) {
+             return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la pregunta: ' . $e], 500);
          }
     }
 }

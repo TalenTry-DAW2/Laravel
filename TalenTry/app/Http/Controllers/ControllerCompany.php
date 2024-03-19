@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ModelCompany;
+use Illuminate\Support\Facades\DB;
 
 class ControllerCompany extends Controller
 {
@@ -13,8 +14,8 @@ class ControllerCompany extends Controller
         try {
            $company = ModelCompany::all();
             return response()->json([$company], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las empresas: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar las empresas: ' . $e], 500);
         }
     }
 
@@ -24,8 +25,8 @@ class ControllerCompany extends Controller
         try {
             $company = ModelCompany::findOrFail($id);
             return response()->json([$company], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la empresa: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la empresa: ' . $e], 500);
         }
     }
 
@@ -51,9 +52,9 @@ class ControllerCompany extends Controller
                 DB::commit();
                 return response()->json(['saved' => true], 200);
             }
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Hubo un error en:' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Hubo un error en:' . $e], 500);
         }
     }
 
@@ -80,15 +81,15 @@ class ControllerCompany extends Controller
                 'password' => $request->input('password'),
             ]);
             DB::commit();
-            return response()->json(['saved' => true], 200);
-        } catch (\Throwable $th) {
+            return response()->json(['updated' => true], 200);
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar le empresa: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar le empresa: ' . $e], 500);
         }
     }
 
     //elimina la empresa (funcion de admin!)
-    public function destroy($id)
+    public function delete($id)
     {
         try {
             DB::beginTransaction();
@@ -102,7 +103,7 @@ class ControllerCompany extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return response()->json(['success' => false, 'message' => 'No se pudo eliminar'],500);
+            return response()->json(['success' => false, 'message' => 'No se pudo eliminar. '.$e],500);
         }
     }
 }

@@ -64,7 +64,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
   //funciones de controlador Answer
   Route::prefix('/answer')->group(function () {
-   // Route::get('/',[ControllerAnswer::class, 'index']);
     Route::get('/getFromQuestion/{id}',[ControllerAnswer::class, 'showQuestion']);
   });
 
@@ -107,18 +106,23 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::get('/showQuestionAnswers',[ControllerQA::class, 'showQuestionAnswers']);
     });
 
+    //funciones de controlador Answer
+    Route::prefix('/answer')->group(function () {
+    Route::get('/create', [ControllerAnswer::class, 'create']);
+  });
+
   });
 
   Route::middleware(['auth:sanctum', 'check.role:Administrador'])->group(function () {
 
     //funciones de controlador Company
     Route::prefix('/company')->group(function () {
-      Route::delete('/destroy/{id}',[ControllerCompany::class, 'destroy']);
+      Route::delete('/delete/{id}',[ControllerCompany::class, 'destroy']);
     });
 
     //funciones de controlador Record
     Route::prefix('/record')->group(function () {
-      Route::get('/destroy/{id}',[ControllerRecord::class, 'destroy']);
+      Route::get('/delete/{id}',[ControllerRecord::class, 'destroy']);
     });
 
     //funciones de controlador QA
@@ -127,6 +131,14 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::get('/update/{id}',[ControllerQA::class, 'update']);
       Route::get('/destroy/{id}',[ControllerQA::class, 'destroy']);
     });
+
+    //funciones de controlador Answer
+    Route::prefix('/answer')->group(function () {
+     Route::get('/listAll', [ControllerAnswer::class, 'index']);
+     Route::get('/create', [ControllerAnswer::class, 'create']);
+     Route::get('/update', [ControllerAnswer::class, 'update']);
+     Route::get('/delete', [ControllerAnswer::class, 'delete']);
+   });
 
   });
 

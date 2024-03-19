@@ -13,8 +13,8 @@ class ControllerShare extends Controller
         try {
            $share = ModelShare::all();
             return response()->json([$share], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las configuraciones: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar las configuraciones: ' . $e], 500);
         }
     }
 
@@ -25,8 +25,8 @@ class ControllerShare extends Controller
             $user = Auth::guard('sanctum')->user();
             $share = ModelShare::where('UserID', $user->UserID)->get();
             return response()->json([$share], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la configuración: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la configuración: ' . $e], 500);
         }
     }
 
@@ -36,8 +36,8 @@ class ControllerShare extends Controller
         try {
             $share = ModelShare::where('UserID', $id)->get();
             return response()->json([$share], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la configuración: ' . $th->getMessage()], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al cargar la configuración: ' . $e], 500);
         }
     }
 
@@ -60,9 +60,9 @@ class ControllerShare extends Controller
                 DB::commit();
                 return response()->json(['saved' => true], 200);
             }
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Hubo un error en:' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Hubo un error en:' . $e], 500);
         }
     }
 
@@ -85,14 +85,14 @@ class ControllerShare extends Controller
             ]);
             DB::commit();
             return response()->json(['saved' => true], 200);
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la politica de privacidad: ' . $th->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar la politica de privacidad: ' . $e], 500);
         }
     }
 
     //elimina un share (!funcion admin!)
-    public function destroy($id)
+    public function delete($id)
     {
         try {
             DB::beginTransaction();
@@ -106,7 +106,7 @@ class ControllerShare extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return response()->json(['success' => false, 'message' => 'No se pudo eliminar: '.$e->getMessage()],500);
+            return response()->json(['success' => false, 'message' => 'No se pudo eliminar: '.$e],500);
         }
     }
 }
