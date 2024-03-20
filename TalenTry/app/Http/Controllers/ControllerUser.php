@@ -159,7 +159,6 @@ class ControllerUser extends Controller
         try {
             // Busca el usuario
             $user = Auth::guard('sanctum')->user();
-
             if ($user) {
                 // Y elimina el token de acceso del usuario
                 $user->currentAccessToken()->delete();
