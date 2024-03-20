@@ -13,9 +13,12 @@ class ControllerQuestion extends Controller
     {
         try {
             $questions = ModelQuestion::orderBy('questionID')->get();
+            if (!$questions) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$questions], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -23,10 +26,13 @@ class ControllerQuestion extends Controller
     public function show($id)
     {
         try {
-            $pregunta = ModelQuestion::where('QuestionID', $id)->get();
-            return response()->json([$pregunta], 200);
+            $question = ModelQuestion::where('QuestionID', $id)->get();
+            if (!$question) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json([$question], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la pregunta: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -34,10 +40,13 @@ class ControllerQuestion extends Controller
     public function showQuestionsCategory($id)
     {
         try {
-            $preguntas = ModelQuestion::where('CategoryID', $id)->get();
-            return response()->json([$preguntas], 200);
+            $questions = ModelQuestion::where('CategoryID', $id)->get();
+            if (!$questions) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json([$questions], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -60,13 +69,13 @@ class ControllerQuestion extends Controller
             }
             return response()->json($respuestas, 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
 
     //crea una pregunta para la categoria seleccionada
-    public function create()
+    public function create(Request $request)
     {
         try {
             $request->validate([
@@ -81,16 +90,16 @@ class ControllerQuestion extends Controller
                 //save in database
             if ($question->save()) {
                 DB::commit();
-                return response()->json(['saved' => true], 200);
+                return response()->json(['success' => true], 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al guardar la pregunta: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
     //actualiza la pregunta
-    public function update($id)
+    public function update(Request $request, $id)
     {
         try {
             DB::beginTransaction();
@@ -101,16 +110,18 @@ class ControllerQuestion extends Controller
 
             // Validation logic goes here
             $question = ModelQuestion::findOrFail($id);
-
+            if (!$question) {
+                return response()->json(['success' => false], 404);
+            }
             $question->update([
                 'question' => $request->input('question'),
                 'CategoryID' => $request->input('CategoryID'),
             ]);
             DB::commit();
-            return response()->json(['updated' => true], 200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la pregunta: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -121,15 +132,18 @@ class ControllerQuestion extends Controller
             DB::beginTransaction();
             
             $question = ModelQuestion::findOrFail($id);
+            if (!$question) {
+                return response()->json(['success' => false], 404);
+            }
             $question->delete();
             
             DB::commit();
             
-            return response()->json(['success' => true, 'message' => 'Pregunta eliminada correctamente'],200);
+            return response()->json(['success' => true],200);
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return response()->json(['success' => false, 'message' => 'No se pudo eliminar. '.$e],500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()],500);
         }
     }  
 }

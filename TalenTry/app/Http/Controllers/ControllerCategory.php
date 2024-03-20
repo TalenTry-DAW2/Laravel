@@ -9,53 +9,88 @@ use App\Models\ModelCategory;
 class ControllerCategory extends Controller
 {
     //muestra todas las categorias
-    public function index(){
+    public function index()
+    {
         try {
             $category = ModelCategory::all();
-            return response()->json($category, 200);
+            return response()->json([$category], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
     //muestra la categoria pedida
-    public function show($id){
+    public function show($id)
+    {
         try {
-            $QA = ModelCategory::where('CategoryID', $id)->firstOrFail();
-            return response()->json($QA, 200);
+            $category = ModelCategory::where('CategoryID', $id)->firstOrFail();
+            return response()->json([$category], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
     public function store(Request $request)
     {
-        $QA = new ModelCategory();
-        $QA->CategoryName = $request->input('CateGoryName');
-        $QA->description = $request->input('description');
-        $QA->save();
-        return response()->json('Categoria creada correctamente');
+        try {
+            $request->validate([
+                'CategoryName' => 'required',
+                'description' => 'required',
+            ]);
+            DB::beginTransaction();
+            $category = new ModelCategory([
+                'CategoryName' => $request->input('CategoryName'),
+                'description' => $request->input('description'),
+            ]);
+            $category->save();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $QA = ModelCategory::find($id);
-        if (!$QA) {
-            return response()->json('Usuario no encontrado');
+        try {
+            $request->validate([
+                'CategoryName' => 'required',
+                'description' => 'required',
+            ]);
+            DB::beginTransaction();
+            $category = ModelCategory::findOrFail($id);
+            if (!$category) {
+                return response()->json(['success' => false], 404);
+            }
+            $category->update([
+                'CategoryName' => $request->input('CategoryName'),
+                'description' => $request->input('description'),
+            ]);
+            DB::commit();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
-        $QA->CategoryName = $request->input('CateGoryName');
-        $QA->description = $request->input('description');
-        $QA->save();
-        return response()->json('Categoria actualizada correctamente');
     }
 
-    public function destroy($id)
+    public function delete(Request $request, $id)
     {
-        $QA = ModelCategory::find($id);
-        if (!$QA) {
-            return response()->json(['Categoria no encontrada']);
+        try {
+            $request->validate([
+                'CategoryName' => 'required',
+                'description' => 'required',
+            ]);
+            DB::beginTransaction();
+            $category = ModelCategory::findOrFail($id);
+            if (!$category) {
+                return response()->json(['success' => false], 404);
+            }
+            $category->delete();
+            DB::commit();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
-        $QA->delete();
-        return response()->json(['Categoria borrada']);
     }
 }

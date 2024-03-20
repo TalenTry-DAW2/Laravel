@@ -16,9 +16,12 @@ class ControllerRecord extends Controller
     {
         try {
             $records = ModelRecord::all();
+            if (!$records) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -28,9 +31,12 @@ class ControllerRecord extends Controller
         $user = Auth::guard('sanctum')->user();
         try {
             $records = ModelRecord::where('UserID', $user->UserID)->get();
+            if (!$records) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -40,9 +46,12 @@ class ControllerRecord extends Controller
         $user = Auth::guard('sanctum')->user();
         try {
             $records = ModelRecord::where('UserID', $user->UserID)->where('RecordID', $id)->firstOrFail();
+            if (!$records) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -71,13 +80,11 @@ class ControllerRecord extends Controller
                 //save in database
             if ($record->save()) {
                 DB::commit();
-                return response()->json(['saved' => true], 200);
-            } else {
-                throw "No se pudo guardar la entrevista";
+                return response()->json(['success' => true], 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -97,7 +104,9 @@ class ControllerRecord extends Controller
             DB::beginTransaction();
             // Validation logic goes here
             $record = ModelRecord::findOrFail($id);
-
+            if (!$record) {
+                return response()->json(['success' => false], 404);
+            }
             // Use the update method to update the record
             $record->update([
                 'score' => $request->input('score'),
@@ -105,10 +114,10 @@ class ControllerRecord extends Controller
                 'FinishDate' => $request->input('FinishDate'),
             ]);
             DB::commit();
-            return response()->json(['message' => 'Se ha actualizado la entrevista correctamente.'], 200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -118,16 +127,19 @@ class ControllerRecord extends Controller
         try {
             DB::beginTransaction();
             $record = ModelRecord::findOrFail($id);
+            if (!$record) {
+                return response()->json(['success' => false], 404);
+            }
             $record->delete();
             // Create an instance of ControllerQA
             $QA = new ControllerQA();
-            if ($QA->delete($id)) {
+            if ($QA->destroy($id)) {
                 DB::commit();
-                return response()->json(['message' => 'Entrevista guardada correctamente'], 200);
+                return response()->json(['success' => true], 200);
             }
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la entrevista sin las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 }

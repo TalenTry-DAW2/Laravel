@@ -10,13 +10,17 @@ use Illuminate\Support\Facades\DB;
 class ControllerCompany extends Controller
 {
     //carga todas las empresas
-    public function index() {
-        
+    public function index()
+    {
+
         try {
-           $company = ModelCompany::all();
+            $company = ModelCompany::all();
+            if (!$company) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$company], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las empresas: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -25,9 +29,12 @@ class ControllerCompany extends Controller
     {
         try {
             $company = ModelCompany::findOrFail($id);
+            if (!$company) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$company], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la empresa: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -36,7 +43,7 @@ class ControllerCompany extends Controller
     {
         try {
             DB::beginTransaction();
-            
+
             $request->validate([
                 'name' => 'required',
                 'NIF' => 'required',
@@ -51,11 +58,11 @@ class ControllerCompany extends Controller
             ]);
             if ($company->save()) {
                 DB::commit();
-                return response()->json(['saved' => true], 200);
+                return response()->json(['success' => true], 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Hubo un error en:' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -72,8 +79,10 @@ class ControllerCompany extends Controller
             ]);
 
             // Validation logic goes here
-            $company = ModelQA::findOrFail($id);
-
+            $company = ModelCompany::findOrFail($id);
+            if (!$company) {
+                return response()->json(['success' => false], 404);
+            }
             // Use the update method to update the record
             $company->update([
                 'name' => $request->input('name'),
@@ -82,10 +91,10 @@ class ControllerCompany extends Controller
                 'password' => $request->input('password'),
             ]);
             DB::commit();
-            return response()->json(['updated' => true], 200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar le empresa: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -94,17 +103,20 @@ class ControllerCompany extends Controller
     {
         try {
             DB::beginTransaction();
-            
+
             $company = ModelCompany::findOrFail($id);
+            if (!$company) {
+                return response()->json(['success' => false], 404);
+            }
             $company->delete();
-            
+
             DB::commit();
-            
-            return response()->json(['success' => true, 'message' => 'Empresa eliminada correctamente'],200);
+
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            
-            return response()->json(['success' => false, 'message' => 'No se pudo eliminar. '.$e],500);
+
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 }

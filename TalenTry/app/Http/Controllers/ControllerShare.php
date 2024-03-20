@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ModelShare;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ControllerShare extends Controller
@@ -12,9 +13,12 @@ class ControllerShare extends Controller
      public function index() {
         try {
            $share = ModelShare::all();
+           if (!$share) {
+            return response()->json(['success' => false], 404);
+        }
             return response()->json([$share], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las configuraciones: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -24,9 +28,12 @@ class ControllerShare extends Controller
         try {
             $user = Auth::guard('sanctum')->user();
             $share = ModelShare::where('UserID', $user->UserID)->get();
+            if (!$share) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$share], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la configuración: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -35,9 +42,12 @@ class ControllerShare extends Controller
     {
         try {
             $share = ModelShare::where('UserID', $id)->get();
+            if (!$share) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$share], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar la configuración: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -62,7 +72,7 @@ class ControllerShare extends Controller
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Hubo un error en:' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -79,7 +89,9 @@ class ControllerShare extends Controller
 
             // Validation logic goes here
             $share = ModelShare::where('UserID', $user->UserID)->where('CompanyID', $request->CompanyID)->firstOrFail();;
-
+            if (!$share) {
+                return response()->json(['success' => false], 404);
+            }
             $share->update([
                 'ExpiredDate' => $request['ExpiredDate'],
             ]);
@@ -87,7 +99,7 @@ class ControllerShare extends Controller
             return response()->json(['saved' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la politica de privacidad: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
@@ -98,15 +110,18 @@ class ControllerShare extends Controller
             DB::beginTransaction();
             
             $share = ModelShare::findOrFail($id);
+            if (!$share) {
+                return response()->json(['success' => false], 404);
+            }
             $share->delete();
             
             DB::commit();
             
-            return response()->json(['success' => true, 'message' => 'Share eliminado correctamente'],200);
+            return response()->json(['success' => true],200);
         } catch (\Exception $e) {
             DB::rollBack();
             
-            return response()->json(['success' => false, 'message' => 'No se pudo eliminar: '.$e],500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()],500);
         }
     }
 }

@@ -14,9 +14,12 @@ class ControllerQA extends Controller
     {
         try {
             $QA = ModelQA::all();
+            if (!$QA) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$QA], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -25,9 +28,12 @@ class ControllerQA extends Controller
     {
         try {
             $QA = ModelQA::where('RecordID', $id)->get();
+            if (!$QA) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$QA], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la entrevista: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -37,10 +43,10 @@ class ControllerQA extends Controller
         try {
             DB::beginTransaction();
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
-             $request->merge(['StartDate' => $startDate]);
+            $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
-             $request->merge(['FinishDate' => $finishDate]);
-            
+            $request->merge(['FinishDate' => $finishDate]);
+
             $request->validate([
                 'RecordID' => 'required',
                 'QuestionID' => 'required',
@@ -59,11 +65,11 @@ class ControllerQA extends Controller
             ]);
             if ($QA->save()) {
                 DB::commit();
-                return response()->json(['saved' => true], 200);
+                return response()->json(['success' => true], 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'hubo un error en:' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -73,9 +79,9 @@ class ControllerQA extends Controller
         try {
             DB::beginTransaction();
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
-             $request->merge(['StartDate' => $startDate]);
+            $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
-             $request->merge(['FinishDate' => $finishDate]);
+            $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
                 'score' => 'required',
                 'StartDate' => 'required',
@@ -84,7 +90,9 @@ class ControllerQA extends Controller
 
             // Validation logic goes here
             $QA = ModelQA::findOrFail($id);
-
+            if (!$QA) {
+                return response()->json(['success' => false], 404);
+            }
             // Use the update method to update the record
             $QA->update([
                 'score' => $request->input('score'),
@@ -92,19 +100,22 @@ class ControllerQA extends Controller
                 'FinishDate' => $request->input('FinishDate'),
             ]);
             DB::commit();
-            return response()->json(['saved' => true], 200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar la entrevista sin las preguntas: ' . $e], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
-    // elimina la respuesta especifica de la entrevista (!funcion de admin!).
+    // elimina la respuesta especifica de la entrevista (!funcion de admin!)(funcion sin api, solo de uso interno!!!).
     public function destroy($id)
-    { 
+    {
         try {
             DB::beginTransaction();
             $relatedQAs = ModelQA::where('RecordID', $id)->get();
+            if (!$relatedQAs) {
+                return false;
+            }
             // Delete all related QA records
             foreach ($relatedQAs as $relatedQA) {
                 $relatedQA->delete();
@@ -122,19 +133,22 @@ class ControllerQA extends Controller
     // muestra todas las respuestas de una pregunta en concreto (funcion de empresa!).!!!!!!!!!!!por comprobar!!!!!!!!!!!!!
     public function showQuestionAnswers($id, $comanyID)
     {
-         try {
+        try {
+            $currentDate = Carbon::now();
             $QA = DB::table('QA')
-            ->join('Record', 'QA.RecordID', '=', 'Record.RecordID')
-            ->join('Share', 'Record.UserID', '=', 'Share.UserID')
-            ->where('QuestionID', $id)
-            ->where('Share.CompanyID', '=', $comanyID)
-            ->where('Share.ExpiredDate', '>=', $currentDate)
-            ->select('QA.*')
-            ->get();
-
-             return response()->json([$QA], 200);
-         } catch (\Exception $e) {
-             return response()->json(['message' => 'Ha ocurrido un error al cargar las respuestas de la pregunta: ' . $e], 500);
-         }
+                ->join('Record', 'QA.RecordID', '=', 'Record.RecordID')
+                ->join('Share', 'Record.UserID', '=', 'Share.UserID')
+                ->where('QuestionID', $id)
+                ->where('Share.CompanyID', '=', $comanyID)
+                ->where('Share.ExpiredDate', '>=', $currentDate)
+                ->select('QA.*')
+                ->get();
+            if (!$QA) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json([$QA], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
 }

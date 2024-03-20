@@ -10,18 +10,21 @@ use Illuminate\Support\Facades\DB;
 class ControllerUser extends Controller
 {
 
-    // Display a listing of the resource.
+    // muestra todos los usuarios (funcion admin).
     public function index()
     {
         try {
         $users = ModelUsers::all();
+        if (!$users) {
+            return response()->json(['success' => false], 404);
+        }
             return response()->json([$users],200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al cargar los usuarios: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
-    // Store a newly created resource in storage.
+    // Crea un usuario nuevo.
     public function store(Request $request)
     {
         try {
@@ -43,50 +46,77 @@ class ControllerUser extends Controller
             ]);
             $usuario->save();
             DB::commit();
-            return response()->json(['message' => 'Usuario registtrado'],200);
+            return response()->json(['success' => true],200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 
-    // Display the specified resource.
+    // muestra el usuario seleccionado (funcion de admin de momento!!!!).
     public function show($id)
     {
         try {
              $user = ModelUsers::find($id);
+             if (!$user) {
+                return response()->json(['success' => false], 404);
+            }
             return response()->json([$user],200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['Usuario no encontrado: '.$e],404);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()],500);
         }
     }
 
-    // Update the specified resource in storage.
-    public function update(Request $request, $id)
+    // muestra el usuario de la sesion actual.
+    public function showSelf()
     {
-        $user = ModelUsers::find($id);
-        if (!$user) {
-            return response()->json('Usuario no encontrado');
+        try {
+            $user = Auth::guard('sanctum')->user();
+            if (!$user) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json([$user],200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error'=> $e->getMessage()],404);
         }
-        $user->DNI = $request->input('DNI');
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = $request->input('password');
-        $user->phone = $request->input('phone');
-        $user->save();
-        return response()->json('Usuario actualizado correctamente');
     }
 
-    // Remove the specified resource from storage.
-    public function destroy($id)
+    // Actualiza la informacion del usuario actual.
+    public function update(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = Auth::guard('sanctum')->user();
+            if (!$user) {
+                return response()->json(['success' => false], 404);
+            }
+            //makes the $user into a user object
+            $user = ModelUsers::find($user->UserID);
+            $user->update([
+                'name' => $request->filled('name') ? $request->input('name') : $user->name,
+                'email' => $request->filled('email') ? $request->input('email') : $user->email,
+                'phone' => $request->filled('phone') ? $request->input('phone') : $user->phone,
+                'pasword' => $request->filled('pasword') ? $request->input('password') : $user->pasword,
+            ]);
+            DB::commit();
+        return response()->json(['success' => true],200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error'=> $e->getMessage()],404);
+        }
+    }
+
+    // Elimina un usuario especificado.
+    public function delete($id)
     {
         $user = ModelUsers::find($id);
         if (!$user) {
-            return response()->json(['Usuario no encontrado']);
+            return response()->json(['success' => false],404);
         }
         $user->delete();
-        return response()->json(['Usuario borrado']);
+        return response()->json(['success' => true],200);
     }
 
     //Funcion de login
@@ -102,26 +132,28 @@ class ControllerUser extends Controller
 
                 // Si las credenciales son correctas
                 $user = Auth::user();
+                if (!$user) {
+                    return response()->json(['success' => false], 404);
+                }
                 $token = $user->createToken('authToken')->plainTextToken;
-                $type = Auth::user()->type;
 
                 // Deuvelve el token de acceso y el tipo de token
                 return response()->json([
                     'access_token' => $token,
                     'token_type' => 'bearer',
-                    'role' => $type,
+                    'type' => $user->type,
                 ], 200);
             } else {
                 // Si no, deuvelve credenciales incorrectas
-                return response()->json(['message' => 'Credenciales incorrectas'], 401);
+                return response()->json(['success' => false], 401);
             } 
         } catch (\Exception $e) {
             // Database error or other unexpected error
-            return response()->json(['message' => 'Hubo un error, vuelva a intentarlo en unos minutos.', 'error' => $e], 500);
+            return response()->json(['success' => false, 'error' => $e], 500);
         };
     }
 
-    //cierra la sesion
+    //funcion de logout
     public function logout() {
 
         try {
@@ -133,15 +165,15 @@ class ControllerUser extends Controller
                 $user->currentAccessToken()->delete();
 
                 // Devuelve un OK
-                return response()->json(['message' => 'Se ha cerrado la sesión de forma satisfactoria'], 200);
+                return response()->json(['success' => true], 200);
             } else {
                 // Si no se ha podido encontrar el usuario
-                return response()->json(['message' => 'Usuario no encontrado.'], 404);
+                return response()->json(['success' => false], 404);
             }
 
         } catch (\Exception $e) {
             // Si hay algun error se muestra
-            return response()->json(['message' => 'Ha ocurrido un error al hacer logout: ' . $e], 500);
+            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
 }
