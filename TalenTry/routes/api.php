@@ -28,10 +28,12 @@ Route::post('/login', [ControllerUser::class, 'login']);
 Route::post('/registroEmpresa', [ControllerCompany::class, 'store']);
 
 
-  //funciones de controlador User
-  
+
+//funciones de controlador User
+
 Route::middleware('auth:sanctum')->group(function () {
-  Route::post('/logout', [ControllerUser::class, 'logout']);
+
+  Route::put('/logout', [ControllerUser::class, 'logout']);
 
   Route::prefix('/user')->group(function () {
     //Route::get('/',[ControllerUser::class, 'index']);
