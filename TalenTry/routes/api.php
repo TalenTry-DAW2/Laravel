@@ -25,6 +25,8 @@ Route::post('/registro', [ControllerUser::class, 'store']);
 
 Route::post('/login', [ControllerUser::class, 'login']);
 
+Route::get('/isLogedIn', [ControllerUser::class, 'isLogedIn']);
+
 Route::post('/registroEmpresa', [ControllerCompany::class, 'store']);
 
 

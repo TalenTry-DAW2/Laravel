@@ -175,4 +175,19 @@ class ControllerUser extends Controller
             return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
+
+    //comprueba si el usuario actual existe y esta logeado
+    public function isLogedIn()
+    {
+        try {
+            $user = Auth::guard('sanctum')->user();
+            if (!$user) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json(['success' => true],200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error'=> $e->getMessage()],404);
+        }
+    }
 }
