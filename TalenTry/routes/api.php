@@ -39,6 +39,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
   Route::prefix('/user')->group(function () {
     Route::get('/self',[ControllerUser::class, 'showSelf']);
+    Route::get('/update',[ControllerUser::class, 'update']);
+    Route::get('/private',[ControllerUser::class, 'togglePrivate']);
   });
 
   //funciones de controlador Share

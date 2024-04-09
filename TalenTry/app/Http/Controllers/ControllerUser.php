@@ -14,13 +14,13 @@ class ControllerUser extends Controller
     public function index()
     {
         try {
-        $users = ModelUsers::all();
-        if (!$users) {
-            return response()->json(['success' => false], 404);
-        }
-            return response()->json([$users],200);
+            $users = ModelUsers::all();
+            if (!$users) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json([$users], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -46,10 +46,10 @@ class ControllerUser extends Controller
             ]);
             $usuario->save();
             DB::commit();
-            return response()->json(['success' => true],200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -57,14 +57,14 @@ class ControllerUser extends Controller
     public function show($id)
     {
         try {
-             $user = ModelUsers::find($id);
-             if (!$user) {
+            $user = ModelUsers::find($id);
+            if (!$user) {
                 return response()->json(['success' => false], 404);
             }
-            return response()->json([$user],200);
+            return response()->json([$user], 200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()],500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -76,10 +76,10 @@ class ControllerUser extends Controller
             if (!$user) {
                 return response()->json(['success' => false], 404);
             }
-            return response()->json([$user],200);
+            return response()->json([$user], 200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()],404);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
         }
     }
 
@@ -95,16 +95,38 @@ class ControllerUser extends Controller
             //makes the $user into a user object
             $user = ModelUsers::find($user->UserID);
             $user->update([
-                'name' => $request->filled('name') ? $request->input('name') : $user->name,
                 'email' => $request->filled('email') ? $request->input('email') : $user->email,
                 'phone' => $request->filled('phone') ? $request->input('phone') : $user->phone,
                 'pasword' => $request->filled('pasword') ? $request->input('password') : $user->pasword,
             ]);
             DB::commit();
-        return response()->json(['success' => true],200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()],404);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    //edita si el usuario es visible ne las estadisticas o no
+    public function togglePrivate()
+    {
+        try {
+            DB::beginTransaction();
+            $user = Auth::guard('sanctum')->user();
+            if (!$user) {
+                return response()->json(['success' => false], 404);
+            }
+
+            //makes the $user into a user object
+            $user = ModelUsers::find($user->UserID);
+            $user->update([
+                'visibility' => !$user->visibility,
+            ]);
+            DB::commit();
+            return response()->json(['success' => true], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -113,10 +135,10 @@ class ControllerUser extends Controller
     {
         $user = ModelUsers::find($id);
         if (!$user) {
-            return response()->json(['success' => false],404);
+            return response()->json(['success' => false], 404);
         }
         $user->delete();
-        return response()->json(['success' => true],200);
+        return response()->json(['success' => true], 200);
     }
 
     //Funcion de login
@@ -146,7 +168,7 @@ class ControllerUser extends Controller
             } else {
                 // Si no, deuvelve credenciales incorrectas
                 return response()->json(['success' => false], 401);
-            } 
+            }
         } catch (\Exception $e) {
             // Database error or other unexpected error
             return response()->json(['success' => false, 'error' => $e], 500);
@@ -154,7 +176,8 @@ class ControllerUser extends Controller
     }
 
     //funcion de logout
-    public function logout() {
+    public function logout()
+    {
 
         try {
             // Busca el usuario
@@ -169,10 +192,9 @@ class ControllerUser extends Controller
                 // Si no se ha podido encontrar el usuario
                 return response()->json(['success' => false], 404);
             }
-
         } catch (\Exception $e) {
             // Si hay algun error se muestra
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -184,10 +206,10 @@ class ControllerUser extends Controller
             if (!$user) {
                 return response()->json(['success' => false], 404);
             }
-            return response()->json(['success' => true],200);
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()],404);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
         }
     }
 }
