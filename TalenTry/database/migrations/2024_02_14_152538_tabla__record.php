@@ -15,11 +15,14 @@ return new class extends Migration
         Schema::create('Record', function (Blueprint $table) {
             $table->id('RecordID', 24); // This will automatically create an auto-incrementing primary key
             $table->unsignedBigInteger('UserID')->nullable(false); // Adjusted data type to match Users table
+            $table->unsignedBigInteger('CategoryID')->nullable(false);
             $table->double('score', 5, 2)->nullable(false);
             $table->dateTime('StartDate')->nullable(false);
             $table->dateTime('FinishDate')->nullable(false);
     
             $table->foreign('UserID')->references('UserID')->on('Users');
+
+            $table->foreign('CategoryID')->references('CategoryID')->on('Category');
         });
     }
 

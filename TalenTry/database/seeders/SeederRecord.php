@@ -22,6 +22,7 @@ class SeederRecord extends Seeder
                 $finishDate = Carbon::createFromFormat('m/d/Y', '1/1/2024')->format('Y-m-d');
                 DB::table('Record')->insert([
                     'UserID' => 1,
+                    'CategoryID'=> 2,
                     'score' => $numeroAleatorio2,
                     'StartDate' => $startDate,
                     'FinishDate' => $finishDate,

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('AnswerID'); // This will automatically create an auto-incrementing primary key
             $table->string('answer')->length(255)->notnull();
             $table->unsignedBigInteger('QuestionID')->notnull();
-            $table->integer('QuestionPoints')->length(4)->notnull();
+            $table->double('QuestionPoints', 5, 2)->notnull();
     
             $table->foreign('QuestionID')->references('QuestionID')->on('Question'); // Adjust the table name if needed
         });

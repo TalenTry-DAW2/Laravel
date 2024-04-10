@@ -12,6 +12,7 @@ class ModelRecord extends Model
 
     protected $fillable = [
         'UserID',
+        'CategoryID',
         'score',
         'StartDate',
         'FinishDate'
@@ -20,6 +21,10 @@ class ModelRecord extends Model
     public function user()
     {
         return $this->belongsTo(ModelUsers::class, 'UserID', 'UserID');
+    }
+    public function category()
+    {
+        return $this->belongsTo(ModelCategory::class, 'CategoryID', 'CategoryID');
     }
 
     const UPDATED_AT = null;

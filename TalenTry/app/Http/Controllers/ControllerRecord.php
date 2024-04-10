@@ -30,7 +30,10 @@ class ControllerRecord extends Controller
     {
         $user = Auth::guard('sanctum')->user();
         try {
-            $records = ModelRecord::where('UserID', $user->UserID)->get();
+            $records = ModelRecord::where('UserID', $user->UserID)
+            ->join('Category', 'Record.CategoryID', '=', 'Category.CategoryID')
+            ->select('Record.*', 'Category.CategoryName')
+            ->get();
             if (!$records) {
                 return response()->json(['success' => false], 404);
             }
