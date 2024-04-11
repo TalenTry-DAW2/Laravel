@@ -112,4 +112,22 @@ class ControllerAnswer extends Controller
             return "Error";
         }
     }
+
+    public function agregarPR(Request $request)
+    {
+        try {
+            $request->validate([
+                'question' => 'required',
+                'answers' => 'required',
+                'category' => 'required',
+            ]);
+            DB::beginTransaction();
+            
+
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return "Error";
+        }
+    }
 }
