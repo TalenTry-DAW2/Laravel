@@ -93,11 +93,13 @@ class ControllerUser extends Controller
                 return response()->json(['success' => false], 404);
             }
             //makes the $user into a user object
+           
             $user = ModelUsers::find($user->UserID);
+            $pHash = bcrypt($request->filled('password') ? $request->input('password') : $user->password);
             $user->update([
                 'email' => $request->filled('email') ? $request->input('email') : $user->email,
                 'phone' => $request->filled('phone') ? $request->input('phone') : $user->phone,
-                'pasword' => $request->filled('pasword') ? $request->input('password') : $user->pasword,
+                'password' => $pHash,
             ]);
             DB::commit();
             return response()->json(['success' => true], 200);
