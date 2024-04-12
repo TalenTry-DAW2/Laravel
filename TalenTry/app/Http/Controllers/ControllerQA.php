@@ -27,7 +27,11 @@ class ControllerQA extends Controller
     public function show($id)
     {
         try {
-            $QA = ModelQA::where('RecordID', $id)->get();
+            $QA = DB::table('QA')
+                ->join('question', 'QA.QuestionID', '=', 'question.QuestionID')
+                ->select('QA.*', 'question.question')
+                ->where('QA.RecordID', $id)
+                ->get();
             if (!$QA) {
                 return response()->json(['success' => false], 404);
             }
