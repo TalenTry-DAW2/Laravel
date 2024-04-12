@@ -63,7 +63,7 @@ class ControllerShare extends Controller
             ]);
             $share = new ModelShare([
                 'UserID' => $user->UserID,
-                'CompanyID' => $request['companyID'],
+                'CompanyID' => $request['CompanyID'],
                 'ExpiredDate' => $request['ExpiredDate'],
             ]);
             if ($share->save()) {
