@@ -33,7 +33,7 @@ class SeederCompany extends Seeder
                 'name' => 'EmpresaGenerica3',
                 'NIF' => '748362746H',
                 'address' => 'Ciudad Gótica',
-                'UserID' => '2',
+                'UserID' => '2',    
             ]);
         }
     }

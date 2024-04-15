@@ -43,18 +43,26 @@ class ControllerCompany extends Controller
     {
         try {
             DB::beginTransaction();
-
-            $request->validate([
-                'name' => 'required',
-                'NIF' => 'required',
-                'address' => 'required',
-                'password' => 'required',
-            ]);
-            $company = new ModelCompany([
+            $pHash = bcrypt($request->input('password'));
+            $user = new ModelUsers([
+                'DNI' => $request['DNI'],
                 'name' => $request['name'],
+                'email' => $request['email'],
+                'tel' => $request['tel'],
+                'password' => $pHash,
+                'type' => 'Empresa',
+            ]);
+
+            // Save the user
+            if (!$user->save()) {
+                throw new \Exception('Failed to create user.');
+            }
+            $userID = $user->id;
+            $company = new ModelCompany([
+                'name' => $request['name2'],
                 'NIF' => $request['NIF'],
                 'address' => $request['address'],
-                'password' => $request['password'],
+                'userID' => $userID,
             ]);
             if ($company->save()) {
                 DB::commit();

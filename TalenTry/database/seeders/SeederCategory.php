@@ -17,6 +17,7 @@ class SeederCategory extends Seeder
         for ($i=0; $i < 10; $i++) { 
             DB::table('Category')->insert([
                 'CategoryName' => str::random(10),
+                'description' => str::random(10),
             ]);
         }
 
