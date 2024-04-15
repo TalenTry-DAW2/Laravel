@@ -14,7 +14,8 @@ class ModelCompany extends Model
         'name',
         'NIF',
         'address',
-        'password'
+        'password',
+        'UserID'
     ];
 
     const UPDATED_AT = null;

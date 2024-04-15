@@ -44,11 +44,11 @@ class ControllerCompany extends Controller
         try {
             DB::beginTransaction();
             $pHash = bcrypt($request->input('password'));
-            $user = new ModelUsers([
+            $user = new ModelUserS([
                 'DNI' => $request['DNI'],
                 'name' => $request['name'],
                 'email' => $request['email'],
-                'tel' => $request['tel'],
+                'phone' => $request['phone'],
                 'password' => $pHash,
                 'type' => 'Empresa',
             ]);
@@ -57,17 +57,29 @@ class ControllerCompany extends Controller
             if (!$user->save()) {
                 throw new \Exception('Failed to create user.');
             }
-            $userID = $user->id;
+            DB::commit();
+
+            $User = ModelUsers::where('email', $request['email'])
+                ->where('password', $pHash)
+                ->first();
+            if (!$User) {
+                throw new \Exception('User not found.');
+            }
+            DB::beginTransaction();
+            // Create a new company
             $company = new ModelCompany([
                 'name' => $request['name2'],
                 'NIF' => $request['NIF'],
                 'address' => $request['address'],
-                'userID' => $userID,
+                'UserID' => $User->UserID,
             ]);
-            if ($company->save()) {
-                DB::commit();
-                return response()->json(['success' => true], 200);
+
+            // Save the company
+            if (!$company->save()) {
+                throw new \Exception('Failed to create company.');
             }
+            DB::commit();
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
