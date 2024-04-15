@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name', 100)->notnull();
             $table->string('NIF', 32)->nullable(false);
             $table->string('address')->nullable(false);
-            $table->string('password')->length(30)->nullable(false);
+            $table->unsignedBigInteger('UserID')->nullable(false);
+
+            $table->foreign('UserID')->references('UserID')->on('Users');
         });
     }
 

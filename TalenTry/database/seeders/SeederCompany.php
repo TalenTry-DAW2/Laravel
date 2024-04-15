@@ -19,21 +19,21 @@ class SeederCompany extends Seeder
                 'name' => 'EmpresaGenerica1',
                 'NIF' => '123456789D',
                 'address' => 'MiKasa 2',
-                'password' => '123456789D',
+                'UserID' => '2',
             ]);
 
             DB::table('Company')->insert([
                 'name' => 'EmpresaGenerica2',
                 'NIF' => '987654321Y',
                 'address' => 'Reino Champiñón',
-                'password' => '123456789V',
+                'UserID' => '2',
             ]);
 
             DB::table('Company')->insert([
                 'name' => 'EmpresaGenerica3',
                 'NIF' => '748362746H',
                 'address' => 'Ciudad Gótica',
-                'password' => '5356637F',
+                'UserID' => '2',
             ]);
         }
     }
