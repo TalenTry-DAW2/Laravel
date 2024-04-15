@@ -112,7 +112,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //funciones de controlador Answer
     Route::prefix('/answer')->group(function () {
-      Route::get('/create', [ControllerAnswer::class, 'create']);
+      Route::post('/create', [ControllerAnswer::class, 'create']);
+      Route::post('/agregarPR', [ControllerAnswer::class, 'agregarPR']);
     });
   });
 
@@ -141,6 +142,7 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::get('/create', [ControllerAnswer::class, 'create']);
       Route::get('/update', [ControllerAnswer::class, 'update']);
       Route::get('/delete', [ControllerAnswer::class, 'delete']);
+      Route::post('/agregarPR', [ControllerAnswer::class, 'agregarPR']);
     });
   });
 });

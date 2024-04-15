@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ModelAnswer;
+use App\Models\ModelQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -116,18 +117,38 @@ class ControllerAnswer extends Controller
     public function agregarPR(Request $request)
     {
         try {
+            DB::beginTransaction();
             $request->validate([
                 'question' => 'required',
                 'answers' => 'required',
-                'category' => 'required',
+                'CategoryID' => 'required',
+                'QuestionPoints' => 'required',
             ]);
-            DB::beginTransaction();
             
+            $question = new ModelQuestion([
+                'question' => $request->input('question'),
+                'CategoryID' => $request->input('CategoryID'),
+            ]);
 
+            if ($question->save()) {
+                DB::commit();
+            }
 
+            $resp = new ModelAnswer([
+                'QuestionID' => 1,
+                'answer' => $request->input('answers'),
+                'QuestionPoints' => $request->input('QuestionPoints'),
+            ]);
+
+            if ($resp->save()) {
+                DB:commit();
+                return response()->json(['success' => true], 200);
+            }
+            
+            
         } catch (\Exception $e) {
             DB::rollback();
-            return "Error";
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 }
