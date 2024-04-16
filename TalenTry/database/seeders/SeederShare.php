@@ -16,15 +16,6 @@ class SeederShare extends Seeder
     // public function run(): void
     // {
     //     {
-    //         for ($i=0; $i < 10; $i++) { 
-    //             DB::table('Share')->insert([
-    //                 'UserID' => $numeroAleatorio,
-    //                 'score' => $numeroAleatorio2,
-    //                 'StartDate' => $startDate,
-    //                 'FinishDate' => $finishDate,
-    //             ]);
-    //         }
-
     //     }
     // }
 }
