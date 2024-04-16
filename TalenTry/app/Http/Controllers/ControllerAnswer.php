@@ -118,37 +118,37 @@ class ControllerAnswer extends Controller
     {
         try {
             DB::beginTransaction();
+        
             $request->validate([
                 'question' => 'required',
-                'answers' => 'required',
+                'answers' => 'required|array',
+                'answers.*.answer' => 'required|string', // Cada respuesta debe ser una cadena
+                'answers.*.QuestionPoints' => 'required|numeric', // Puntuación de cada respuesta
                 'CategoryID' => 'required',
-                'QuestionPoints' => 'required',
             ]);
             
             $question = new ModelQuestion([
                 'question' => $request->input('question'),
                 'CategoryID' => $request->input('CategoryID'),
             ]);
-
-            if ($question->save()) {
-                DB::commit();
+            $question->save();
+        
+            foreach ($request->input('answers') as $answer) {
+                $resp = new ModelAnswer([
+                    'QuestionID' => $question->id,
+                    'answer' => $answer['answer'],
+                    'QuestionPoints' => $answer['QuestionPoints'],
+                ]);
+        
+                $resp->save();
             }
-
-            $resp = new ModelAnswer([
-                'QuestionID' => 1,
-                'answer' => $request->input('answers'),
-                'QuestionPoints' => $request->input('QuestionPoints'),
-            ]);
-
-            if ($resp->save()) {
-                DB:commit();
-                return response()->json(['success' => true], 200);
-            }
-            
-            
+        
+            DB::commit();
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
-        }
+        }        
+        
     }
 }
