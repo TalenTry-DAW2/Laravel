@@ -214,4 +214,19 @@ class ControllerUser extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
         }
     }
+
+    //devuelve el rol del usuario
+    public function getRole()
+    {
+        try {
+            $user = Auth::guard('sanctum')->user();
+            if (!$user) {
+                return response()->json(['success' => false], 404);
+            }
+            return response()->json([$user->type], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
+        }
+    }
 }
