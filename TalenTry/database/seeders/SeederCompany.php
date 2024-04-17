@@ -16,23 +16,23 @@ class SeederCompany extends Seeder
     {
         {
             DB::table('Company')->insert([
-                'name' => 'EmpresaGenerica1',
-                'NIF' => '123456789D',
-                'address' => 'MiKasa 2',
-                'UserID' => '2',
+                'name' => 'Tecnologías Avanzadas S.A.',
+                'NIF' => 'ES12345678A',
+                'address' => 'Calle Mayor, 10, Madrid',
+                'UserID' => '2',    
             ]);
-
+            
             DB::table('Company')->insert([
-                'name' => 'EmpresaGenerica2',
-                'NIF' => '987654321Y',
-                'address' => 'Reino Champiñón',
-                'UserID' => '2',
+                'name' => 'Productos Ecológicos Verdes S.L.',
+                'NIF' => 'ES87654321B',
+                'address' => 'Avenida del Bosque, 25, Barcelona',
+                'UserID' => '2',    
             ]);
-
+            
             DB::table('Company')->insert([
-                'name' => 'EmpresaGenerica3',
-                'NIF' => '748362746H',
-                'address' => 'Ciudad Gótica',
+                'name' => 'Grupo Logístico Global S.L.',
+                'NIF' => 'ES56789012C',
+                'address' => 'Plaza Central, 7, Valencia',
                 'UserID' => '2',    
             ]);
         }

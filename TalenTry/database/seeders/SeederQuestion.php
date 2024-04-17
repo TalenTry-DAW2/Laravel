@@ -2,37 +2,515 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; //libreria nos permite hacer insert
-use Illuminate\Support\Str; //liberaria para funciones str
+use Illuminate\Support\Facades\DB;
+
+//libreria nos permite hacer insert
+//liberaria para funciones str
 
 class SeederQuestion extends Seeder
 {
     /**
      * Run the database seeds.
-     */   
+     */
     public function run(): void
     {
-        $preguntas = array(
-            "¿Qué es un array en PHP y cómo se define?",
-            "¿Cuál es la diferencia entre un array asociativo y un array indexado en PHP?",
-            "¿Cómo se accede a un elemento específico dentro de un array en PHP?",
-            "¿Puedes explicar la función array_push() en PHP y proporcionar un ejemplo de su uso?",
-            "¿Qué métodos existen para recorrer un array en PHP?",
-            "¿Cómo se ordena un array en PHP según sus valores o claves?",
-            "¿Qué es la función array_merge() en PHP y cuál es su propósito?",
-            "¿Cuál es la diferencia entre la función array_key_exists() y isset() en PHP?",
-            "¿Cómo se elimina un elemento específico de un array en PHP?",
-            "¿Puedes explicar cómo funciona la función array_unique() en PHP y proporcionar un ejemplo de su uso?"
-        ); 
-        for ($i=0; $i < count ($preguntas); $i++) {
-            $numeroAleatorio2 = random_int(1,10);
+        //Recursos humanos
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en reclutamiento y selección de personal?",
+            "¿Cómo abordarías la integración de nuevos empleados en la empresa?",
+            "¿Cuáles son tus estrategias para retener a los empleados talentosos?",
+            "¿Cómo manejarías conflictos entre miembros del equipo?",
+            "¿Cómo evaluarías las necesidades de capacitación y desarrollo de los empleados?",
+            "¿Cuál es tu enfoque para evaluar el desempeño de los empleados?",
+            "¿Cómo garantizarías un entorno de trabajo inclusivo y diverso?",
+            "¿Qué medidas tomarías para promover el bienestar de los empleados en el lugar de trabajo?",
+            "¿Cuál es tu experiencia en la elaboración de políticas de recursos humanos?",
+            "¿Cómo te mantienes actualizado sobre las tendencias y regulaciones laborales?",
+            "¿Puedes describir una situación en la que resolviste eficazmente un conflicto laboral?",
+            "¿Cómo manejarías una situación en la que un empleado muestra bajo rendimiento?",
+            "¿Qué importancia le das a la comunicación interna dentro de una organización?",
+            "¿Cuál es tu enfoque para fomentar un ambiente laboral positivo?",
+            "¿Cómo te asegurarías de que los procesos de reclutamiento sean justos y equitativos?",
+            "¿Puedes describir un proyecto de capacitación que hayas liderado?",
+            "¿Cómo gestionarías el proceso de despido de un empleado?",
+            "¿Qué estrategias usarías para atraer candidatos talentosos?",
+            "¿Cómo abordarías las preocupaciones de un empleado insatisfecho?",
+            "¿Qué medidas tomarías para garantizar la conformidad con las leyes laborales?",
+            "¿Cómo manejarías una situación en la que un empleado se queja de discriminación?",
+            "¿Cuál es tu enfoque para resolver problemas de comunicación entre empleados?",
+            "¿Qué importancia le das a la formación continua de los empleados?",
+            "¿Puedes describir un momento en el que implementaste con éxito una política de recursos humanos?",
+            "¿Cómo garantizarías la confidencialidad de la información del empleado?",
+            "¿Cómo medirías el éxito de tus iniciativas de recursos humanos?",
+            "¿Cuál es tu experiencia en la gestión del rendimiento de los empleados?",
+            "¿Cómo manejarías una queja de acoso laboral?",
+            "¿Qué estrategias usarías para fomentar la colaboración entre equipos?",
+            "¿Cuál es tu enfoque para crear un plan de sucesión dentro de la organización?",
+            "¿Cómo abordarías las preocupaciones sobre la carga de trabajo y el equilibrio entre vida laboral y personal?",
+            "¿Puedes describir una situación en la que implementaste cambios en la cultura organizacional?",
+            "¿Qué medidas tomarías para promover la igualdad de oportunidades en el lugar de trabajo?",
+            "¿Cómo manejarías una situación en la que un empleado presenta una queja sobre su supervisor?",
+            "¿Cuál es tu experiencia en la gestión de la diversidad en el lugar de trabajo?",
+            "¿Cómo fomentarías el compromiso de los empleados con la empresa?",
+            "¿Qué importancia le das a la retroalimentación en el desarrollo profesional de los empleados?",
+            "¿Cómo manejarías una situación en la que un empleado se siente infravalorado?",
+            "¿Cuál es tu enfoque para promover un ambiente de trabajo saludable y seguro?",
+            "¿Puedes describir una estrategia que hayas implementado para mejorar la moral de los empleados?",
+            "¿Qué medidas tomarías para fomentar el liderazgo dentro de los equipos de trabajo?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $preguntas[$i],
-                'CategoryID' => $numeroAleatorio2,
+                'question' => $pregunta,
+                'CategoryId' => 1,
             ]);
         }
+        //Finanzas y contabilidad
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en contabilidad financiera?",
+            "¿Cómo manejas el análisis de estados financieros?",
+            "¿Qué métodos utilizas para gestionar el presupuesto de una empresa?",
+            "¿Cómo interpretas los indicadores financieros clave?",
+            "¿Cuál es tu experiencia en la preparación de informes financieros?",
+            "¿Cómo manejas el análisis de costos?",
+            "¿Qué herramientas utilizas para la planificación financiera?",
+            "¿Puedes describir una situación en la que resolviste un problema financiero complejo?",
+            "¿Cómo evalúas la rentabilidad de un proyecto o inversión?",
+            "¿Cuál es tu experiencia en la gestión de cuentas por cobrar y cuentas por pagar?",
+            "¿Cómo manejas la conciliación bancaria?",
+            "¿Qué medidas tomas para garantizar la conformidad con las regulaciones financieras?",
+            "¿Cuál es tu enfoque para la gestión del flujo de efectivo?",
+            "¿Cómo abordas el análisis de riesgos financieros?",
+            "¿Qué importancia le das al control interno en la contabilidad?",
+            "¿Cómo manejas la auditoría interna y externa?",
+            "¿Puedes describir un proyecto de optimización de costos que hayas liderado?",
+            "¿Qué estrategias usarías para reducir los gastos operativos de una empresa?",
+            "¿Cuál es tu experiencia en la gestión de impuestos?",
+            "¿Cómo manejas la planificación fiscal?",
+            "¿Qué herramientas utilizas para el análisis financiero?",
+            "¿Cuál es tu enfoque para la gestión de activos y pasivos?",
+            "¿Cómo abordarías una discrepancia en los registros contables?",
+            "¿Qué medidas tomarías para mejorar la eficiencia financiera de una empresa?",
+            "¿Cómo evalúas la solvencia financiera de una empresa?",
+            "¿Cuál es tu experiencia en la gestión de inversiones?",
+            "¿Cómo manejas la gestión de riesgos financieros en un entorno volátil?",
+            "¿Qué importancia le das al cumplimiento de los plazos en la contabilidad?",
+            "¿Cómo manejas la relación con instituciones financieras externas?",
+            "¿Puedes describir una situación en la que identificaste y corregiste un error contable?",
+            "¿Qué estrategias usarías para maximizar los beneficios de una empresa?",
+            "¿Cuál es tu enfoque para el análisis de rentabilidad por producto o servicio?",
+            "¿Cómo manejas la preparación para una auditoría financiera?",
+            "¿Qué medidas tomarías para garantizar la precisión de los informes financieros?",
+            "¿Cómo evalúas la eficacia de los controles financieros internos?",
+            "¿Cuál es tu experiencia en la gestión de flujos de efectivo en múltiples divisas?",
+            "¿Cómo abordarías una situación de fraude financiero?",
+            "¿Qué importancia le das a la educación financiera del personal en una empresa?",
+            "¿Puedes describir una estrategia que implementaste para mejorar la gestión financiera de una empresa?",
+            "¿Cómo manejas la preparación de presupuestos en un entorno económico cambiante?",
+        ];
 
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 2,
+            ]);
+        }
+        //Marketing y publicidad
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en la planificación de estrategias de marketing?",
+            "¿Cómo abordarías la investigación de mercado para un nuevo producto?",
+            "¿Qué métodos utilizas para segmentar el mercado?",
+            "¿Cuál es tu enfoque para el desarrollo de un plan de marketing?",
+            "¿Cómo evalúas la efectividad de una campaña publicitaria?",
+            "¿Qué herramientas utilizas para el análisis competitivo?",
+            "¿Puedes describir una campaña de marketing exitosa en la que hayas participado?",
+            "¿Cómo manejas el análisis de tendencias del mercado?",
+            "¿Cuál es tu experiencia en la creación de contenido para medios digitales?",
+            "¿Qué estrategias usarías para aumentar la visibilidad de una marca en línea?",
+            "¿Cómo evalúas la efectividad de las estrategias de SEO y SEM?",
+            "¿Qué importancia le das a las redes sociales en una estrategia de marketing?",
+            "¿Cómo manejas la relación con influencers en una estrategia de marketing?",
+            "¿Cuál es tu enfoque para la generación de leads?",
+            "¿Cómo abordarías la gestión de la reputación en línea de una empresa?",
+            "¿Qué medidas tomas para asegurar la coherencia de la marca en todos los canales?",
+            "¿Cómo manejas la colaboración con agencias de publicidad o marketing externas?",
+            "¿Puedes describir una estrategia de marketing de contenidos que hayas implementado?",
+            "¿Cómo evalúas la efectividad de una estrategia de email marketing?",
+            "¿Qué herramientas utilizas para medir el retorno de la inversión en marketing?",
+            "¿Cuál es tu experiencia en la organización de eventos promocionales?",
+            "¿Cómo manejas la gestión de la comunicación en crisis?",
+            "¿Qué estrategias usarías para mejorar la participación del cliente?",
+            "¿Cómo abordarías la personalización en una estrategia de marketing?",
+            "¿Qué importancia le das al análisis del comportamiento del consumidor?",
+            "¿Cuál es tu enfoque para la identificación de oportunidades de mercado?",
+            "¿Cómo manejas la coordinación de lanzamientos de productos?",
+            "¿Qué medidas tomarías para mejorar la experiencia del cliente en línea y fuera de línea?",
+            "¿Cómo evalúas la efectividad de una estrategia de branding?",
+            "¿Qué herramientas utilizas para la automatización del marketing?",
+            "¿Puedes describir una situación en la que resolviste un desafío de marketing?",
+            "¿Cómo manejas la gestión de campañas de publicidad en medios tradicionales?",
+            "¿Qué importancia le das al análisis del ciclo de vida del producto?",
+            "¿Cómo abordarías la creación de una estrategia de marketing para un mercado internacional?",
+            "¿Cuál es tu experiencia en la optimización de conversiones?",
+            "¿Qué estrategias usarías para mejorar el reconocimiento de marca?",
+            "¿Cómo manejas la gestión de presupuestos en una estrategia de marketing?",
+            "¿Qué medidas tomarías para mantener actualizada una estrategia de marketing en un mercado cambiante?",
+            "¿Cómo evalúas la efectividad de una estrategia de marketing omnicanal?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 3,
+            ]);
+        }
+        //Operaciones y logística
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en la gestión de la cadena de suministro?",
+            "¿Cómo manejas la planificación de la demanda y el inventario?",
+            "¿Qué métodos utilizas para optimizar los procesos de producción?",
+            "¿Cuál es tu enfoque para la gestión de la logística de entrada y salida?",
+            "¿Cómo evalúas la eficiencia de los procesos de distribución?",
+            "¿Qué herramientas utilizas para el seguimiento de envíos y la gestión de inventario?",
+            "¿Puedes describir una estrategia de gestión de almacenes que hayas implementado?",
+            "¿Cómo manejas la coordinación de transporte y envíos?",
+            "¿Cuál es tu experiencia en la gestión de proveedores y contratistas?",
+            "¿Qué estrategias usarías para mejorar la eficiencia operativa de una empresa?",
+            "¿Cómo evalúas la efectividad de los sistemas de gestión de calidad?",
+            "¿Qué importancia le das a la optimización de procesos en la cadena de suministro?",
+            "¿Cómo manejas la gestión de riesgos en la cadena de suministro?",
+            "¿Cuál es tu enfoque para la gestión de la capacidad de producción?",
+            "¿Cómo abordarías la gestión de la cadena de frío en la logística de alimentos?",
+            "¿Qué medidas tomas para garantizar la seguridad y el cumplimiento normativo en las operaciones?",
+            "¿Cómo evalúas la eficacia de los proveedores y contratistas?",
+            "¿Cuál es tu experiencia en la gestión de proyectos de mejora continua?",
+            "¿Cómo manejas la planificación de rutas y la optimización de la distribución?",
+            "¿Qué herramientas utilizas para el análisis de costos en la cadena de suministro?",
+            "¿Puedes describir una situación en la que implementaste cambios en los procesos operativos?",
+            "¿Cómo manejas la gestión de personal en entornos operativos?",
+            "¿Qué estrategias usarías para reducir los tiempos de espera y los cuellos de botella en la producción?",
+            "¿Cuál es tu enfoque para la gestión de inventario justo a tiempo (JIT)?",
+            "¿Cómo abordarías la gestión de la cadena de suministro en un entorno globalizado?",
+            "¿Qué medidas tomarías para mejorar la colaboración entre departamentos en una empresa?",
+            "¿Cómo evalúas la efectividad de los sistemas de información en las operaciones?",
+            "¿Cuál es tu experiencia en la implementación de sistemas de gestión de almacenes (WMS)?",
+            "¿Cómo manejas la gestión de devoluciones y reclamaciones de clientes?",
+            "¿Qué importancia le das a la sostenibilidad en las operaciones y la logística?",
+            "¿Cómo abordarías la gestión de la cadena de suministro en situaciones de crisis?",
+            "¿Cuál es tu experiencia en la gestión de proyectos de mejora de la calidad?",
+            "¿Cómo manejas la coordinación de equipos en entornos operativos?",
+            "¿Qué estrategias usarías para mejorar la eficiencia energética en las operaciones?",
+            "¿Cómo evalúas la efectividad de los sistemas de seguimiento de activos en la logística?",
+            "¿Qué medidas tomarías para garantizar la continuidad del negocio en caso de interrupciones en la cadena de suministro?",
+            "¿Cómo manejas la gestión de la documentación y los registros en las operaciones?",
+            "¿Cuál es tu enfoque para la gestión de proyectos de expansión de instalaciones?",
+            "¿Qué herramientas utilizas para la optimización de la carga en el transporte?",
+            "¿Cómo abordarías la gestión de la logística inversa y el reciclaje de productos?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 4,
+            ]);
+        }
+        //Ventas y desarrollo de negocios
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en ventas y desarrollo de negocios?",
+            "¿Cómo abordarías la identificación de oportunidades de mercado?",
+            "¿Qué estrategias utilizas para generar leads y prospectos?",
+            "¿Cuál es tu enfoque para la gestión de relaciones con clientes?",
+            "¿Cómo evalúas las necesidades y los deseos del cliente?",
+            "¿Qué métodos utilizas para cerrar acuerdos y negociar contratos?",
+            "¿Cómo manejas la gestión de pipelines de ventas?",
+            "¿Puedes describir una estrategia de ventas exitosa que hayas implementado?",
+            "¿Cuál es tu experiencia en la elaboración de propuestas comerciales?",
+            "¿Qué herramientas utilizas para el seguimiento de ventas y actividades comerciales?",
+            "¿Cómo abordarías la gestión de cuentas clave y clientes corporativos?",
+            "¿Qué medidas tomas para mantener relaciones comerciales a largo plazo?",
+            "¿Cómo evalúas la efectividad de las estrategias de upselling y cross-selling?",
+            "¿Cuál es tu enfoque para la gestión de objeciones y resistencias de los clientes?",
+            "¿Cómo manejas la gestión de quejas y reclamaciones de clientes?",
+            "¿Qué estrategias usarías para establecer y alcanzar objetivos de ventas?",
+            "¿Cómo evalúas la rentabilidad de una oportunidad de venta?",
+            "¿Cuál es tu experiencia en la gestión de equipos de ventas?",
+            "¿Cómo abordarías la formación y el desarrollo de habilidades del equipo de ventas?",
+            "¿Qué medidas tomarías para mejorar la productividad del equipo de ventas?",
+            "¿Cómo manejas la coordinación de esfuerzos de ventas en equipos multidisciplinarios?",
+            "¿Qué importancia le das a la colaboración entre ventas y marketing?",
+            "¿Cómo evalúas la efectividad de los canales de distribución y venta?",
+            "¿Cuál es tu enfoque para la gestión de territorios de ventas?",
+            "¿Cómo abordarías la gestión de la competencia en el mercado?",
+            "¿Qué herramientas utilizas para la planificación y seguimiento de actividades de ventas?",
+            "¿Puedes describir una situación en la que superaste tus objetivos de ventas?",
+            "¿Cómo manejas la gestión de precios y tarifas en ventas?",
+            "¿Qué estrategias usarías para identificar nuevas oportunidades de negocio?",
+            "¿Cómo evalúas la efectividad de las estrategias de penetración de mercado?",
+            "¿Cuál es tu experiencia en la participación en ferias comerciales y eventos de networking?",
+            "¿Cómo abordarías la gestión de la relación con distribuidores y socios comerciales?",
+            "¿Qué medidas tomarías para garantizar la calidad y satisfacción del cliente en ventas?",
+            "¿Cómo manejas la gestión de tiempo y prioridades en ventas?",
+            "¿Qué importancia le das a la innovación y la creatividad en el desarrollo de estrategias de ventas?",
+            "¿Cómo evalúas la efectividad de las campañas de marketing en apoyo a las ventas?",
+            "¿Cuál es tu enfoque para la gestión de datos y análisis en ventas?",
+            "¿Cómo abordarías la gestión de la comunicación interna y externa en el equipo de ventas?",
+            "¿Qué estrategias usarías para adaptarte a cambios en el mercado y la industria?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 5,
+            ]);
+        }
+        //Servicio al cliente
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en atención al cliente?",
+            "¿Cómo abordarías la resolución de problemas de los clientes?",
+            "¿Qué medidas tomas para garantizar la satisfacción del cliente?",
+            "¿Cuál es tu enfoque para la gestión de quejas y reclamaciones de los clientes?",
+            "¿Cómo manejas situaciones de clientes difíciles o molestos?",
+            "¿Qué métodos utilizas para comunicarte de manera efectiva con los clientes?",
+            "¿Cómo evalúas la calidad del servicio al cliente?",
+            "¿Qué herramientas utilizas para el seguimiento de solicitudes y consultas de los clientes?",
+            "¿Puedes describir una situación en la que proporcionaste un servicio excepcional al cliente?",
+            "¿Cuál es tu experiencia en la gestión de equipos de atención al cliente?",
+            "¿Cómo abordarías la formación y el desarrollo de habilidades del equipo de atención al cliente?",
+            "¿Qué estrategias usarías para mejorar la eficiencia y productividad del equipo de atención al cliente?",
+            "¿Cómo evalúas la efectividad de los canales de comunicación con los clientes (teléfono, correo electrónico, chat, etc.)?",
+            "¿Cuál es tu enfoque para la gestión de tiempos de espera y tiempos de respuesta?",
+            "¿Cómo manejas la gestión de crisis y situaciones de emergencia en el servicio al cliente?",
+            "¿Qué medidas tomarías para garantizar la confidencialidad y seguridad de la información del cliente?",
+            "¿Cómo abordarías la gestión de clientes insatisfechos y la retención de clientes?",
+            "¿Qué importancia le das a la empatía en la atención al cliente?",
+            "¿Cómo manejas la gestión de expectativas de los clientes?",
+            "¿Qué estrategias usarías para anticipar las necesidades de los clientes?",
+            "¿Cómo evalúas la satisfacción del cliente y recopilación de feedback?",
+            "¿Cuál es tu experiencia en la gestión de solicitudes de reembolso y devoluciones?",
+            "¿Cómo manejas la gestión de cambios en políticas o procedimientos que afectan al servicio al cliente?",
+            "¿Qué herramientas utilizas para la gestión de la base de conocimientos y recursos de atención al cliente?",
+            "¿Puedes describir una situación en la que implementaste una mejora en el servicio al cliente?",
+            "¿Cómo abordarías la gestión de clientes en diferentes canales (en persona, teléfono, correo electrónico, redes sociales, etc.)?",
+            "¿Qué medidas tomarías para garantizar la accesibilidad y disponibilidad del servicio al cliente?",
+            "¿Cómo evalúas la efectividad de los programas de fidelización y recompensas para clientes?",
+            "¿Cuál es tu enfoque para la gestión de la calidad del servicio al cliente?",
+            "¿Cómo manejas la coordinación de esfuerzos entre diferentes departamentos para resolver problemas de los clientes?",
+            "¿Qué importancia le das a la resolución de problemas en el primer contacto con el cliente?",
+            "¿Cómo abordarías la gestión de quejas y reclamaciones en redes sociales y plataformas de revisión en línea?",
+            "¿Qué estrategias usarías para mejorar la eficiencia del servicio al cliente sin comprometer la calidad?",
+            "¿Cómo evalúas la efectividad de los sistemas de gestión de relaciones con los clientes (CRM)?",
+            "¿Cuál es tu experiencia en la gestión de clientes en entornos multiculturales o internacionales?",
+            "¿Cómo manejas la gestión de solicitudes urgentes y situaciones de alta presión?",
+            "¿Qué medidas tomarías para garantizar la consistencia del servicio al cliente en diferentes puntos de contacto?",
+            "¿Cómo abordarías la gestión de expectativas de los clientes en situaciones de productos o servicios agotados?",
+            "¿Qué importancia le das a la proactividad en la atención al cliente?",
+            "¿Cómo evalúas la efectividad de los procesos de retroalimentación y mejora continua en el servicio al cliente?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 6,
+            ]);
+        }
+        //Gestión de proyectos
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en la gestión de proyectos?",
+            "¿Cómo abordarías la planificación inicial de un proyecto?",
+            "¿Qué métodos utilizas para establecer objetivos y hitos de proyecto claros?",
+            "¿Cuál es tu enfoque para la asignación de recursos en un proyecto?",
+            "¿Cómo manejas la identificación y gestión de riesgos en un proyecto?",
+            "¿Qué herramientas utilizas para el seguimiento del progreso y el cumplimiento de plazos?",
+            "¿Puedes describir una situación en la que tuviste que adaptarte a cambios en un proyecto?",
+            "¿Cómo evalúas y gestionas los cambios en el alcance del proyecto?",
+            "¿Qué medidas tomas para garantizar la comunicación efectiva entre los miembros del equipo del proyecto?",
+            "¿Cuál es tu experiencia en la gestión de presupuestos y costos de proyecto?",
+            "¿Cómo manejas la gestión de conflictos entre miembros del equipo en un proyecto?",
+            "¿Qué estrategias usarías para motivar y mantener comprometido al equipo del proyecto?",
+            "¿Cómo evalúas la eficacia de las reuniones de seguimiento de proyectos?",
+            "¿Cuál es tu enfoque para la gestión de la calidad en un proyecto?",
+            "¿Cómo abordarías la gestión de expectativas de los stakeholders del proyecto?",
+            "¿Qué herramientas utilizas para la gestión de la documentación y los entregables del proyecto?",
+            "¿Cómo manejas la gestión de dependencias entre tareas y equipos en un proyecto?",
+            "¿Qué medidas tomarías para garantizar la conformidad con los requisitos regulatorios en un proyecto?",
+            "¿Cuál es tu experiencia en la gestión de proyectos en entornos ágiles o Scrum?",
+            "¿Cómo evalúas la efectividad de la gestión del tiempo en un proyecto?",
+            "¿Qué estrategias usarías para garantizar la alineación del proyecto con los objetivos estratégicos de la organización?",
+            "¿Cómo manejas la gestión de la carga de trabajo y la asignación de tareas en un proyecto?",
+            "¿Qué importancia le das a la gestión del cambio en un proyecto?",
+            "¿Cómo abordarías la gestión de la comunicación con stakeholders externos al proyecto?",
+            "¿Qué herramientas utilizas para la evaluación y seguimiento del rendimiento del equipo del proyecto?",
+            "¿Cómo manejas la gestión de expectativas de los clientes en un proyecto?",
+            "¿Cuál es tu enfoque para la gestión de la innovación en un proyecto?",
+            "¿Cómo evalúas la efectividad de la gestión de riesgos en un proyecto?",
+            "¿Qué medidas tomarías para garantizar la resiliencia del proyecto ante imprevistos?",
+            "¿Cómo manejas la gestión de entregables y revisiones en un proyecto?",
+            "¿Qué estrategias usarías para mejorar la colaboración entre equipos y departamentos en un proyecto?",
+            "¿Cómo abordarías la gestión de proyectos en entornos virtuales o distribuidos?",
+            "¿Cuál es tu experiencia en la gestión de proyectos de desarrollo de software?",
+            "¿Cómo evalúas la efectividad de la gestión de la comunicación en un proyecto?",
+            "¿Qué importancia le das a la retroalimentación y la mejora continua en la gestión de proyectos?",
+            "¿Cómo manejas la gestión de stakeholders con expectativas divergentes en un proyecto?",
+            "¿Qué herramientas utilizas para la evaluación y selección de proveedores en un proyecto?",
+            "¿Cuál es tu enfoque para la gestión de la integración de equipos multidisciplinarios en un proyecto?",
+            "¿Cómo evalúas la efectividad de la gestión de la calidad en un proyecto?",
+            "¿Qué medidas tomarías para garantizar la adherencia a los estándares de seguridad en un proyecto?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 7,
+            ]);
+        }
+        //Educación y formación
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en educación y formación?",
+            "¿Cuál es tu enfoque pedagógico o metodológico preferido?",
+            "¿Cómo adaptas tu enseñanza a diferentes estilos de aprendizaje?",
+            "¿Qué medidas tomas para garantizar la participación y el compromiso de los estudiantes?",
+            "¿Cómo evalúas el progreso y el rendimiento de los estudiantes?",
+            "¿Qué estrategias utilizas para fomentar un ambiente de aprendizaje inclusivo?",
+            "¿Puedes describir una situación en la que resolviste un desafío en el aula?",
+            "¿Cómo manejas la gestión del tiempo y la planificación de lecciones?",
+            "¿Cuál es tu experiencia en el uso de tecnología en el aula?",
+            "¿Qué importancia le das al aprendizaje experiencial o práctico?",
+            "¿Cómo abordarías la adaptación de programas de estudio para diferentes niveles de habilidad?",
+            "¿Qué herramientas utilizas para la evaluación y retroalimentación de los estudiantes?",
+            "¿Cuál es tu enfoque para la gestión del comportamiento en el aula?",
+            "¿Cómo manejas la diversidad cultural y lingüística en el aula?",
+            "¿Qué medidas tomarías para garantizar un ambiente seguro y respetuoso en el aula?",
+            "¿Cómo evalúas la efectividad de tus métodos de enseñanza?",
+            "¿Cuál es tu experiencia en el diseño y desarrollo de materiales didácticos?",
+            "¿Cómo abordarías la colaboración con otros educadores o profesionales en la enseñanza?",
+            "¿Qué estrategias usarías para promover el pensamiento crítico y la resolución de problemas en los estudiantes?",
+            "¿Cómo manejas la adaptación de la enseñanza a las necesidades individuales de los estudiantes?",
+            "¿Qué importancia le das al desarrollo de habilidades socioemocionales en la educación?",
+            "¿Cómo abordarías la evaluación formativa y sumativa en el aula?",
+            "¿Cuál es tu experiencia en la gestión de programas de educación a distancia o en línea?",
+            "¿Cómo evalúas la efectividad de la retroalimentación en el proceso de aprendizaje?",
+            "¿Qué herramientas utilizas para la colaboración y comunicación con padres y tutores?",
+            "¿Cómo manejas la adaptación de la enseñanza a estudiantes con necesidades especiales?",
+            "¿Qué medidas tomarías para fomentar la motivación y la autoestima de los estudiantes?",
+            "¿Cuál es tu enfoque para la integración de habilidades prácticas y teóricas en la enseñanza?",
+            "¿Cómo abordarías la enseñanza de habilidades del siglo XXI, como el pensamiento crítico, la creatividad y la colaboración?",
+            "¿Qué importancia le das a la educación en valores y ciudadanía?",
+            "¿Cómo manejas la gestión del estrés y la presión en el ámbito educativo?",
+            "¿Cuál es tu experiencia en la implementación de programas de educación continua y desarrollo profesional para educadores?",
+            "¿Cómo evalúas la efectividad de la retroalimentación entre pares en el desarrollo profesional?",
+            "¿Qué estrategias usarías para promover la inclusión y diversidad en el entorno educativo?",
+            "¿Cómo abordarías la enseñanza de habilidades de pensamiento computacional y tecnológico?",
+            "¿Qué medidas tomarías para fomentar la creatividad y la innovación en el aula?",
+            "¿Cómo evalúas la efectividad de la colaboración entre estudiantes en el aprendizaje?",
+            "¿Cuál es tu enfoque para la evaluación y seguimiento del progreso del programa de estudios?",
+            "¿Qué importancia le das a la educación ambiental y sostenibilidad en el currículo?",
+            "¿Cómo manejas la gestión de la diversidad cultural y lingüística en el entorno educativo?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 8,
+            ]);
+        }
+        //Salud y bienestar
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en el campo de la salud y el bienestar?",
+            "¿Qué te motivó a trabajar en el campo de la salud y el bienestar?",
+            "¿Cómo abordarías la promoción de estilos de vida saludables entre los clientes?",
+            "¿Qué medidas tomarías para evaluar las necesidades individuales de salud y bienestar de los clientes?",
+            "¿Cuál es tu enfoque para el diseño de programas de bienestar personalizados?",
+            "¿Cómo evalúas la efectividad de los programas de salud y bienestar que implementas?",
+            "¿Qué estrategias utilizarías para fomentar el cambio de comportamiento hacia hábitos más saludables?",
+            "¿Cómo manejas la gestión de objetivos de salud y bienestar a corto y largo plazo?",
+            "¿Qué herramientas utilizas para el seguimiento de progreso y resultados en el bienestar de los clientes?",
+            "¿Cuál es tu experiencia en la gestión de programas de ejercicios y actividad física?",
+            "¿Cómo abordarías la gestión del estrés y la salud mental de los clientes?",
+            "¿Qué importancia le das a la nutrición y la dieta en el bienestar general?",
+            "¿Cómo manejas la gestión de problemas de salud crónicos en los clientes?",
+            "¿Cuál es tu enfoque para la gestión del tiempo y la planificación de programas de bienestar?",
+            "¿Qué medidas tomarías para garantizar un enfoque holístico en la salud y el bienestar?",
+            "¿Cómo evalúas la efectividad de las intervenciones de salud y bienestar a largo plazo?",
+            "¿Cuál es tu experiencia en la implementación de programas de bienestar en entornos laborales?",
+            "¿Cómo abordarías la promoción de la salud en la comunidad local?",
+            "¿Qué estrategias usarías para fomentar la participación y la adherencia a los programas de bienestar?",
+            "¿Cómo manejas la gestión de expectativas y objetivos realistas en la salud y el bienestar?",
+            "¿Qué importancia le das al sueño y el descanso en el bienestar general?",
+            "¿Cómo evalúas la efectividad de las estrategias de gestión del peso y la composición corporal?",
+            "¿Cuál es tu enfoque para la gestión del equilibrio entre trabajo, vida personal y bienestar?",
+            "¿Qué herramientas utilizas para la educación y capacitación en salud y bienestar?",
+            "¿Cómo manejas la adaptación de programas de bienestar para diferentes grupos demográficos?",
+            "¿Qué medidas tomarías para garantizar la accesibilidad y la inclusión en los programas de bienestar?",
+            "¿Cuál es tu experiencia en la gestión de programas de bienestar en entornos virtuales o a distancia?",
+            "¿Cómo abordarías la gestión de la motivación y el compromiso de los clientes en el bienestar?",
+            "¿Qué importancia le das a la actividad física y el ejercicio en la salud y el bienestar?",
+            "¿Cómo evalúas la efectividad de las estrategias de prevención de lesiones y enfermedades?",
+            "¿Cuál es tu enfoque para la gestión del autocuidado y la autogestión en el bienestar?",
+            "¿Qué estrategias usarías para fomentar la autonomía y la responsabilidad en la salud y el bienestar?",
+            "¿Cómo manejas la gestión de información confidencial y privacidad en el contexto de salud y bienestar?",
+            "¿Qué medidas tomarías para adaptar programas de bienestar a diferentes culturas y contextos socioeconómicos?",
+            "¿Cuál es tu experiencia en la gestión de programas de bienestar enfocados en la prevención de enfermedades crónicas?",
+            "¿Cómo evalúas la satisfacción de los clientes con los programas de bienestar?",
+            "¿Qué importancia le das a la colaboración interdisciplinaria en el campo de la salud y el bienestar?",
+            "¿Cómo manejas la gestión de la calidad y la mejora continua en los programas de bienestar?",
+            "¿Qué herramientas utilizas para la investigación y evaluación de tendencias en salud y bienestar?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 9,
+            ]);
+        }
+        //Gobierno y administración pública
+        $preguntas = [
+            "¿Cuál es tu experiencia previa en el campo de gobierno y administración pública?",
+            "¿Qué te motiva a trabajar en el sector público?",
+            "¿Cómo abordarías la gestión de políticas públicas en un entorno cambiante?",
+            "¿Qué medidas tomarías para promover la transparencia y la rendición de cuentas en la administración pública?",
+            "¿Cuál es tu enfoque para la participación ciudadana en la toma de decisiones gubernamentales?",
+            "¿Cómo evalúas la efectividad de los programas y servicios gubernamentales?",
+            "¿Qué estrategias usarías para mejorar la eficiencia y la eficacia de la administración pública?",
+            "¿Cómo manejas la gestión de presupuestos y recursos en el sector público?",
+            "¿Qué herramientas utilizas para la gestión de proyectos y programas gubernamentales?",
+            "¿Cuál es tu experiencia en la gestión de relaciones con otras entidades gubernamentales y organizaciones internacionales?",
+            "¿Cómo abordarías la gestión de crisis y situaciones de emergencia en el gobierno?",
+            "¿Qué importancia le das a la innovación y la tecnología en la administración pública?",
+            "¿Cómo manejas la gestión de conflictos entre diferentes partes interesadas en el gobierno?",
+            "¿Cuál es tu enfoque para la gestión del talento y el desarrollo de capacidades en el sector público?",
+            "¿Qué medidas tomarías para promover la igualdad de género y la inclusión en el gobierno?",
+            "¿Cómo evalúas la efectividad de las políticas de desarrollo económico y social?",
+            "¿Cuál es tu experiencia en la implementación de programas de desarrollo comunitario?",
+            "¿Cómo abordarías la gestión de la planificación urbana y el desarrollo sostenible?",
+            "¿Qué estrategias usarías para mejorar la participación electoral y la representación política?",
+            "¿Cómo manejas la gestión de riesgos y la seguridad en el sector público?",
+            "¿Qué importancia le das a la educación cívica y la conciencia pública?",
+            "¿Cómo evalúas la efectividad de los programas de seguridad social y protección social?",
+            "¿Cuál es tu enfoque para la gestión de políticas de salud pública y bienestar?",
+            "¿Qué herramientas utilizas para la gestión de datos y análisis en el gobierno?",
+            "¿Cómo manejas la gestión de la infraestructura y los servicios públicos?",
+            "¿Qué medidas tomarías para promover la justicia y el estado de derecho en el gobierno?",
+            "¿Cuál es tu experiencia en la gestión de crisis políticas y sociales?",
+            "¿Cómo abordarías la gestión de políticas de medio ambiente y sostenibilidad?",
+            "¿Qué estrategias usarías para promover la innovación y la competitividad en el gobierno?",
+            "¿Cómo evalúas la efectividad de las políticas de seguridad nacional y defensa?",
+            "¿Cuál es tu enfoque para la gestión de políticas de igualdad racial y étnica?",
+            "¿Qué herramientas utilizas para la gestión de la comunicación y la participación ciudadana?",
+            "¿Cómo manejas la gestión de la diversidad cultural y lingüística en el gobierno?",
+            "¿Qué importancia le das a la colaboración intersectorial y la asociación público-privada en el gobierno?",
+            "¿Cómo evalúas la efectividad de los programas de combate a la corrupción y el mal uso de fondos públicos?",
+            "¿Cuál es tu experiencia en la gestión de políticas de migración y refugiados?",
+            "¿Cómo abordarías la gestión de políticas de igualdad de género y empoderamiento de la mujer?",
+            "¿Qué medidas tomarías para promover la participación juvenil y el desarrollo de liderazgo en el gobierno?",
+            "¿Cómo manejas la gestión de crisis sanitarias y pandemias en el gobierno?",
+        ];
+
+        foreach ($preguntas as $pregunta) {
+            DB::table('Question')->insert([
+                'question' => $pregunta,
+                'CategoryId' => 10,
+            ]);
+        }
     }
 }
