@@ -12,7 +12,8 @@ class ModelCategory extends Model
 
     protected $fillable = [
         'CategoryName',
-        'description'
+        'description',
+        'image'
     ];
 
     public function questions()

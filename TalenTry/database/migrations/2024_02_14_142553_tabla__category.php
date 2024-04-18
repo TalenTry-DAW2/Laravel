@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('CategoryID', 4);
             $table->string('CategoryName', 50)->notnull();
             $table->string('description', 200)->default('null');
+            $table->string('image', 255)->default('https://deproconsultores.com/wp-content/uploads/2018/11/Art-245-Trabajo-en-casa-1.jpg');
         });
     }
 
