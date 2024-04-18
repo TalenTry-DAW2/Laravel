@@ -352,14 +352,15 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta['pregunta'],
                 'CategoryId' => 1,
-            ]);
+            ]);$p=10;
             foreach ($pregunta['respuestas'] as $respuesta) {
+                
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
                     'QuestionID'=> $i,
-                    'QuestionPoints' => 1,
+                    'QuestionPoints' => $p,
                 ]);
-                
+                $p-=3;
             }
             $i++;
         }
@@ -411,7 +412,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 2,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Marketing y publicidad
         $preguntas = [
@@ -460,7 +471,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 3,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Operaciones y logística
         $preguntas = [
@@ -510,7 +531,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 4,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Ventas y desarrollo de negocios
         $preguntas = [
@@ -559,7 +590,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 5,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Servicio al cliente
         $preguntas = [
@@ -609,7 +650,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 6,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Gestión de proyectos
         $preguntas = [
@@ -659,7 +710,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 7,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Educación y formación
         $preguntas = [
@@ -709,7 +770,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 8,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Salud y bienestar
         $preguntas = [
@@ -758,7 +829,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 9,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
         //Gobierno y administración pública
         $preguntas = [
@@ -807,7 +888,17 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 10,
-            ]);
+            ]);$p=10;
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => $p,
+                ]);
+                $p-=3;
+            }
+            $i++;
         }
     }
 }
