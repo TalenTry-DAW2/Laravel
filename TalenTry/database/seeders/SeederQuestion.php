@@ -15,56 +15,353 @@ class SeederQuestion extends Seeder
      */
     public function run(): void
     {
+        $i=1;
         //Recursos humanos
         $preguntas = [
-            "¿Cuál es tu experiencia previa en reclutamiento y selección de personal?",
-            "¿Cómo abordarías la integración de nuevos empleados en la empresa?",
-            "¿Cuáles son tus estrategias para retener a los empleados talentosos?",
-            "¿Cómo manejarías conflictos entre miembros del equipo?",
-            "¿Cómo evaluarías las necesidades de capacitación y desarrollo de los empleados?",
-            "¿Cuál es tu enfoque para evaluar el desempeño de los empleados?",
-            "¿Cómo garantizarías un entorno de trabajo inclusivo y diverso?",
-            "¿Qué medidas tomarías para promover el bienestar de los empleados en el lugar de trabajo?",
-            "¿Cuál es tu experiencia en la elaboración de políticas de recursos humanos?",
-            "¿Cómo te mantienes actualizado sobre las tendencias y regulaciones laborales?",
-            "¿Puedes describir una situación en la que resolviste eficazmente un conflicto laboral?",
-            "¿Cómo manejarías una situación en la que un empleado muestra bajo rendimiento?",
-            "¿Qué importancia le das a la comunicación interna dentro de una organización?",
-            "¿Cuál es tu enfoque para fomentar un ambiente laboral positivo?",
-            "¿Cómo te asegurarías de que los procesos de reclutamiento sean justos y equitativos?",
-            "¿Puedes describir un proyecto de capacitación que hayas liderado?",
-            "¿Cómo gestionarías el proceso de despido de un empleado?",
-            "¿Qué estrategias usarías para atraer candidatos talentosos?",
-            "¿Cómo abordarías las preocupaciones de un empleado insatisfecho?",
-            "¿Qué medidas tomarías para garantizar la conformidad con las leyes laborales?",
-            "¿Cómo manejarías una situación en la que un empleado se queja de discriminación?",
-            "¿Cuál es tu enfoque para resolver problemas de comunicación entre empleados?",
-            "¿Qué importancia le das a la formación continua de los empleados?",
-            "¿Puedes describir un momento en el que implementaste con éxito una política de recursos humanos?",
-            "¿Cómo garantizarías la confidencialidad de la información del empleado?",
-            "¿Cómo medirías el éxito de tus iniciativas de recursos humanos?",
-            "¿Cuál es tu experiencia en la gestión del rendimiento de los empleados?",
-            "¿Cómo manejarías una queja de acoso laboral?",
-            "¿Qué estrategias usarías para fomentar la colaboración entre equipos?",
-            "¿Cuál es tu enfoque para crear un plan de sucesión dentro de la organización?",
-            "¿Cómo abordarías las preocupaciones sobre la carga de trabajo y el equilibrio entre vida laboral y personal?",
-            "¿Puedes describir una situación en la que implementaste cambios en la cultura organizacional?",
-            "¿Qué medidas tomarías para promover la igualdad de oportunidades en el lugar de trabajo?",
-            "¿Cómo manejarías una situación en la que un empleado presenta una queja sobre su supervisor?",
-            "¿Cuál es tu experiencia en la gestión de la diversidad en el lugar de trabajo?",
-            "¿Cómo fomentarías el compromiso de los empleados con la empresa?",
-            "¿Qué importancia le das a la retroalimentación en el desarrollo profesional de los empleados?",
-            "¿Cómo manejarías una situación en la que un empleado se siente infravalorado?",
-            "¿Cuál es tu enfoque para promover un ambiente de trabajo saludable y seguro?",
-            "¿Puedes describir una estrategia que hayas implementado para mejorar la moral de los empleados?",
-            "¿Qué medidas tomarías para fomentar el liderazgo dentro de los equipos de trabajo?",
+            [
+                "pregunta" => "¿Cuál es tu experiencia previa en reclutamiento y selección de personal?",
+                "respuestas" => [
+                    "Tengo experiencia previa en reclutamiento y selección de personal en mi trabajo anterior.",
+                    "He trabajado en reclutamiento y selección durante algunos años en diferentes empresas.",
+                    "No tengo experiencia directa en reclutamiento y selección de personal, pero estoy dispuesto a aprender."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías la integración de nuevos empleados en la empresa?",
+                "respuestas" => [
+                    "Yo abordaría la integración de nuevos empleados mediante un proceso estructurado de inducción y capacitación.",
+                    "Para abordar la integración de nuevos empleados, implementaría un programa de mentoría para facilitar su adaptación al equipo.",
+                    "No tengo un plan específico para abordar la integración de nuevos empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuáles son tus estrategias para retener a los empleados talentosos?",
+                "respuestas" => [
+                    "Mis estrategias para retener a los empleados talentosos incluyen ofrecer oportunidades de desarrollo profesional y un ambiente laboral positivo.",
+                    "Implementaría un sistema de reconocimiento y recompensas para valorar el trabajo de los empleados talentosos y fomentar su lealtad a la empresa.",
+                    "No tengo estrategias específicas para retener a los empleados talentosos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejarías conflictos entre miembros del equipo?",
+                "respuestas" => [
+                    "Manejaría conflictos entre miembros del equipo fomentando la comunicación abierta y la resolución colaborativa de problemas.",
+                    "Implementaría un proceso de mediación y facilitación para abordar los conflictos de manera constructiva y promover la reconciliación.",
+                    "Ignoraría los conflictos entre miembros del equipo y esperaría a que se resolvieran por sí mismos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evaluarías las necesidades de capacitación y desarrollo de los empleados?",
+                "respuestas" => [
+                    "Evaluaría las necesidades de capacitación y desarrollo de los empleados mediante encuestas de retroalimentación, evaluaciones de desempeño y análisis de brechas de habilidades.",
+                    "Realizaría reuniones individuales con los empleados para discutir sus metas profesionales y áreas de mejora, y luego diseñaría programas de capacitación personalizados.",
+                    "No tengo un método específico para evaluar las necesidades de capacitación y desarrollo de los empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para evaluar el desempeño de los empleados?",
+                "respuestas" => [
+                    "Mi enfoque para evaluar el desempeño de los empleados incluye establecer objetivos claros, proporcionar retroalimentación regular y realizar revisiones formales de desempeño.",
+                    "Utilizaría un sistema de evaluación 360 grados que involucre a colegas, supervisores y subordinados para obtener una visión completa del desempeño de los empleados.",
+                    "No tengo un enfoque específico para evaluar el desempeño de los empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo garantizarías un entorno de trabajo inclusivo y diverso?",
+                "respuestas" => [
+                    "Garantizaría un entorno de trabajo inclusivo y diverso mediante la implementación de políticas de contratación equitativas, programas de capacitación en diversidad e inclusión, y fomentando la sensibilización cultural.",
+                    "Promovería la diversidad en la contratación y crearía grupos de afinidad para proporcionar un espacio seguro para discutir temas relacionados con la diversidad y la inclusión.",
+                    "No tengo un plan específico para garantizar un entorno de trabajo inclusivo y diverso."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para promover el bienestar de los empleados en el lugar de trabajo?",
+                "respuestas" => [
+                    "Tomaría medidas para promover el bienestar de los empleados en el lugar de trabajo, como ofrecer programas de bienestar físico y mental, promover un equilibrio entre vida laboral y personal, y proporcionar recursos para manejar el estrés.",
+                    "Implementaría políticas de flexibilidad laboral, como horarios de trabajo flexibles y días de trabajo desde casa, para ayudar a los empleados a equilibrar sus responsabilidades laborales y personales.",
+                    "No tomaría medidas específicas para promover el bienestar de los empleados en el lugar de trabajo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la elaboración de políticas de recursos humanos?",
+                "respuestas" => [
+                    "Tengo experiencia en la elaboración de políticas de recursos humanos en mi trabajo anterior, donde participé en la creación y revisión de políticas relacionadas con la contratación, la compensación, el desarrollo y la terminación de empleo.",
+                    "He liderado equipos en la revisión y actualización de políticas de recursos humanos para garantizar su alineación con las mejores prácticas de la industria y las regulaciones laborales.",
+                    "No tengo experiencia en la elaboración de políticas de recursos humanos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo te mantienes actualizado sobre las tendencias y regulaciones laborales?",
+                "respuestas" => [
+                    "Me mantengo actualizado sobre las tendencias y regulaciones laborales mediante la participación en conferencias y seminarios, la lectura de publicaciones especializadas y el seguimiento de cambios en la legislación laboral.",
+                    "Formo parte de asociaciones profesionales y redes de recursos humanos que proporcionan acceso a recursos y eventos relacionados con las tendencias y regulaciones laborales.",
+                    "No tengo un método específico para mantenerme actualizado sobre las tendencias y regulaciones laborales."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una situación en la que resolviste eficazmente un conflicto laboral?",
+                "respuestas" => [
+                    "En una situación anterior, medie entre dos miembros del equipo que estaban en desacuerdo sobre la asignación de tareas y logré encontrar un compromiso que satisfizo a ambas partes y restableció la armonía en el equipo.",
+                    "Lideré la resolución de un conflicto entre un empleado y su supervisor mediante la facilitación de conversaciones abiertas y la identificación de soluciones mutuamente aceptables.",
+                    "No tengo experiencia en la resolución efectiva de conflictos laborales."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejarías una situación en la que un empleado muestra bajo rendimiento?",
+                "respuestas" => [
+                    "Manejaría una situación de bajo rendimiento mediante la identificación de las causas subyacentes, el desarrollo de un plan de mejora del desempeño y la provisión de apoyo y recursos necesarios para ayudar al empleado a alcanzar su máximo potencial.",
+                    "Realizaría reuniones regulares con el empleado para discutir su desempeño, establecer metas claras y brindar retroalimentación constructiva para facilitar su mejora.",
+                    "Ignoraría el bajo rendimiento del empleado y esperaría a que la situación se resolviera por sí misma."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das a la comunicación interna dentro de una organización?",
+                "respuestas" => [
+                    "Considero que la comunicación interna es esencial para el éxito de cualquier organización, ya que promueve la transparencia, la colaboración y la cohesión del equipo.",
+                    "Doy una gran importancia a la comunicación interna y establecería canales de comunicación abiertos y efectivos para garantizar que la información fluya libremente dentro de la organización.",
+                    "No considero que la comunicación interna sea importante y no tomaría medidas para fomentarla en la organización."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para fomentar un ambiente laboral positivo?",
+                "respuestas" => [
+                    "Mi enfoque para fomentar un ambiente laboral positivo incluye reconocer y recompensar el buen desempeño, promover la colaboración y el trabajo en equipo, y cultivar una cultura de respeto y apoyo mutuo.",
+                    "Implementaría actividades de team building y eventos sociales para fortalecer las relaciones entre los miembros del equipo y mejorar el clima laboral.",
+                    "No tengo un enfoque específico para fomentar un ambiente laboral positivo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo te asegurarías de que los procesos de reclutamiento sean justos y equitativos?",
+                "respuestas" => [
+                    "Me aseguraría de que los procesos de reclutamiento sean justos y equitativos mediante la eliminación de sesgos y prejuicios, la estandarización de criterios de selección y la diversificación de los paneles de entrevistas.",
+                    "Implementaría políticas de reclutamiento inclusivas que promuevan la diversidad y la igualdad de oportunidades para todos los candidatos.",
+                    "No tomaría medidas específicas para garantizar la equidad en los procesos de reclutamiento."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir un proyecto de capacitación que hayas liderado?",
+                "respuestas" => [
+                    "Lideré un proyecto de capacitación centrado en el desarrollo de habilidades de liderazgo para los gerentes de nivel medio, que incluyó talleres, sesiones de coaching y evaluaciones de desempeño.",
+                    "Organicé un programa de capacitación en habilidades técnicas para empleados de diferentes departamentos, que resultó en un aumento significativo en la productividad y la satisfacción laboral.",
+                    "No he liderado ningún proyecto de capacitación."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo gestionarías el proceso de despido de un empleado?",
+                "respuestas" => [
+                    "Gestionaría el proceso de despido de un empleado con empatía y profesionalismo, siguiendo todos los procedimientos legales y brindando apoyo emocional y recursos para facilitar la transición.",
+                    "Realizaría una revisión exhaustiva del desempeño del empleado y proporcionaría retroalimentación clara y específica sobre las razones del despido, asegurándome de respetar su dignidad y privacidad.",
+                    "Despediría al empleado sin ofrecer explicaciones ni apoyo, lo que podría generar resentimiento y desconfianza dentro del equipo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para atraer candidatos talentosos?",
+                "respuestas" => [
+                    "Para atraer candidatos talentosos, utilizaría una combinación de marketing de empleador sólido, una sólida presencia en línea, y la participación en eventos de reclutamiento y ferias de empleo.",
+                    "Implementaría un programa de referidos de empleados y establecería relaciones con universidades y programas de formación profesional para identificar y reclutar talento emergente.",
+                    "No tengo estrategias específicas para atraer candidatos talentosos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías las preocupaciones de un empleado insatisfecho?",
+                "respuestas" => [
+                    "Abordaría las preocupaciones de un empleado insatisfecho escuchando activamente sus inquietudes, identificando las causas subyacentes y colaborando con él para encontrar soluciones que satisfagan sus necesidades.",
+                    "Programaría reuniones periódicas con el empleado para revisar su progreso y proporcionarle un espacio seguro para expresar sus preocupaciones y sugerir mejoras.",
+                    "Ignoraría las preocupaciones del empleado y esperaría a que se resolvieran por sí mismas."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para garantizar la conformidad con las leyes laborales?",
+                "respuestas" => [
+                    "Para garantizar la conformidad con las leyes laborales, me mantendría actualizado sobre las regulaciones laborales relevantes, establecería políticas y procedimientos claros, y proporcionaría capacitación regular a los empleados y supervisores.",
+                    "Realizaría auditorías internas periódicas para identificar y corregir cualquier posible violación de las leyes laborales antes de que se conviertan en problemas legales.",
+                    "No tomaría medidas específicas para garantizar la conformidad con las leyes laborales."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejarías una situación en la que un empleado se queja de discriminación?",
+                "respuestas" => [
+                    "Manejaría una queja de discriminación investigando de manera imparcial y confidencial, tomando medidas correctivas apropiadas si se encuentra evidencia de discriminación, y brindando apoyo al empleado afectado.",
+                    "Establecería canales de denuncia seguros y confidenciales para que los empleados puedan reportar incidentes de discriminación sin temor a represalias.",
+                    "Ignoraría la queja de discriminación y esperaría a que el problema se resolviera por sí mismo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para resolver problemas de comunicación entre empleados?",
+                "respuestas" => [
+                    "Mi enfoque para resolver problemas de comunicación entre empleados incluye facilitar el diálogo abierto, promover la escucha activa y proporcionar herramientas y técnicas para mejorar la comunicación interpersonal.",
+                    "Organizaría talleres y sesiones de capacitación sobre comunicación efectiva y resolución de conflictos para ayudar a los empleados a mejorar sus habilidades de comunicación y resolver malentendidos.",
+                    "No tengo un enfoque específico para resolver problemas de comunicación entre empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das a la formación continua de los empleados?",
+                "respuestas" => [
+                    "Considero que la formación continua de los empleados es crucial para mantener su relevancia y competitividad en el mercado laboral en constante cambio, así como para fomentar su desarrollo profesional y personal.",
+                    "Invertiría en programas de formación continua para mejorar las habilidades y conocimientos de los empleados, lo que a su vez beneficiaría a la organización en términos de innovación y crecimiento.",
+                    "No le doy importancia a la formación continua de los empleados y no invertiría en programas de desarrollo profesional."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir un momento en el que implementaste con éxito una política de recursos humanos?",
+                "respuestas" => [
+                    "Implementé con éxito una política de flexibilidad laboral que permitía a los empleados trabajar desde casa en determinadas circunstancias, lo que resultó en una mejora significativa en la satisfacción y la retención de empleados.",
+                    "Introduje una política de reconocimiento y recompensas que premiaba el desempeño excepcional de los empleados, lo que motivó a todo el equipo a alcanzar metas más ambiciosas.",
+                    "No tengo experiencia en la implementación exitosa de políticas de recursos humanos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo garantizarías la confidencialidad de la información del empleado?",
+                "respuestas" => [
+                    "Garantizaría la confidencialidad de la información del empleado mediante el establecimiento de políticas claras de privacidad de datos, la capacitación del personal sobre la importancia de la confidencialidad y el uso de medidas de seguridad físicas y electrónicas para proteger la información.",
+                    "Limitaría el acceso a la información confidencial solo a aquellos empleados que necesiten saber, y establecería procedimientos de manejo de datos seguros para prevenir filtraciones o pérdidas de información.",
+                    "No tomaría medidas específicas para garantizar la confidencialidad de la información del empleado."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo medirías el éxito de tus iniciativas de recursos humanos?",
+                "respuestas" => [
+                    "Mediría el éxito de mis iniciativas de recursos humanos mediante la recopilación y análisis de datos clave, como la retención de empleados, la satisfacción del cliente interno, la productividad y el rendimiento del equipo.",
+                    "Realizaría encuestas periódicas de compromiso de empleados y evaluaciones de clima laboral para evaluar el impacto de mis iniciativas en la moral y el bienestar de los empleados.",
+                    "No tendría forma de medir el éxito de mis iniciativas de recursos humanos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la gestión del rendimiento de los empleados?",
+                "respuestas" => [
+                    "Tengo experiencia en la gestión del rendimiento de los empleados, que incluye establecer objetivos claros, proporcionar retroalimentación regular y realizar revisiones formales de desempeño para promover el desarrollo profesional y el crecimiento personal.",
+                    "He implementado sistemas de gestión del desempeño basados en el modelo de objetivos y resultados clave (OKR) que han mejorado la alineación de objetivos y el rendimiento individual con los objetivos organizacionales.",
+                    "No tengo experiencia en la gestión del rendimiento de los empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejarías una queja de acoso laboral?",
+                "respuestas" => [
+                    "Manejaría una queja de acoso laboral con seriedad y sensibilidad, investigando de manera imparcial y confidencial, tomando medidas correctivas apropiadas y proporcionando apoyo y recursos para el empleado afectado.",
+                    "Establecería un proceso claro y confidencial para que los empleados presenten quejas de acoso laboral y garantizaría que todas las denuncias se investiguen de manera exhaustiva y justa.",
+                    "Ignoraría la queja de acoso laboral y esperaría a que el problema se resolviera por sí mismo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para fomentar la colaboración entre equipos?",
+                "respuestas" => [
+                    "Fomentaría la colaboración entre equipos mediante la organización de actividades de team building, la creación de grupos de trabajo interdepartamentales y el establecimiento de canales de comunicación abiertos y transparentes.",
+                    "Incentivaría la colaboración entre equipos mediante la implementación de sistemas de recompensas y reconocimiento que valoren el trabajo en equipo y la contribución colectiva al éxito organizacional.",
+                    "No tomaría medidas específicas para fomentar la colaboración entre equipos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para crear un plan de sucesión dentro de la organización?",
+                "respuestas" => [
+                    "Mi enfoque para crear un plan de sucesión incluye identificar y desarrollar talento interno, establecer criterios claros de sucesión, y proporcionar oportunidades de desarrollo y capacitación para preparar a los empleados para roles de liderazgo futuros.",
+                    "Implementaría un proceso estructurado de planificación de la sucesión que involucre a la alta dirección y a los líderes de equipo en la identificación y desarrollo de posibles sucesores.",
+                    "No tengo un enfoque específico para crear un plan de sucesión dentro de la organización."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías las preocupaciones sobre la carga de trabajo y el equilibrio entre vida laboral y personal?",
+                "respuestas" => [
+                    "Abordaría las preocupaciones sobre la carga de trabajo y el equilibrio entre vida laboral y personal mediante la implementación de políticas de flexibilidad laboral, programas de bienestar y apoyo para ayudar a los empleados a gestionar el estrés y encontrar un equilibrio saludable entre el trabajo y la vida personal.",
+                    "Realizaría revisiones regulares de la carga de trabajo de los empleados y proporcionaría recursos adicionales o redistribuiría las tareas según sea necesario para evitar el agotamiento y el desgaste.",
+                    "Ignoraría las preocupaciones sobre la carga de trabajo y el equilibrio entre vida laboral y personal, lo que podría provocar una disminución en la moral y la productividad de los empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una situación en la que implementaste cambios en la cultura organizacional?",
+                "respuestas" => [
+                    "Implementé cambios en la cultura organizacional mediante la introducción de programas de mentoría y coaching para fomentar el desarrollo profesional y personal de los empleados, lo que resultó en un aumento en la colaboración y la innovación dentro de la empresa.",
+                    "Lideré la transición hacia una cultura más orientada al equipo, fomentando la participación y la contribución de todos los empleados en la toma de decisiones y la resolución de problemas.",
+                    "No he tenido la oportunidad de implementar cambios en la cultura organizacional."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para promover la igualdad de oportunidades en el lugar de trabajo?",
+                "respuestas" => [
+                    "Para promover la igualdad de oportunidades en el lugar de trabajo, implementaría políticas de contratación y promoción basadas en el mérito y la diversidad, y proporcionaría capacitación sobre sesgo inconsciente y diversidad e inclusión para todos los empleados.",
+                    "Establecería metas de diversidad y equidad en la contratación y promoción, y tomaría medidas afirmativas para garantizar que se brinden oportunidades iguales a todos los empleados, independientemente de su origen o características personales.",
+                    "No tomaría medidas específicas para promover la igualdad de oportunidades en el lugar de trabajo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejarías una situación en la que un empleado presenta una queja sobre su supervisor?",
+                "respuestas" => [
+                    "Manejaría una queja sobre un supervisor investigando de manera imparcial, brindando apoyo al empleado afectado y tomando medidas correctivas apropiadas según sea necesario para resolver el problema.",
+                    "Facilitaría una conversación mediada entre el empleado y su supervisor para abordar las preocupaciones y trabajar hacia una solución mutuamente aceptable.",
+                    "Ignoraría la queja del empleado y esperaría a que el problema se resolviera por sí mismo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la gestión de la diversidad en el lugar de trabajo?",
+                "respuestas" => [
+                    "Tengo experiencia en la gestión de la diversidad en el lugar de trabajo, que incluye la promoción de la inclusión, la sensibilización cultural y la creación de un ambiente que valore y celebre las diferencias individuales.",
+                    "He liderado iniciativas para aumentar la diversidad en la contratación y promoción, así como para crear programas de desarrollo profesional que apoyen a empleados de diversos orígenes y perspectivas.",
+                    "No tengo experiencia en la gestión de la diversidad en el lugar de trabajo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo fomentarías el compromiso de los empleados con la empresa?",
+                "respuestas" => [
+                    "Fomentaría el compromiso de los empleados con la empresa mediante el reconocimiento y la valoración de su contribución, la promoción de oportunidades de desarrollo y crecimiento, y la creación de un ambiente de trabajo inclusivo y colaborativo.",
+                    "Implementaría programas de participación de empleados que involucren a los empleados en la toma de decisiones, fomenten la transparencia y proporcionen oportunidades para compartir ideas y retroalimentación.",
+                    "No tomaría medidas específicas para fomentar el compromiso de los empleados con la empresa."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das a la retroalimentación en el desarrollo profesional de los empleados?",
+                "respuestas" => [
+                    "Considero que la retroalimentación es fundamental para el desarrollo profesional de los empleados, ya que les proporciona información valiosa sobre su desempeño y áreas de mejora, y les ayuda a crecer y alcanzar su máximo potencial.",
+                    "Implementaría un sistema de retroalimentación continua que incluya evaluaciones regulares, revisiones de desempeño y sesiones de coaching individualizado para apoyar el desarrollo profesional de los empleados.",
+                    "No le doy importancia a la retroalimentación en el desarrollo profesional de los empleados y no proporcionaría oportunidades para recibir retroalimentación."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejarías una situación en la que un empleado se siente infravalorado?",
+                "respuestas" => [
+                    "Manejaría una situación en la que un empleado se siente infravalorado mediante el reconocimiento y la validación de sus contribuciones, la escucha activa de sus preocupaciones y la colaboración con él para encontrar soluciones que restauren su confianza y motivación.",
+                    "Programaría una reunión individual con el empleado para discutir sus preocupaciones, proporcionar retroalimentación positiva sobre su desempeño y trabajar juntos en un plan para abordar sus inquietudes y necesidades.",
+                    "Ignoraría los sentimientos de infravaloración del empleado y esperaría a que la situación se resolviera por sí sola."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para promover un ambiente de trabajo saludable y seguro?",
+                "respuestas" => [
+                    "Mi enfoque para promover un ambiente de trabajo saludable y seguro incluye la identificación y mitigación de riesgos laborales, la promoción de hábitos de trabajo saludables y el fomento de una cultura de seguridad y bienestar.",
+                    "Implementaría políticas y procedimientos de salud y seguridad en el trabajo, proporcionaría capacitación regular sobre prácticas seguras y garantizaría el cumplimiento de todas las regulaciones y estándares relevantes.",
+                    "No tengo un enfoque específico para promover un ambiente de trabajo saludable y seguro."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una estrategia que hayas implementado para mejorar la moral de los empleados?",
+                "respuestas" => [
+                    "Implementé un programa de reconocimiento de empleados que incluía premios y celebraciones para reconocer y recompensar el buen desempeño, lo que resultó en un aumento en la moral y la motivación del equipo.",
+                    "Organicé actividades de team building y eventos sociales para fortalecer las relaciones entre los miembros del equipo y mejorar el sentido de pertenencia y camaradería.",
+                    "No he tenido la oportunidad de implementar estrategias para mejorar la moral de los empleados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para fomentar el liderazgo dentro de los equipos de trabajo?",
+                "respuestas" => [
+                    "Para fomentar el liderazgo dentro de los equipos de trabajo, proporcionaría oportunidades de desarrollo y capacitación en liderazgo, asignaría responsabilidades de liderazgo a empleados con potencial y fomentaría una cultura de mentoría y colaboración.",
+                    "Implementaría programas de liderazgo que identifiquen y desarrollen talento interno, promuevan el empoderamiento y la autonomía, y fomenten la asunción de responsabilidades de liderazgo en todos los niveles de la organización.",
+                    "No tomaría medidas específicas para fomentar el liderazgo dentro de los equipos de trabajo."
+                ]
+            ]
         ];
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 1,
             ]);
+            foreach ($pregunta['respuestas'] as $respuesta) {
+                DB::table('Answer')->insert([
+                    'answer' => $respuesta,
+                    'QuestionID'=> $i,
+                    'QuestionPoints' => 1,
+                ]);
+                
+            }
+            $i++;
         }
         //Finanzas y contabilidad
         $preguntas = [
