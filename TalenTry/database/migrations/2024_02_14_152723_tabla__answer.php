@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('Answer', function (Blueprint $table) {
             $table->id('AnswerID'); // This will automatically create an auto-incrementing primary key
-            $table->string('answer')->length(512)->notnull();
+            $table->string('answer')->length(1024)->notnull();
             $table->unsignedBigInteger('QuestionID')->notnull();
             $table->double('QuestionPoints', 5, 2)->notnull();
     
