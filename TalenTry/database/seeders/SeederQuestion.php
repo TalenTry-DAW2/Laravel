@@ -15,7 +15,7 @@ class SeederQuestion extends Seeder
      */
     public function run(): void
     {
-        $i=1;
+        $i = 1;
         //Recursos humanos
         $preguntas = [
             [
@@ -352,134 +352,694 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta['pregunta'],
                 'CategoryId' => 1,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
         //Finanzas y contabilidad
-        $preguntas = [
-            "¿Cuál es tu experiencia previa en contabilidad financiera?",
-            "¿Cómo manejas el análisis de estados financieros?",
-            "¿Qué métodos utilizas para gestionar el presupuesto de una empresa?",
-            "¿Cómo interpretas los indicadores financieros clave?",
-            "¿Cuál es tu experiencia en la preparación de informes financieros?",
-            "¿Cómo manejas el análisis de costos?",
-            "¿Qué herramientas utilizas para la planificación financiera?",
-            "¿Puedes describir una situación en la que resolviste un problema financiero complejo?",
-            "¿Cómo evalúas la rentabilidad de un proyecto o inversión?",
-            "¿Cuál es tu experiencia en la gestión de cuentas por cobrar y cuentas por pagar?",
-            "¿Cómo manejas la conciliación bancaria?",
-            "¿Qué medidas tomas para garantizar la conformidad con las regulaciones financieras?",
-            "¿Cuál es tu enfoque para la gestión del flujo de efectivo?",
-            "¿Cómo abordas el análisis de riesgos financieros?",
-            "¿Qué importancia le das al control interno en la contabilidad?",
-            "¿Cómo manejas la auditoría interna y externa?",
-            "¿Puedes describir un proyecto de optimización de costos que hayas liderado?",
-            "¿Qué estrategias usarías para reducir los gastos operativos de una empresa?",
-            "¿Cuál es tu experiencia en la gestión de impuestos?",
-            "¿Cómo manejas la planificación fiscal?",
-            "¿Qué herramientas utilizas para el análisis financiero?",
-            "¿Cuál es tu enfoque para la gestión de activos y pasivos?",
-            "¿Cómo abordarías una discrepancia en los registros contables?",
-            "¿Qué medidas tomarías para mejorar la eficiencia financiera de una empresa?",
-            "¿Cómo evalúas la solvencia financiera de una empresa?",
-            "¿Cuál es tu experiencia en la gestión de inversiones?",
-            "¿Cómo manejas la gestión de riesgos financieros en un entorno volátil?",
-            "¿Qué importancia le das al cumplimiento de los plazos en la contabilidad?",
-            "¿Cómo manejas la relación con instituciones financieras externas?",
-            "¿Puedes describir una situación en la que identificaste y corregiste un error contable?",
-            "¿Qué estrategias usarías para maximizar los beneficios de una empresa?",
-            "¿Cuál es tu enfoque para el análisis de rentabilidad por producto o servicio?",
-            "¿Cómo manejas la preparación para una auditoría financiera?",
-            "¿Qué medidas tomarías para garantizar la precisión de los informes financieros?",
-            "¿Cómo evalúas la eficacia de los controles financieros internos?",
-            "¿Cuál es tu experiencia en la gestión de flujos de efectivo en múltiples divisas?",
-            "¿Cómo abordarías una situación de fraude financiero?",
-            "¿Qué importancia le das a la educación financiera del personal en una empresa?",
-            "¿Puedes describir una estrategia que implementaste para mejorar la gestión financiera de una empresa?",
-            "¿Cómo manejas la preparación de presupuestos en un entorno económico cambiante?",
+        $respuestas = [
+            [
+                "pregunta" => "¿Cuál es tu experiencia previa en contabilidad financiera?",
+                "respuestas" => [
+                    "He trabajado como contador financiero durante más de cinco años, gestionando la contabilidad de varias empresas medianas.",
+                    "Mi experiencia en contabilidad financiera se extiende a través de diversos sectores como manufactura, servicios y tecnología, sumando un total de ocho años de práctica profesional.",
+                    "Soy recién graduado en contabilidad y he realizado prácticas en dos firmas de contabilidad, adquiriendo experiencia fundamental en procesos financieros."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas el análisis de estados financieros?",
+                "respuestas" => [
+                    "Utilizo herramientas analíticas avanzadas y técnicas de análisis de ratios para evaluar el desempeño financiero y detectar áreas de mejora.",
+                    "Me concentro en un enfoque detallado y sistemático para revisar cada componente de los estados financieros, asegurando la precisión y relevancia de la información.",
+                    "Implemento software de análisis financiero y colaboro estrechamente con el departamento de auditoría para garantizar análisis consistentes y precisos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué métodos utilizas para gestionar el presupuesto de una empresa?",
+                "respuestas" => [
+                    "Desarrollo presupuestos basados en un análisis detallado de los datos históricos y proyecciones futuras, ajustando por factores de mercado y objetivos empresariales.",
+                    "Aplico un enfoque colaborativo, trabajando con diferentes departamentos para entender sus necesidades y expectativas, y asegurando que el presupuesto refleje los objetivos estratégicos de la empresa.",
+                    "Uso software de gestión presupuestaria para monitorear los gastos en tiempo real y ajustar las asignaciones según sea necesario para evitar desviaciones."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo interpretas los indicadores financieros clave?",
+                "respuestas" => [
+                    "Analizo indicadores como el ROI, ROE, y margen de beneficio para evaluar la eficacia operativa y la rentabilidad de la empresa.",
+                    "Me enfoco en la interpretación contextual de los indicadores, considerando tanto el rendimiento interno como comparaciones con estándares del sector.",
+                    "Realizo análisis de tendencias y uso benchmarks de la industria para dar contexto a los indicadores financieros, ayudando a la dirección a tomar decisiones informadas."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la preparación de informes financieros?",
+                "respuestas" => [
+                    "Tengo amplia experiencia en la preparación de informes financieros cumpliendo con los estándares GAAP y IFRS, adaptándome a las regulaciones locales e internacionales.",
+                    "He preparado informes financieros trimestrales y anuales para empresas cotizadas en bolsa, asegurando transparencia y cumplimiento normativo.",
+                    "Durante mi carrera he desarrollado habilidades en la consolidación de informes financieros para grupos empresariales, mejorando la claridad y utilidad de la información presentada a stakeholders."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas el análisis de costos?",
+                "respuestas" => [
+                    "Utilizo técnicas de contabilidad de costos para desglosar y analizar los gastos, mejorando la estrategia de precios y la eficiencia operativa.",
+                    "Aplico métodos de costeo basado en actividades para obtener un entendimiento más preciso de cómo los recursos son utilizados y cómo pueden optimizarse.",
+                    "Realizo revisiones regulares de los costos, comparándolos con presupuestos y pronósticos para identificar y rectificar desviaciones inesperadas."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué herramientas utilizas para la planificación financiera?",
+                "respuestas" => [
+                    "Utilizo software de planificación financiera como Oracle Financials y SAP para un análisis detallado y proyecciones precisas.",
+                    "Empleo hojas de cálculo avanzadas y herramientas de modelado financiero para desarrollar planes financieros robustos y adaptativos.",
+                    "Incorporo herramientas de análisis de datos y simulación para prever escenarios futuros y ajustar estrategias financieras acorde a las condiciones del mercado."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una situación en la que resolviste un problema financiero complejo?",
+                "respuestas" => [
+                    "En mi último empleo, resolví una discrepancia significativa en el reconocimiento de ingresos que afectaba los resultados financieros reportados. Mediante un análisis detallado y colaboración con el equipo de auditoría, corregí el error y restablecí la integridad de nuestros estados financieros.",
+                    "Enfrenté un problema de flujo de caja negativo sostenido; implementé medidas de reducción de costos y renegociación de términos con proveedores, lo que recuperó la estabilidad financiera de la empresa.",
+                    "Resolví un problema de sobrecoste en un proyecto clave mediante la implementación de un sistema de seguimiento de costos más riguroso y la negociación de contratos más favorables con subcontratistas."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la rentabilidad de un proyecto o inversión?",
+                "respuestas" => [
+                    "Utilizo técnicas de evaluación financiera como el Valor Presente Neto (VPN) y la Tasa Interna de Retorno (TIR) para determinar la viabilidad y rentabilidad de proyectos e inversiones.",
+                    "Realizo análisis de sensibilidad para entender cómo diferentes escenarios afectarían la rentabilidad del proyecto, asegurando una decisión bien fundamentada.",
+                    "Combino análisis cuantitativos con consideraciones cualitativas, como el alineamiento estratégico y el riesgo de mercado, para evaluar inversiones."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la gestión de cuentas por cobrar y cuentas por pagar?",
+                "respuestas" => [
+                    "He gestionado con éxito las cuentas por cobrar y por pagar de empresas grandes, optimizando los tiempos de cobro y pago para mejorar el flujo de caja.",
+                    "Mi experiencia incluye la implementación de sistemas automatizados para la gestión eficiente de estas cuentas, reduciendo errores y mejorando la transparencia.",
+                    "He desarrollado políticas que minimizan los periodos de crédito para las cuentas por cobrar mientras maximizan los términos de pago favorables en las cuentas por pagar."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la conciliación bancaria?",
+                "respuestas" => [
+                    "Realizo conciliaciones bancarias mensualmente utilizando software de contabilidad para asegurar que todos los registros coincidan con los estados bancarios, identificando y corrigiendo discrepancias rápidamente.",
+                    "Me aseguro de que cada transacción sea registrada correctamente y verificada contra los extractos bancarios, utilizando procesos automatizados para mejorar la eficiencia y reducir errores.",
+                    "Mantengo comunicación regular con el banco para resolver cualquier discrepancia en el menor tiempo posible, garantizando la precisión en nuestros registros financieros."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomas para garantizar la conformidad con las regulaciones financieras?",
+                "respuestas" => [
+                    "Me mantengo actualizado con los cambios en las regulaciones financieras mediante cursos de formación continua y suscripciones a publicaciones especializadas.",
+                    "Implemento revisiones regulares y auditorías internas para asegurar que todas las prácticas contables cumplen con las normas vigentes.",
+                    "Colaboro estrechamente con asesores legales para interpretar y aplicar correctamente las regulaciones financieras en todas nuestras operaciones."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para la gestión del flujo de efectivo?",
+                "respuestas" => [
+                    "Priorizo la creación de un colchón de efectivo para manejar imprevistos, mientras optimizo el pago a proveedores y la colección de cuentas por cobrar.",
+                    "Utilizo modelos de pronóstico de flujo de efectivo para planificar y asegurar la disponibilidad de fondos necesaria para las operaciones continuas.",
+                    "Implemento herramientas tecnológicas para un seguimiento en tiempo real del flujo de efectivo, permitiendo ajustes operativos rápidos según sea necesario."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordas el análisis de riesgos financieros?",
+                "respuestas" => [
+                    "Desarrollo e implemento políticas de gestión de riesgos que incluyen la identificación, evaluación y mitigación de riesgos financieros.",
+                    "Utilizo software de análisis de riesgos para simular diferentes escenarios y sus impactos potenciales en la salud financiera de la empresa.",
+                    "Colaboro con el equipo de gestión para establecer tolerancias al riesgo y estrategias de mitigación apropiadas a nuestro contexto empresarial."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das al control interno en la contabilidad?",
+                "respuestas" => [
+                    "Considero el control interno como fundamental para asegurar la integridad de la información financiera y prevenir fraudes.",
+                    "Integro controles internos robustos en todos los procesos contables y realizo evaluaciones periódicas para su mejora continua.",
+                    "Capacito al personal sobre la importancia y la ejecución de controles internos, asegurando que sean parte integral de nuestra cultura organizacional."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la auditoría interna y externa?",
+                "respuestas" => [
+                    "Facilito el proceso de auditoría interna y externa proporcionando toda la documentación necesaria y asegurando la total transparencia de nuestras operaciones financieras.",
+                    "Trabajo en colaboración con los auditores para identificar y rectificar cualquier irregularidad o área de mejora en los sistemas financieros de la empresa.",
+                    "Organizo y preparo los calendarios de auditoría, asegurando que todas las áreas de la empresa estén listas y cumpliendo con los estándares requeridos antes de las visitas de auditores."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir un proyecto de optimización de costos que hayas liderado?",
+                "respuestas" => [
+                    "Dirigí un proyecto de revisión de procesos operativos que resultó en una reducción del 15% en los costos operativos generales mediante la automatización y la reestructuración de procesos.",
+                    "Implementé un sistema de gestión de inventarios just-in-time que redujo significativamente los costos de almacenamiento y desperdicio de materiales.",
+                    "Lideré una iniciativa de renegociación de contratos con proveedores clave, logrando ahorros sustanciales y mejoras en los términos de entrega y calidad de producto."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para reducir los gastos operativos de una empresa?",
+                "respuestas" => [
+                    "Analizaría detalladamente los gastos actuales para identificar áreas de ineficiencia y propondría medidas de reducción de costos sin comprometer la calidad del servicio o producto.",
+                    "Implementaría tecnologías automatizadas para optimizar los procesos y reducir la necesidad de intervención manual, lo que disminuye los costos laborales y mejora la eficiencia.",
+                    "Negociaría con proveedores para obtener mejores precios o condiciones de compra, y revisaría los contratos de servicios para ajustarlos a nuestras necesidades reales y evitar gastos superfluos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la gestión de impuestos?",
+                "respuestas" => [
+                    "He manejado la planificación y cumplimiento fiscal para empresas multinacionales, asegurando la optimización de las cargas tributarias bajo diferentes regímenes fiscales.",
+                    "Mi experiencia incluye la gestión de auditorías fiscales y la implementación de estrategias de mitigación de riesgos fiscales.",
+                    "He colaborado con asesores fiscales para desarrollar estructuras eficientes desde el punto de vista fiscal y asegurar el cumplimiento en todas las jurisdicciones en las que operamos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la planificación fiscal?",
+                "respuestas" => [
+                    "Desarrollo estrategias de planificación fiscal que se anticipan a cambios en la legislación, minimizando obligaciones fiscales y maximizando la rentabilidad.",
+                    "Colaboro con expertos legales y fiscales para asegurar que todas las estrategias de planificación fiscal cumplan con la ley y sean eficaces.",
+                    "Utilizo software de gestión fiscal para modelar y prever las consecuencias fiscales de diversas estrategias de negocio, eligiendo la más óptima."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué herramientas utilizas para el análisis financiero?",
+                "respuestas" => [
+                    "Utilizo plataformas como Microsoft Excel para análisis financiero detallado, SAP para la integración de datos empresariales, y herramientas específicas de la industria como QuickBooks para operaciones más pequeñas.",
+                    "Empleo software de Business Intelligence como Tableau y Power BI para visualizar y analizar datos financieros, facilitando la toma de decisiones estratégicas.",
+                    "Aplico herramientas de análisis predictivo para modelar escenarios financieros y anticipar cambios en las condiciones del mercado."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para la gestión de activos y pasivos?",
+                "respuestas" => [
+                    "Mi enfoque se centra en mantener un balance óptimo entre activos y pasivos para sostener la liquidez y la solvencia a largo plazo.",
+                    "Utilizo análisis de ratio y modelado financiero para evaluar y ajustar la estructura de capital de la empresa, optimizando nuestro perfil de riesgo y retorno.",
+                    "Gestiono activos y pasivos con un enfoque proactivo, asegurando que se alineen con los objetivos estratégicos de la empresa y las condiciones del mercado."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías una discrepancia en los registros contables?",
+                "respuestas" => [
+                    "Iniciaría una auditoría interna para identificar la fuente de la discrepancia, utilizando herramientas de reconciliación de cuentas para corregir los errores.",
+                    "Colaboraría con el equipo contable para revisar todas las entradas relacionadas y asegurar que todas las transacciones estén debidamente documentadas y justificadas.",
+                    "Implementaría controles adicionales para prevenir futuras discrepancias y mejorar la precisión de los registros contables."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para mejorar la eficiencia financiera de una empresa?",
+                "respuestas" => [
+                    "Implementaría sistemas de contabilidad y reporte automatizados para reducir errores y tiempo de procesamiento.",
+                    "Revisaría los procesos financieros actuales para identificar cuellos de botella y áreas de mejora, aplicando soluciones tecnológicas modernas.",
+                    "Capacitaría al equipo en prácticas de trabajo lean y agiles para maximizar la productividad y reducir costos innecesarios."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la solvencia financiera de una empresa?",
+                "respuestas" => [
+                    "Analizo ratios financieros claves como el ratio de liquidez, solvencia y endeudamiento, junto con proyecciones de flujo de caja.",
+                    "Evalúo la estructura de capital de la empresa y su capacidad para generar ingresos suficientes para cubrir sus obligaciones a corto y largo plazo.",
+                    "Realizo un análisis detallado del estado de resultados, balance general y flujos de efectivo para obtener una visión completa de la salud financiera de la empresa."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la gestión de inversiones?",
+                "respuestas" => [
+                    "He manejado portafolios de inversiones para clientes corporativos, con enfoques tanto en ingresos fijos como en equidad, maximizando retornos ajustados al riesgo.",
+                    "Poseo experiencia en la evaluación y selección de oportunidades de inversión, utilizando análisis cuantitativo y cualitativo.",
+                    "Tengo experiencia en supervisar y ajustar estrategias de inversión basadas en cambios del mercado y objetivos de los clientes."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la gestión de riesgos financieros en un entorno volátil?",
+                "respuestas" => [
+                    "Utilizo herramientas de análisis de riesgo y software de simulación para prever y mitigar efectos de fluctuaciones de mercado.",
+                    "Mantengo una diversificación adecuada del portafolio y una revisión constante de las estrategias de cobertura para proteger los activos financieros.",
+                    "Implemento un riguroso proceso de due diligence para todos los activos y transacciones, asegurando que los riesgos sean comprendidos y gestionados adecuadamente."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das al cumplimiento de los plazos en la contabilidad?",
+                "respuestas" => [
+                    "Considero crítico el cumplimiento de plazos para mantener la credibilidad y la transparencia financiera, así como para cumplir con regulaciones externas.",
+                    "Priorizo la organización y planificación adecuada para asegurar que todos los informes financieros y declaraciones fiscales se presenten a tiempo.",
+                    "Utilizo herramientas de gestión de proyectos para monitorizar los plazos de todas las tareas contables, asegurando que no haya retrasos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la relación con instituciones financieras externas?",
+                "respuestas" => [
+                    "Mantengo una comunicación abierta y regular con nuestras instituciones financieras para asegurar que entendemos y podemos cumplir con sus requisitos y condiciones.",
+                    "Negocio los mejores términos posibles para financiamiento y otros servicios bancarios, basándome en un entendimiento profundo de nuestras necesidades y capacidades financieras.",
+                    "Establezco y mantengo relaciones sólidas con contactos clave en las instituciones financieras para facilitar negociaciones y obtener acceso a información y recursos valiosos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una situación en la que identificaste y corregiste un error contable?",
+                "respuestas" => [
+                    "Descubrí un error significativo en la depreciación de activos durante una revisión de fin de año; ajusté los cálculos y corregí el error, lo que mejoró nuestra posición de resultados.",
+                    "Identifiqué y resolví discrepancias en el reconocimiento de ingresos entre reportes interdepartamentales, lo que resultó en una representación más precisa de nuestra situación financiera.",
+                    "Encontré un error en la aplicación de los principios de contabilidad para transacciones en moneda extranjera, corrigiendo el problema y mejorando la precisión de nuestros estados financieros."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para maximizar los beneficios de una empresa?",
+                "respuestas" => [
+                    "Implementaría mejoras en eficiencia operativa a través de tecnología y optimización de procesos, reduciendo costos y mejorando el margen de beneficio.",
+                    "Exploraría nuevas oportunidades de mercado para expandir ingresos, mientras mantengo un control riguroso sobre los costos operativos.",
+                    "Fortalecería las relaciones con los clientes y mejorarías las estrategias de precios y ventas para aumentar los ingresos y los márgenes de beneficio."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para el análisis de rentabilidad por producto o servicio?",
+                "respuestas" => [
+                    "Utilizo análisis de costos y precios para determinar la rentabilidad de cada producto o servicio, ajustando la estrategia según los resultados para maximizar los beneficios.",
+                    "Realizo un seguimiento de los márgenes de contribución por producto y servicio, y reevalúo la oferta basándome en la demanda del mercado y la eficiencia de producción.",
+                    "Empleo herramientas de análisis financiero para desglosar los costos y ingresos asociados con cada línea de productos, optimizando así nuestra estructura de precios y oferta de servicios."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la preparación para una auditoría financiera?",
+                "respuestas" => [
+                    "Organizo revisiones periódicas y preparo la documentación necesaria con antelación para asegurar un proceso de auditoría fluido y sin contratiempos.",
+                    "Capacito al equipo contable sobre las mejores prácticas y estándares de auditoría para minimizar errores y discrepancias.",
+                    "Colaboro estrechamente con los auditores externos desde el inicio para entender sus requisitos y facilitar el acceso a la información requerida."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para garantizar la precisión de los informes financieros?",
+                "respuestas" => [
+                    "Implementaría controles internos rigurosos y realizaría auditorías internas regulares para validar la precisión de los informes financieros.",
+                    "Capacitaría continuamente al personal en normas de contabilidad y aseguraría el uso de software actualizado para evitar errores en los informes.",
+                    "Establecería un comité de revisión financiera para supervisar la preparación de los informes y asegurar su cumplimiento con las normas contables aceptadas."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la eficacia de los controles financieros internos?",
+                "respuestas" => [
+                    "Realizo auditorías periódicas y pruebas de controles para evaluar su efectividad y realizar ajustes según sea necesario.",
+                    "Utilizo indicadores de desempeño y feedback de los equipos para mejorar continuamente los procesos y controles internos.",
+                    "Incorporo evaluaciones de riesgos en el proceso de revisión para asegurar que los controles sean adecuados y efectivos frente a los riesgos financieros actuales."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la gestión de flujos de efectivo en múltiples divisas?",
+                "respuestas" => [
+                    "He gestionado flujos de efectivo en múltiples divisas para corporaciones internacionales, optimizando las posiciones de efectivo y minimizando los riesgos de cambio.",
+                    "Poseo experiencia en la utilización de instrumentos financieros para cobertura de riesgos de cambio y en la implementación de estrategias para la eficiencia en la gestión de tesorería.",
+                    "Tengo un historial probado en la mejora de procesos de reconciliación y en la optimización de la liquidez en diferentes monedas para maximizar la rentabilidad."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías una situación de fraude financiero?",
+                "respuestas" => [
+                    "Iniciaría una investigación inmediata para identificar la extensión del fraude, colaborando con expertos en forenses financieros y legales para resolver la situación.",
+                    "Implementaría medidas correctivas y preventivas para fortalecer los controles internos y evitar futuros incidentes de fraude.",
+                    "Capacitaría al personal en detección de fraudes y fomentaría una cultura de transparencia y ética en la empresa."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das a la educación financiera del personal en una empresa?",
+                "respuestas" => [
+                    "Promuevo activamente la educación financiera entre el personal para mejorar la toma de decisiones y fomentar una cultura de responsabilidad y transparencia financiera.",
+                    "Considero esencial la capacitación continua del equipo en aspectos financieros, lo cual ayuda a mejorar los procesos internos y la comprensión de los objetivos financieros de la empresa.",
+                    "Organizo talleres y seminarios regulares sobre finanzas para asegurar que el personal esté bien informado y capacitado en las mejores prácticas y regulaciones financieras."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una estrategia que implementaste para mejorar la gestión financiera de una empresa?",
+                "respuestas" => [
+                    "Desarrollé e implementé una estrategia de centralización de las funciones financieras, lo que resultó en una reducción de costos y una mejora en la eficiencia y el control.",
+                    "Introduje un nuevo sistema de planificación de recursos empresariales (ERP) que integró diferentes áreas financieras, mejorando la precisión y la disponibilidad de la información financiera.",
+                    "Reestructuré la estrategia de inversión de la empresa, diversificando activos y reduciendo la exposición a riesgos, lo cual mejoró significativamente nuestra posición financiera a largo plazo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la preparación de presupuestos en un entorno económico cambiante?",
+                "respuestas" => [
+                    "Utilizo un enfoque flexible en la preparación de presupuestos, con revisiones periódicas para adaptarlos a cambios en el entorno económico.",
+                    "Incorporo análisis de escenarios en la planificación presupuestaria para anticipar posibles impactos económicos y ajustar las estrategias financieras adecuadamente.",
+                    "Mantengo una comunicación constante con los líderes de la empresa para entender mejor las necesidades y expectativas, ajustando el presupuesto en función de la evolución del mercado y la empresa."
+                ]
+            ]
         ];
+
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 2,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
+
         //Marketing y publicidad
-        $preguntas = [
-            "¿Cuál es tu experiencia previa en la planificación de estrategias de marketing?",
-            "¿Cómo abordarías la investigación de mercado para un nuevo producto?",
-            "¿Qué métodos utilizas para segmentar el mercado?",
-            "¿Cuál es tu enfoque para el desarrollo de un plan de marketing?",
-            "¿Cómo evalúas la efectividad de una campaña publicitaria?",
-            "¿Qué herramientas utilizas para el análisis competitivo?",
-            "¿Puedes describir una campaña de marketing exitosa en la que hayas participado?",
-            "¿Cómo manejas el análisis de tendencias del mercado?",
-            "¿Cuál es tu experiencia en la creación de contenido para medios digitales?",
-            "¿Qué estrategias usarías para aumentar la visibilidad de una marca en línea?",
-            "¿Cómo evalúas la efectividad de las estrategias de SEO y SEM?",
-            "¿Qué importancia le das a las redes sociales en una estrategia de marketing?",
-            "¿Cómo manejas la relación con influencers en una estrategia de marketing?",
-            "¿Cuál es tu enfoque para la generación de leads?",
-            "¿Cómo abordarías la gestión de la reputación en línea de una empresa?",
-            "¿Qué medidas tomas para asegurar la coherencia de la marca en todos los canales?",
-            "¿Cómo manejas la colaboración con agencias de publicidad o marketing externas?",
-            "¿Puedes describir una estrategia de marketing de contenidos que hayas implementado?",
-            "¿Cómo evalúas la efectividad de una estrategia de email marketing?",
-            "¿Qué herramientas utilizas para medir el retorno de la inversión en marketing?",
-            "¿Cuál es tu experiencia en la organización de eventos promocionales?",
-            "¿Cómo manejas la gestión de la comunicación en crisis?",
-            "¿Qué estrategias usarías para mejorar la participación del cliente?",
-            "¿Cómo abordarías la personalización en una estrategia de marketing?",
-            "¿Qué importancia le das al análisis del comportamiento del consumidor?",
-            "¿Cuál es tu enfoque para la identificación de oportunidades de mercado?",
-            "¿Cómo manejas la coordinación de lanzamientos de productos?",
-            "¿Qué medidas tomarías para mejorar la experiencia del cliente en línea y fuera de línea?",
-            "¿Cómo evalúas la efectividad de una estrategia de branding?",
-            "¿Qué herramientas utilizas para la automatización del marketing?",
-            "¿Puedes describir una situación en la que resolviste un desafío de marketing?",
-            "¿Cómo manejas la gestión de campañas de publicidad en medios tradicionales?",
-            "¿Qué importancia le das al análisis del ciclo de vida del producto?",
-            "¿Cómo abordarías la creación de una estrategia de marketing para un mercado internacional?",
-            "¿Cuál es tu experiencia en la optimización de conversiones?",
-            "¿Qué estrategias usarías para mejorar el reconocimiento de marca?",
-            "¿Cómo manejas la gestión de presupuestos en una estrategia de marketing?",
-            "¿Qué medidas tomarías para mantener actualizada una estrategia de marketing en un mercado cambiante?",
-            "¿Cómo evalúas la efectividad de una estrategia de marketing omnicanal?",
+        $respuestas = [
+            [
+                "pregunta" => "¿Cuál es tu experiencia previa en la planificación de estrategias de marketing?",
+                "respuestas" => [
+                    "He desarrollado y ejecutado múltiples estrategias de marketing en diferentes sectores, ajustándolas según las necesidades del mercado y los objetivos empresariales.",
+                    "Mi experiencia incluye la creación de planes de marketing integrados que abarcan tanto medios digitales como tradicionales.",
+                    "Aunque soy relativamente nuevo en la planificación estratégica de marketing, tengo un fuerte background en la implementación y el seguimiento de campañas publicitarias."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías la investigación de mercado para un nuevo producto?",
+                "respuestas" => [
+                    "Comenzaría definiendo el público objetivo y luego emplearía métodos cuantitativos y cualitativos para recopilar y analizar datos.",
+                    "Usaría herramientas de análisis de mercado online, encuestas a clientes y grupos focales para obtener una comprensión profunda del mercado objetivo.",
+                    "Integraría datos secundarios disponibles con investigación primaria personalizada para desarrollar una perspectiva completa del entorno de mercado."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué métodos utilizas para segmentar el mercado?",
+                "respuestas" => [
+                    "Utilizo una combinación de segmentación demográfica, psicográfica y de comportamiento para identificar y priorizar los segmentos de mercado más relevantes.",
+                    "Aplico análisis estadísticos y herramientas de big data para segmentar el mercado de manera precisa y eficiente.",
+                    "Me enfoco en la segmentación basada en el valor del cliente y la probabilidad de conversión para maximizar la efectividad de las campañas de marketing."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para el desarrollo de un plan de marketing?",
+                "respuestas" => [
+                    "Mi enfoque incluye un análisis exhaustivo del mercado, definición de objetivos claros, estrategia de posicionamiento, y la creación de un mix de marketing equilibrado.",
+                    "Trabajo colaborativamente con equipos de ventas, producto y servicio al cliente para desarrollar un plan que sea integral y alineado con las metas empresariales.",
+                    "Priorizo la flexibilidad en el plan de marketing para adaptarme rápidamente a cambios en el mercado o en las respuestas del consumidor."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la efectividad de una campaña publicitaria?",
+                "respuestas" => [
+                    "Evalúo la efectividad mediante indicadores clave de rendimiento como el retorno de la inversión (ROI), la tasa de conversión y el alcance de la campaña.",
+                    "Uso herramientas de análisis web y seguimiento de conversiones para medir el impacto directo de las campañas en las ventas y el compromiso del cliente.",
+                    "Realizo pruebas A/B y utilizo grupos de control para comparar el rendimiento de diferentes elementos de la campaña y optimizarla basándome en datos reales."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué herramientas utilizas para el análisis competitivo?",
+                "respuestas" => [
+                    "Utilizo herramientas como SEMrush, Ahrefs y BuzzSumo para realizar análisis competitivos detallados, monitoreando las estrategias de SEO, contenido y redes sociales de competidores.",
+                    "Aplico análisis SWOT para entender fortalezas, debilidades, oportunidades y amenazas en relación con competidores directos.",
+                    "Me apoyo en herramientas de inteligencia de mercado como Market Explorer y Insights para obtener una visión global del comportamiento de los competidores y tendencias de la industria."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una campaña de marketing exitosa en la que hayas participado?",
+                "respuestas" => [
+                    "Participé en una campaña de lanzamiento de producto que generó un aumento del 150% en leads cualificados a través de una combinación de marketing de influencers, publicidad PPC y eventos en línea.",
+                    "Colaboré en una campaña de concienciación de marca que utilizó estrategias de contenido viral y asociaciones con marcas líderes, resultando en un crecimiento del reconocimiento de marca en un 40% en tres meses.",
+                    "Dirigí una campaña de retención de clientes que integró email marketing personalizado y ofertas exclusivas, logrando reducir la tasa de churn en un 25%."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas el análisis de tendencias del mercado?",
+                "respuestas" => [
+                    "Utilizo herramientas de análisis de datos como Google Trends y análisis de redes sociales para identificar y actuar según las tendencias emergentes.",
+                    "Colaboro con equipos de insights del consumidor para realizar análisis predictivo y asegurar que nuestras estrategias de marketing se anticipen a cambios del mercado.",
+                    "Mantengo una actualización constante a través de informes de la industria y publicaciones de investigación para incorporar rápidamente tendencias relevantes en nuestras estrategias de marketing."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la creación de contenido para medios digitales?",
+                "respuestas" => [
+                    "He creado y gestionado contenido para múltiples plataformas digitales incluyendo blogs, redes sociales y sitios web, optimizando cada pieza para SEO y engagement del usuario.",
+                    "Poseo experiencia en el desarrollo de contenido multimedia, incluyendo videos, podcasts y gráficos interactivos, para mejorar la experiencia del usuario y aumentar la retención de contenido.",
+                    "Tengo un historial comprobado en la creación de campañas de contenido que incrementan la visibilidad de la marca y fomentan la interacción con el cliente."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para aumentar la visibilidad de una marca en línea?",
+                "respuestas" => [
+                    "Implementaría una combinación de SEO avanzado, marketing de contenido estratégico y publicidad pagada para mejorar la presencia en línea de la marca.",
+                    "Utilizaría estrategias de marketing en redes sociales, incluyendo campañas de influencers y publicidad dirigida para llegar a audiencias más amplias y relevantes.",
+                    "Optaría por tácticas de marketing de guerrilla y campañas virales para generar buzz y aumentar rápidamente la visibilidad de la marca entre el público objetivo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la efectividad de las estrategias de SEO y SEM?",
+                "respuestas" => [
+                    "Mido la efectividad de SEO y SEM a través de KPIs como la clasificación de palabras clave, el tráfico orgánico, y la tasa de conversión, utilizando herramientas como Google Analytics.",
+                    "Analizo el retorno sobre la inversión (ROI) de las campañas SEM y ajusto las estrategias en tiempo real para optimizar el presupuesto y los resultados.",
+                    "Realizo auditorías regulares de SEO para asegurar que el sitio web cumple con las mejores prácticas y adapto las tácticas basándome en los cambios en los algoritmos de los motores de búsqueda."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das a las redes sociales en una estrategia de marketing?",
+                "respuestas" => [
+                    "Considero las redes sociales fundamentales para la interacción directa con los clientes y para influir en la percepción de la marca, adecuando el contenido a cada plataforma específica.",
+                    "Las redes sociales son vitales para alcanzar a la audiencia más joven y para campañas de respuesta rápida, aprovechando tendencias y feedback en tiempo real.",
+                    "Las veo como un complemento esencial de otras estrategias de marketing, ideales para el lanzamiento rápido de promociones y para la amplificación de contenido."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la relación con influencers en una estrategia de marketing?",
+                "respuestas" => [
+                    "Establezco colaboraciones basadas en la autenticidad y el alineamiento de valores entre los influencers y la marca, priorizando relaciones a largo plazo.",
+                    "Utilizo plataformas y herramientas específicas para gestionar y monitorear las campañas con influencers, asegurando que los KPIs se cumplan eficientemente.",
+                    "Negocio acuerdos claros y medibles, estableciendo expectativas precisas y seguimiento continuo para asegurar que las campañas alcanzan los objetivos deseados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para la generación de leads?",
+                "respuestas" => [
+                    "Mi enfoque se centra en la creación de contenido de valor y campañas dirigidas que atraigan a potenciales clientes, utilizando técnicas de inbound marketing.",
+                    "Desarrollo estrategias de lead nurturing para avanzar a los leads a través del embudo de ventas, mejorando la conversión con personalización y seguimiento automatizado.",
+                    "Implemento una combinación de marketing digital y tácticas de outbound, como email marketing y publicidad en redes, para maximizar la generación de leads cualificados."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías la gestión de la reputación en línea de una empresa?",
+                "respuestas" => [
+                    "Monitorearía activamente las menciones de la marca en línea, respondiendo rápidamente a comentarios negativos y destacando positivos para mejorar la percepción pública.",
+                    "Implementaría programas de gestión de crisis para actuar rápidamente en caso de incidentes que puedan afectar la reputación de la empresa.",
+                    "Utilizaría herramientas de escucha social para seguir la conversación en torno a la marca y ajustar las estrategias de comunicación según sea necesario."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomas para asegurar la coherencia de la marca en todos los canales?",
+                "respuestas" => [
+                    "Desarrollo y aplico una guía de estilo de marca que detalle la voz, tono, y elementos visuales a utilizar en todos los canales de comunicación.",
+                    "Realizo auditorías regulares de marca para asegurar que todas las comunicaciones reflejen consistentemente los valores y el mensaje de la empresa.",
+                    "Coordino estrechamente con todos los departamentos para garantizar que las campañas en diferentes canales estén sincronizadas y coherentes."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la colaboración con agencias de publicidad o marketing externas?",
+                "respuestas" => [
+                    "Establezco relaciones basadas en la comunicación clara y objetivos compartidos para asegurar que todas las partes están alineadas y enfocadas en resultados medibles.",
+                    "Realizo reuniones regulares y revisiones de desempeño para mantener a las agencias externas responsables y asegurar la máxima eficiencia y retorno sobre la inversión.",
+                    "Utilizo contratos detallados que especifican expectativas, plazos y criterios de éxito para garantizar que los servicios proporcionados cumplen con nuestros estándares de calidad."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una estrategia de marketing de contenidos que hayas implementado?",
+                "respuestas" => [
+                    "Desarrollé una estrategia de contenidos enfocada en educar al cliente sobre nuestros productos mediante artículos de blog, videos tutoriales y estudios de caso, lo que incrementó nuestro tráfico web en un 30%.",
+                    "Implementé una serie de campañas de contenido interactivas que incluyeron infografías y quizzes personalizados, aumentando significativamente la participación del usuario y la captura de datos.",
+                    "Lancé un podcast semanal que abordaba temas relevantes para nuestra industria, lo que nos ayudó a construir autoridad en el sector y mejoró nuestro engagement con la comunidad."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la efectividad de una estrategia de email marketing?",
+                "respuestas" => [
+                    "Utilizo métricas clave como tasa de apertura, tasa de clics, conversiones y retorno de inversión para medir la efectividad de las campañas de email marketing.",
+                    "Segmento las listas de correo para personalizar los mensajes y realizar pruebas A/B para optimizar las tasas de respuesta y engagement.",
+                    "Analizo el comportamiento del usuario post-clic para entender mejor cómo los emails influyen en las decisiones de compra y ajustar las tácticas según sea necesario."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué herramientas utilizas para medir el retorno de la inversión en marketing?",
+                "respuestas" => [
+                    "Uso plataformas de análisis avanzado como Google Analytics, CRM y herramientas de automatización de marketing para rastrear y reportar el ROI de cada campaña.",
+                    "Implemento sistemas de atribución de múltiples canales para entender cómo cada elemento de la estrategia de marketing contribuye al resultado final.",
+                    "Me apoyo en herramientas de BI (Business Intelligence) para integrar datos de diversas fuentes y obtener una vista holística del impacto del marketing en las ventas y la retención de clientes."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la organización de eventos promocionales?",
+                "respuestas" => [
+                    "He organizado numerosos eventos promocionales, desde ferias comerciales hasta lanzamientos de productos, gestionando todos los aspectos desde la logística hasta la promoción y la medición del éxito del evento.",
+                    "Mi experiencia incluye tanto eventos en persona como virtuales, utilizando las últimas tecnologías para maximizar el alcance y el impacto de cada evento.",
+                    "Soy experto en la coordinación de equipos multifuncionales y proveedores externos para asegurar que los eventos se ejecuten sin problemas y cumplan con los objetivos estratégicos de la marca."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la gestión de la comunicación en crisis?",
+                "respuestas" => [
+                    "Actúo rápidamente para evaluar la situación y comunicar con transparencia a las partes interesadas, utilizando un plan preestablecido de gestión de crisis.",
+                    "Me enfoco en mantener la calma, recopilar todos los hechos disponibles y responder de manera coherente y considerada para proteger la reputación de la organización.",
+                    "Colaboro estrechamente con los equipos de relaciones públicas y legal para asegurar que todas las comunicaciones sean precisas y mitiguen posibles daños."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para mejorar la participación del cliente?",
+                "respuestas" => [
+                    "Implementaría estrategias de gamificación para aumentar la interacción del cliente, ofreciendo recompensas por acciones específicas dentro de nuestra plataforma.",
+                    "Desarrollaría contenido interactivo y personalizado, como webinars y tutoriales en vivo, para fomentar una participación más activa y directa de los clientes.",
+                    "Utilizaría herramientas de CRM para segmentar y personalizar las comunicaciones, asegurando que cada cliente reciba mensajes relevantes y oportunos que incentiven la participación."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías la personalización en una estrategia de marketing?",
+                "respuestas" => [
+                    "Usaría datos de comportamiento del cliente para crear perfiles detallados y ofrecer experiencias de compra personalizadas a través de todos los canales.",
+                    "Implementaría tecnología de IA para analizar datos en tiempo real y adaptar automáticamente las ofertas y mensajes según las preferencias y el historial de cada cliente.",
+                    "Aprovecharía las tecnologías de segmentación avanzada para entregar contenido y promociones específicas que resonen con los intereses individuales de los clientes."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das al análisis del comportamiento del consumidor?",
+                "respuestas" => [
+                    "Lo considero fundamental para entender las necesidades y motivaciones de los consumidores, lo que me permite ajustar las estrategias de marketing para mejor atender y anticipar sus comportamientos.",
+                    "Utilizo análisis de comportamiento para guiar todas las decisiones de marketing, desde el desarrollo de productos hasta las campañas de comunicación, asegurando que se alineen con las expectativas del consumidor.",
+                    "El análisis del comportamiento del consumidor es crucial para optimizar el journey del cliente y mejorar la conversión y la retención a través de una mejor comprensión de sus patrones de compra."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu enfoque para la identificación de oportunidades de mercado?",
+                "respuestas" => [
+                    "Realizo análisis de mercado continuos para identificar tendencias emergentes y brechas en el mercado que representen oportunidades para la innovación o expansión.",
+                    "Utilizo herramientas de inteligencia de mercado y datos de ventas internos para evaluar el potencial de nuevas áreas de negocio y mercados geográficos.",
+                    "Colaboro con equipos de insights y desarrollo de productos para validar oportunidades a través de investigación de mercado y pruebas de concepto."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la coordinación de lanzamientos de productos?",
+                "respuestas" => [
+                    "Dirijo un enfoque integrado, asegurando que todos los equipos, desde desarrollo de producto hasta marketing y ventas, estén alineados con el cronograma y los objetivos del lanzamiento.",
+                    "Utilizo herramientas de gestión de proyectos para mantener a todos los equipos informados y en pista, y aseguro que cada fase del lanzamiento sea ejecutada correctamente.",
+                    "Coordinando las actividades promocionales cruzadas y asegurando una comunicación fluida entre departamentos para garantizar un lanzamiento de producto cohesivo y efectivo."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para mejorar la experiencia del cliente en línea y fuera de línea?",
+                "respuestas" => [
+                    "Implementaría un enfoque omnicanal para asegurar una experiencia de cliente consistente y fluida tanto en línea como en tiendas físicas.",
+                    "Usaría feedback del cliente para identificar áreas de mejora y aplicaría cambios basados en datos para optimizar tanto el journey digital como el físico.",
+                    "Capacitaría al personal de servicio al cliente y utilizaría tecnología avanzada para mejorar la interacción y satisfacción del cliente en todos los puntos de contacto."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la efectividad de una estrategia de branding?",
+                "respuestas" => [
+                    "Mido el reconocimiento de marca y la percepción a través de encuestas y análisis de sentimientos en redes sociales, evaluando cómo estos indicadores impactan en la lealtad y retención del cliente.",
+                    "Utilizo indicadores de desempeño como el aumento en la cuota de mercado y la salud de la marca a través de métricas de compromiso y conversión.",
+                    "Realizo estudios comparativos con competidores para entender la posición de nuestra marca en el mercado y ajustar la estrategia según sea necesario para mejorar la fortaleza de la marca."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué herramientas utilizas para la automatización del marketing?",
+                "respuestas" => [
+                    "Utilizo plataformas como HubSpot y Marketo para automatizar campañas de marketing, personalizar comunicaciones y medir eficazmente las interacciones y conversiones.",
+                    "Implemento herramientas de CRM para automatizar el seguimiento de clientes y asegurar una gestión eficiente del funnel de ventas.",
+                    "Aplico soluciones de AI y machine learning para optimizar la segmentación de audiencias y la personalización de campañas en tiempo real."
+                ]
+            ],
+            [
+                "pregunta" => "¿Puedes describir una situación en la que resolviste un desafío de marketing?",
+                "respuestas" => [
+                    "Enfrenté el desafío de mejorar la tasa de conversión en una campaña de bajo rendimiento. Analicé los datos, realicé ajustes en la segmentación y el mensaje, resultando en un aumento del 25% en conversiones.",
+                    "Dirigí la respuesta a una crisis de reputación online, coordinando un plan de acción rápido que involucraba comunicados de prensa, actualizaciones en redes sociales y entrevistas con medios, logrando restaurar la confianza del público en la marca.",
+                    "Desarrollé una estrategia de entrada a un mercado altamente competitivo, identificando un nicho único mediante investigación de mercado, lo que permitió a la empresa obtener una cuota de mercado significativa rápidamente."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la gestión de campañas de publicidad en medios tradicionales?",
+                "respuestas" => [
+                    "Integro campañas en medios tradicionales con esfuerzos digitales para ampliar el alcance y mejorar la eficacia, supervisando estrechamente el ROI y ajustando en tiempo real.",
+                    "Desarrollo colaboraciones con agencias de medios para asegurar que las ubicaciones y el tiempo de las campañas maximicen la visibilidad y el impacto.",
+                    "Uso análisis de mercado y segmentación para orientar las campañas en los canales tradicionales más efectivos para nuestro público objetivo, asegurando una cobertura óptima y eficiencia en costos."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué importancia le das al análisis del ciclo de vida del producto?",
+                "respuestas" => [
+                    "Lo considero crucial para planificar estrategias de marketing efectivas que acompañen el desarrollo del producto desde su lanzamiento hasta su retirada, maximizando así su rentabilidad.",
+                    "Utilizo el análisis del ciclo de vida para adaptar las tácticas de marketing a las diferentes etapas del producto, asegurando que se satisfagan las necesidades cambiantes de los clientes y se mantenga la relevancia del mercado.",
+                    "El análisis del ciclo de vida del producto me permite anticipar cambios en la demanda, ajustar la producción y la estrategia de precios, y planificar innovaciones o mejoras."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo abordarías la creación de una estrategia de marketing para un mercado internacional?",
+                "respuestas" => [
+                    "Investigaría profundamente cada mercado local para entender las diferencias culturales y adaptaría el mensaje y los medios de comunicación para resonar específicamente en cada región.",
+                    "Colaboraría con equipos locales y expertos en el mercado para desarrollar estrategias que sean culturalmente pertinentes y efectivas en términos de costos.",
+                    "Utilizaría una combinación de marketing global y localizado, manteniendo un mensaje de marca coherente mientras personalizo aspectos clave según las necesidades y preferencias del mercado local."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cuál es tu experiencia en la optimización de conversiones?",
+                "respuestas" => [
+                    "Tengo amplia experiencia en la implementación de pruebas A/B, análisis de datos de usuario y ajuste de interfaces para mejorar las tasas de conversión en sitios web y aplicaciones.",
+                    "He liderado varios proyectos de optimización que han resultado en mejoras significativas en las métricas de conversión, utilizando enfoques basados en datos para refinar la experiencia del usuario y la jornada del cliente.",
+                    "Regularmente utilizo herramientas de análisis web para identificar cuellos de botella en los funnels de conversión y desarrollar soluciones específicas que mejoren el rendimiento."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué estrategias usarías para mejorar el reconocimiento de marca?",
+                "respuestas" => [
+                    "Desarrollaría campañas de contenido que destaquen la unicidad de la marca y sus valores, utilizando plataformas de alto alcance como redes sociales y eventos en vivo para captar la atención del público.",
+                    "Implementaría programas de embajadores de marca y colaboraciones con influencers para ampliar el alcance y la autenticidad de nuestras comunicaciones de marca.",
+                    "Utilizaría publicidad dirigida y patrocinios estratégicos para colocar nuestra marca en frente de audiencias relevantes y construir asociaciones positivas en la mente de los consumidores."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo manejas la gestión de presupuestos en una estrategia de marketing?",
+                "respuestas" => [
+                    "Priorizo la asignación de recursos basándome en el retorno esperado de inversión, asegurando que los presupuestos se distribuyan de manera eficiente entre las diversas tácticas y plataformas.",
+                    "Realizo un seguimiento riguroso de todos los gastos y resultados para ajustar rápidamente las asignaciones y optimizar el impacto de cada dólar gastado.",
+                    "Colaboro con equipos de finanzas y analítica para desarrollar pronósticos y escenarios que guíen la planificación presupuestaria y la toma de decisiones estratégicas."
+                ]
+            ],
+            [
+                "pregunta" => "¿Qué medidas tomarías para mantener actualizada una estrategia de marketing en un mercado cambiante?",
+                "respuestas" => [
+                    "Implementaría un sistema de monitoreo continuo de tendencias de mercado y comportamiento del consumidor para adaptar rápidamente nuestra estrategia a cambios y oportunidades emergentes.",
+                    "Fomentaría una cultura de innovación dentro del equipo de marketing para experimentar con nuevas tácticas y tecnologías que puedan mejorar nuestra efectividad.",
+                    "Realizaría revisiones estratégicas regulares para evaluar la relevancia de nuestras tácticas y realizar ajustes proactivos en respuesta a la evolución del mercado."
+                ]
+            ],
+            [
+                "pregunta" => "¿Cómo evalúas la efectividad de una estrategia de marketing omnicanal?",
+                "respuestas" => [
+                    "Utilizo indicadores clave de rendimiento específicos para cada canal, junto con métricas de desempeño general, para evaluar cómo cada componente contribuye a los objetivos globales.",
+                    "Analizo la experiencia del cliente a través de diferentes puntos de contacto para asegurar una transición fluida y una comunicación coherente, lo que mejora la percepción general y la eficacia de la campaña.",
+                    "Me apoyo en herramientas de análisis de datos y feedback del cliente para medir la consistencia y el impacto de la estrategia omnicanal en la satisfacción y fidelización del cliente."
+                ]
+            ]
         ];
+
+
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 3,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -531,15 +1091,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 4,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -590,15 +1151,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 5,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -650,15 +1212,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 6,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -710,15 +1273,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 7,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -770,15 +1334,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 8,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -829,15 +1394,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 9,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
@@ -888,15 +1454,16 @@ class SeederQuestion extends Seeder
             DB::table('Question')->insert([
                 'question' => $pregunta,
                 'CategoryId' => 10,
-            ]);$p=10;
+            ]);
+            $p = 10;
             foreach ($pregunta['respuestas'] as $respuesta) {
-                
+
                 DB::table('Answer')->insert([
                     'answer' => $respuesta,
-                    'QuestionID'=> $i,
+                    'QuestionID' => $i,
                     'QuestionPoints' => $p,
                 ]);
-                $p-=3;
+                $p -= 3;
             }
             $i++;
         }
