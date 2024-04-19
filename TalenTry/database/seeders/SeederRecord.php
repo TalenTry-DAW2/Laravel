@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB; //libreria nos permite hacer insert
-use Illuminate\Support\Str; //liberaria para funciones str
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Str; 
 use Illuminate\Support\Carbon;
 
 class SeederRecord extends Seeder
