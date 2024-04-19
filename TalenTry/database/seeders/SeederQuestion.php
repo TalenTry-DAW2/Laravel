@@ -366,7 +366,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Finanzas y contabilidad
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en contabilidad financiera?",
                 "respuestas" => [
@@ -688,11 +688,10 @@ class SeederQuestion extends Seeder
                 ]
             ]
         ];
-
-
         foreach ($preguntas as $pregunta) {
+
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 2,
             ]);
             $p = 10;
@@ -709,7 +708,7 @@ class SeederQuestion extends Seeder
         }
 
         //Marketing y publicidad
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en la planificación de estrategias de marketing?",
                 "respuestas" => [
@@ -1028,7 +1027,7 @@ class SeederQuestion extends Seeder
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 3,
             ]);
             $p = 10;
@@ -1044,7 +1043,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Operaciones y logística
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en la gestión de la cadena de suministro?",
                 "respuestas" => [
@@ -1369,7 +1368,7 @@ class SeederQuestion extends Seeder
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 4,
             ]);
             $p = 10;
@@ -1385,7 +1384,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Ventas y desarrollo de negocios
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en ventas y desarrollo de negocios?",
                 "respuestas" => [
@@ -1702,7 +1701,7 @@ class SeederQuestion extends Seeder
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 5,
             ]);
             $p = 10;
@@ -1718,7 +1717,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Servicio al cliente
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en atención al cliente?",
                 "respuestas" => [
@@ -1959,11 +1958,6 @@ class SeederQuestion extends Seeder
                     "Me apoyo en herramientas colaborativas para que el equipo de servicio al cliente contribuya y refine continuamente nuestra base de conocimientos."
                 ]
             ],
-            // Continuar con el resto de las preguntas y respuestas...
-        ];
-
-        $respuestas = [
-            // Continuación y finalización de las preguntas y respuestas...
             [
                 "pregunta" => "¿Puedes describir una situación en la que implementaste una mejora en el servicio al cliente?",
                 "respuestas" => [
@@ -2042,109 +2036,13 @@ class SeederQuestion extends Seeder
                     "Mediría la tasa de retención de clientes y el incremento en la frecuencia de compra o uso del servicio para evaluar el impacto de nuestros programas de fidelización.",
                     "Realizaría encuestas y grupos focales para obtener feedback directo de los clientes sobre la percepción y valoración de las recompensas ofrecidas.",
                     "Analizaría los datos de participación en el programa y los compararía con los objetivos de negocio para asegurar que los programas son rentables y efectivos."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cuál es tu enfoque para la gestión de la calidad del servicio al cliente?",
-                "respuestas" => [
-                    "Implemento estándares de calidad rigurosos y realizo auditorías regulares para asegurar que el servicio al cliente cumpla con estos estándares.",
-                    "Fomento una cultura de mejora continua, donde cada interacción con el cliente es una oportunidad para aprender y mejorar.",
-                    "Utilizo herramientas de feedback del cliente y análisis de desempeño para identificar áreas de mejora y aplicar correcciones de forma proactiva."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo manejas la coordinación de esfuerzos entre diferentes departamentos para resolver problemas de los clientes?",
-                "respuestas" => [
-                    "Establezco canales de comunicación claros y efectivos entre departamentos para facilitar la colaboración y la resolución rápida de problemas.",
-                    "Organizo reuniones regulares de coordinación y actualización de casos para asegurar que todos los departamentos estén alineados y comprometidos con la satisfacción del cliente.",
-                    "Implemento un sistema de gestión de casos que permite seguir el progreso de las consultas de clientes a través de diferentes departamentos, asegurando responsabilidad y transparencia en el proceso."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué importancia le das a la resolución de problemas en el primer contacto con el cliente?",
-                "respuestas" => [
-                    "Priorizo la resolución al primer contacto para aumentar la satisfacción del cliente y reducir la carga de trabajo repetitivo en el equipo de soporte.",
-                    "Considero crítico resolver problemas en el primer contacto como una medida de eficiencia y efectividad, mejorando la experiencia general del cliente.",
-                    "La resolución en el primer contacto es un indicador clave de la calidad del servicio al cliente, y fomento prácticas que maximicen estas oportunidades."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo abordarías la gestión de quejas y reclamaciones en redes sociales y plataformas de revisión en línea?",
-                "respuestas" => [
-                    "Respondería rápidamente a las quejas en redes sociales y plataformas en línea, ofreciendo soluciones transparentes y públicas para demostrar nuestro compromiso con la satisfacción del cliente.",
-                    "Implementaría un enfoque proactivo para monitorear y gestionar la reputación online, asegurando que las respuestas a las quejas sean adecuadas y reflejen los valores de nuestra empresa.",
-                    "Capacitaría a un equipo especializado para manejar interacciones en redes sociales, enfocándose en la resolución eficiente y la minimización del impacto negativo en la percepción pública."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué estrategias usarías para mejorar la eficiencia del servicio al cliente sin comprometer la calidad?",
-                "respuestas" => [
-                    "Optimizaría procesos y utilizaría tecnología avanzada para automatizar tareas repetitivas, permitiendo que el equipo se enfoque en casos más complejos y en la interacción humana.",
-                    "Implementaría métodos de trabajo Lean y Six Sigma para mejorar la eficiencia operativa y mantener altos estándares de calidad.",
-                    "Realizaría revisiones periódicas de los procesos de servicio al cliente para eliminar ineficiencias y asegurar que los recursos se utilizan de la manera más efectiva posible."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo evalúas la efectividad de los sistemas de gestión de relaciones con los clientes (CRM)?",
-                "respuestas" => [
-                    "Analizo métricas clave proporcionadas por el sistema CRM, como la satisfacción del cliente, tiempo de respuesta y tasas de conversión, para medir su efectividad.",
-                    "Realizo auditorías regulares de los procesos del CRM para asegurar que estén alineados con los objetivos del negocio y las necesidades del cliente.",
-                    "Utilizo feedback tanto de usuarios internos (equipo de ventas y servicio al cliente) como de clientes para evaluar y mejorar la funcionalidad del CRM."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cuál es tu experiencia en la gestión de clientes en entornos multiculturales o internacionales?",
-                "respuestas" => [
-                    "He gestionado equipos de servicio al cliente en varios países, adaptando estrategias para respetar y abrazar diferencias culturales mientras se mantiene una calidad de servicio consistente.",
-                    "Mi experiencia incluye la adaptación de comunicaciones y servicios para satisfacer las necesidades de una base de clientes diversa, asegurando respeto y efectividad en múltiples culturas.",
-                    "Trabajo eficientemente en entornos multiculturales, utilizando mi fluidez en varios idiomas y mi comprensión de diferentes normas culturales para mejorar la interacción con el cliente."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo manejas la gestión de solicitudes urgentes y situaciones de alta presión?",
-                "respuestas" => [
-                    "Priorizo las solicitudes según su urgencia y potencial impacto, asegurando que los casos críticos se manejen rápidamente y con la atención adecuada.",
-                    "Entreno a mi equipo para mantener la calma y eficiencia bajo presión, utilizando protocolos de escalación claros para situaciones urgentes.",
-                    "Implemento herramientas de soporte en tiempo real y aseguro recursos adicionales durante picos de demanda para manejar eficazmente situaciones de alta presión."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué medidas tomarías para garantizar la consistencia del servicio al cliente en diferentes puntos de contacto?",
-                "respuestas" => [
-                    "Establecería estándares uniformes de servicio al cliente a lo largo de todos los puntos de contacto, y realizaría capacitaciones regulares para asegurar su cumplimiento.",
-                    "Implementaría un sistema de gestión de calidad que monitoree y evalúe la consistencia del servicio en todos los canales de interacción con el cliente.",
-                    "Desarrollaría guías y scripts detallados para el equipo de atención al cliente, asegurando una experiencia homogénea y profesional en todos los puntos de contacto."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo abordarías la gestión de expectativas de los clientes en situaciones de productos o servicios agotados?",
-                "respuestas" => [
-                    "Comunicaría proactivamente cualquier problema de disponibilidad, ofreciendo alternativas viables y tiempos estimados para la reposición de productos o servicios.",
-                    "Gestionaría las expectativas a través de una comunicación transparente y honesta, asegurando que los clientes estén informados y puedan tomar decisiones basadas en la información más reciente.",
-                    "Implementaría estrategias de servicio al cliente que incluyan opciones de compensación o beneficios para mitigar cualquier inconveniente causado por la falta de disponibilidad."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué importancia le das a la proactividad en la atención al cliente?",
-                "respuestas" => [
-                    "La proactividad es esencial para anticipar y resolver problemas antes de que afecten al cliente, mejorando la satisfacción y la lealtad del cliente a largo plazo.",
-                    "Fomento un enfoque proactivo entre mi equipo, incentivándolos a buscar constantemente maneras de mejorar la experiencia del cliente antes de que surjan problemas.",
-                    "Considero la proactividad como una piedra angular en la gestión de relaciones con clientes, ya que permite crear experiencias memorables y positivas de manera consistente."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo evalúas la efectividad de los procesos de retroalimentación y mejora continua en el servicio al cliente?",
-                "respuestas" => [
-                    "Utilizo indicadores de desempeño clave (KPIs) para medir los resultados de los procesos de mejora y ajustar estrategias según sea necesario.",
-                    "Realizo evaluaciones periódicas para revisar la eficacia de los procesos de retroalimentación, asegurándome de que conduzcan a mejoras tangibles en el servicio.",
-                    "Incorporo regularmente el feedback de clientes y empleados en los procesos de revisión, utilizando este input para guiar las decisiones de mejora continua."
                 ]
             ]
         ];
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 6,
             ]);
             $p = 10;
@@ -2160,7 +2058,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Gestión de proyectos
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en la gestión de proyectos?",
                 "respuestas" => [
@@ -2486,7 +2384,7 @@ class SeederQuestion extends Seeder
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 7,
             ]);
             $p = 10;
@@ -2502,7 +2400,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Educación y formación
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en educación y formación?",
                 "respuestas" => [
@@ -2829,7 +2727,7 @@ class SeederQuestion extends Seeder
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 8,
             ]);
             $p = 10;
@@ -2845,7 +2743,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Salud y bienestar
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en el campo de la salud y el bienestar?",
                 "respuestas" => [
@@ -3186,7 +3084,7 @@ class SeederQuestion extends Seeder
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 9,
             ]);
             $p = 10;
@@ -3202,7 +3100,7 @@ class SeederQuestion extends Seeder
             $i++;
         }
         //Gobierno y administración pública
-        $respuestas = [
+        $preguntas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en el campo de gobierno y administración pública?",
                 "respuestas" => [
@@ -3379,12 +3277,6 @@ class SeederQuestion extends Seeder
                     "Consultaría a expertos en políticas sociales y grupos comunitarios para evaluar el alcance y la relevancia de los programas de seguridad social."
                 ]
             ],
-
-        ];
-
-
-        //GOBIERNO Y ADMINISTRACION PUBLICA
-        $respuestas = [
             [
                 "pregunta" => "¿Cuál es tu experiencia previa en el campo de gobierno y administración pública?",
                 "respuestas" => [
@@ -3528,181 +3420,13 @@ class SeederQuestion extends Seeder
                     "Involucraría a la comunidad en el proceso de planificación para asegurar que las decisiones reflejen las necesidades y aspiraciones locales.",
                     "Implementaría políticas de desarrollo sostenible que fomenten el crecimiento económico equitativo y la conservación de recursos naturales."
                 ]
-            ],
-            [
-                "pregunta" => "¿Qué estrategias usarías para mejorar la participación electoral y la representación política?",
-                "respuestas" => [
-                    "Implementaría campañas de concienciación y educación cívica para promover la participación electoral y el voto informado.",
-                    "Adoptaría medidas para eliminar barreras al acceso al voto y asegurar una representación equitativa de diferentes grupos en el proceso político.",
-                    "Fomentaría la participación ciudadana en la toma de decisiones y la elaboración de políticas para fortalecer la democracia participativa."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo manejas la gestión de riesgos y la seguridad en el sector público?",
-                "respuestas" => [
-                    "Realizaría evaluaciones de riesgos periódicas y desarrollaría planes de mitigación para abordar posibles amenazas y vulnerabilidades.",
-                    "Colaboraría con agencias de seguridad y expertos en gestión de riesgos para implementar mejores prácticas y salvaguardar los activos públicos.",
-                    "Promovería una cultura de seguridad y sensibilización entre el personal para prevenir incidentes y responder eficazmente en caso de emergencia."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué importancia le das a la educación cívica y la conciencia pública?",
-                "respuestas" => [
-                    "Considero que la educación cívica es fundamental para fortalecer la democracia y empoderar a los ciudadanos para participar activamente en la vida política.",
-                    "Promovería programas de educación cívica en escuelas y comunidades para fomentar el entendimiento de los derechos y responsabilidades ciudadanas.",
-                    "Invertiría en campañas de conciencia pública para aumentar la participación en procesos democráticos y fortalecer la confianza en las instituciones gubernamentales."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo evalúas la efectividad de los programas de seguridad social y protección social?",
-                "respuestas" => [
-                    "Analizaría indicadores de bienestar y calidad de vida para evaluar el impacto de los programas de seguridad social.",
-                    "Realizaría estudios de seguimiento y evaluación para comprender cómo los programas afectan a la pobreza, la desigualdad y otros indicadores sociales clave.",
-                    "Recopilaría retroalimentación de beneficiarios y partes interesadas para identificar áreas de mejora y garantizar la relevancia y eficacia de los programas."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cuál es tu enfoque para la gestión de políticas de salud pública y bienestar?",
-                "respuestas" => [
-                    "Priorizaría la prevención y promoción de la salud a través de programas de educación, vacunación y acceso equitativo a servicios de atención médica.",
-                    "Colaboraría con profesionales de la salud y organizaciones comunitarias para abordar los determinantes sociales de la salud y reducir las disparidades.",
-                    "Promovería políticas de bienestar integral que aborden no solo la salud física, sino también la salud mental y el bienestar emocional de la población."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué herramientas utilizas para la gestión de datos y análisis en el gobierno?",
-                "respuestas" => [
-                    "Utilizaría software de análisis de datos y visualización para identificar tendencias, patrones y áreas de oportunidad.",
-                    "Implementaría sistemas de gestión de bases de datos seguros y eficientes para almacenar y acceder a información gubernamental.",
-                    "Fomentaría la capacitación del personal en habilidades de análisis de datos para aprovechar al máximo la información disponible."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo manejas la gestión de la infraestructura y los servicios públicos?",
-                "respuestas" => [
-                    "Desarrollaría planes de infraestructura a largo plazo que aborden las necesidades actuales y futuras de la comunidad.",
-                    "Implementaría tecnologías de mantenimiento predictivo para garantizar la fiabilidad y disponibilidad de los servicios públicos.",
-                    "Involucraría a la comunidad en la planificación y gestión de la infraestructura para asegurar que los proyectos satisfagan las necesidades locales."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué medidas tomarías para promover la justicia y el estado de derecho en el gobierno?",
-                "respuestas" => [
-                    "Fortalecería las instituciones judiciales y promovería el acceso igualitario a la justicia para todos los ciudadanos.",
-                    "Implementaría políticas de prevención del delito y rehabilitación para abordar las causas subyacentes de la delincuencia.",
-                    "Fomentaría una cultura de legalidad y respeto por el estado de derecho a través de programas educativos y campañas de sensibilización."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cuál es tu experiencia en la gestión de crisis políticas y sociales?",
-                "respuestas" => [
-                    "He gestionado crisis políticas y sociales en mi trabajo anterior, colaborando con diferentes partes interesadas para encontrar soluciones pacíficas y duraderas.",
-                    "He participado en la gestión de crisis como voluntario en organizaciones de ayuda humanitaria, coordinando respuestas de emergencia y distribución de ayuda.",
-                    "Aunque no tengo experiencia directa, estoy familiarizado con los protocolos y procedimientos para abordar crisis políticas y sociales de manera efectiva."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo abordarías la gestión de políticas de medio ambiente y sostenibilidad?",
-                "respuestas" => [
-                    "Priorizaría la protección y conservación del medio ambiente a través de políticas de conservación de recursos naturales y reducción de la contaminación.",
-                    "Promovería la adopción de prácticas sostenibles en todos los niveles de la administración pública, desde la gestión de residuos hasta el transporte público.",
-                    "Involucraría a la comunidad en la toma de decisiones sobre cuestiones ambientales y promovería la educación ambiental para fomentar la conciencia y la acción."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué estrategias usarías para promover la innovación y la competitividad en el gobierno?",
-                "respuestas" => [
-                    "Fomentaría la colaboración con el sector privado, la academia y la sociedad civil para impulsar la investigación y el desarrollo de tecnologías innovadoras.",
-                    "Implementaría incentivos y premios para estimular la creatividad y la innovación entre el personal gubernamental.",
-                    "Facilitaría el acceso a fondos y recursos para proyectos innovadores que mejoren la eficiencia y la calidad de los servicios públicos."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo evalúas la efectividad de las políticas de seguridad nacional y defensa?",
-                "respuestas" => [
-                    "Utilizaría indicadores de seguridad nacional y análisis de inteligencia para evaluar el nivel de amenazas y riesgos para el país.",
-                    "Realizaría evaluaciones de capacidades militares y de defensa para garantizar la preparación y respuesta adecuadas ante posibles escenarios.",
-                    "Recopilaría retroalimentación de expertos en seguridad y ciudadanos para evaluar la percepción pública y la eficacia de las políticas de seguridad."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cuál es tu enfoque para la gestión de políticas de igualdad racial y étnica?",
-                "respuestas" => [
-                    "Implementaría políticas de acción afirmativa y programas de inclusión para abordar las disparidades raciales y étnicas en el acceso a oportunidades y servicios.",
-                    "Fomentaría la diversidad y la representación equitativa en todos los niveles de la administración pública para reflejar la pluralidad de la sociedad.",
-                    "Trabajaría en colaboración con comunidades minoritarias y organizaciones de derechos civiles para desarrollar estrategias específicas de inclusión y empoderamiento."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué herramientas utilizas para la gestión de la comunicación y la participación ciudadana?",
-                "respuestas" => [
-                    "Utilizaría medios de comunicación tradicionales y digitales para difundir información gubernamental y promover la participación ciudadana.",
-                    "Implementaría plataformas en línea y redes sociales para facilitar el diálogo y la interacción entre el gobierno y los ciudadanos.",
-                    "Organizaría eventos y actividades de participación pública para involucrar a la comunidad en la toma de decisiones y la elaboración de políticas."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo manejas la gestión de la diversidad cultural y lingüística en el gobierno?",
-                "respuestas" => [
-                    "Promovería la inclusión y la sensibilidad cultural en todos los aspectos de la administración pública, desde el reclutamiento hasta la prestación de servicios.",
-                    "Proporcionaría servicios y materiales en varios idiomas para garantizar el acceso equitativo a la información y los servicios gubernamentales.",
-                    "Facilitaría la formación y el desarrollo de competencias interculturales entre el personal para promover un ambiente de trabajo inclusivo y respetuoso."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué importancia le das a la colaboración intersectorial y la asociación público-privada en el gobierno?",
-                "respuestas" => [
-                    "Considero que la colaboración intersectorial y las asociaciones público-privadas son fundamentales para abordar desafíos complejos y promover el desarrollo sostenible.",
-                    "Trabajaría en colaboración con empresas, organizaciones sin fines de lucro y otros actores para aprovechar recursos y conocimientos complementarios.",
-                    "Fomentaría un marco normativo claro y transparente para regular las asociaciones público-privadas y garantizar resultados equitativos y beneficiosos para todos."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo evalúas la efectividad de los programas de combate a la corrupción y el mal uso de fondos públicos?",
-                "respuestas" => [
-                    "Realizaría auditorías y revisiones periódicas para detectar posibles irregularidades y malversación de fondos públicos.",
-                    "Promovería la transparencia y el acceso a la información sobre el uso de fondos públicos para aumentar la rendición de cuentas.",
-                    "Fomentaría la participación ciudadana y la denuncia de actos de corrupción para fortalecer los mecanismos de control y prevención."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cuál es tu experiencia en la gestión de políticas de migración y refugiados?",
-                "respuestas" => [
-                    "He trabajado en la gestión de políticas de migración y refugiados en contextos nacionales e internacionales, colaborando con agencias gubernamentales y organizaciones humanitarias.",
-                    "He participado como voluntario en proyectos de asistencia a refugiados, proporcionando apoyo y recursos para su integración.",
-                    "Aunque no tengo experiencia directa, estoy familiarizado con los desafíos y las mejores prácticas en la gestión de políticas de migración y refugiados."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo abordarías la gestión de políticas de igualdad de género y empoderamiento de la mujer?",
-                "respuestas" => [
-                    "Implementaría políticas y programas específicos para promover la igualdad de género y eliminar la discriminación en todas las áreas de la sociedad.",
-                    "Promovería la participación activa de las mujeres en la toma de decisiones y el liderazgo político, económico y social.",
-                    "Trabajaría en colaboración con organizaciones de la sociedad civil y el sector privado para abordar las causas subyacentes de la desigualdad de género y promover el empoderamiento de las mujeres."
-                ]
-            ],
-            [
-                "pregunta" => "¿Qué medidas tomarías para promover la participación juvenil y el desarrollo de liderazgo en el gobierno?",
-                "respuestas" => [
-                    "Crearía programas de mentoría y pasantías para involucrar a los jóvenes en la vida política y la administración pública.",
-                    "Fomentaría la participación de jóvenes en procesos de toma de decisiones y la elaboración de políticas a través de consejos juveniles y plataformas de participación.",
-                    "Promovería la educación cívica y el desarrollo de habilidades de liderazgo entre los jóvenes para prepararlos para roles de liderazgo en el futuro."
-                ]
-            ],
-            [
-                "pregunta" => "¿Cómo manejas la gestión de crisis sanitarias y pandemias en el gobierno?",
-                "respuestas" => [
-                    "Desarrollaría planes de preparación y respuesta para crisis sanitarias y pandemias, basados en las mejores prácticas y las recomendaciones de expertos en salud pública.",
-                    "Coordinaría con autoridades de salud locales, nacionales e internacionales para garantizar una respuesta integral y coordinada.",
-                    "Comunicaría de manera clara y transparente con el público sobre medidas preventivas, recursos disponibles y actualizaciones sobre la situación epidemiológica."
-                ]
-            ],
+             ]
         ];
 
 
         foreach ($preguntas as $pregunta) {
             DB::table('Question')->insert([
-                'question' => $pregunta,
+                'question' => $pregunta['pregunta'],
                 'CategoryId' => 10,
             ]);
             $p = 10;
