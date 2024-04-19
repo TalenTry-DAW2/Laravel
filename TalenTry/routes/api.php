@@ -27,10 +27,6 @@ Route::post('/login', [ControllerUser::class, 'login']);
 
 Route::get('/isLogedIn', [ControllerUser::class, 'isLogedIn']);
 
-Route::post('/registroEmpresa', [ControllerCompany::class, 'store']);
-
-
-
 //funciones de controlador User
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -91,6 +87,11 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::post('/store', [ControllerShare::class, 'store']);
       Route::put('/update', [ControllerShare::class, 'update']);
     });
+
+    //funciones de controlador Record
+    Route::prefix('/record')->group(function () {
+      Route::get('/store', [ControllerRecord::class, 'store']);
+    });
   });
 
   Route::middleware(['auth:sanctum', 'check.role:Empresa'])->group(function () {
@@ -100,12 +101,6 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::put('/update/{id}', [ControllerCompany::class, 'update']);
     });
 
-    //funciones de controlador Record
-    Route::prefix('/record')->group(function () {
-      Route::get('/store', [ControllerRecord::class, 'store']);
-      Route::get('/update/{id}', [ControllerRecord::class, 'update']);
-    });
-
     //funciones de controlador QA
     Route::prefix('/QA')->group(function () {
       Route::get('/showQuestionAnswers', [ControllerQA::class, 'showQuestionAnswers']);
@@ -113,7 +108,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //funciones de controlador Answer
     Route::prefix('/answer')->group(function () {
-      Route::post('/create', [ControllerAnswer::class, 'create']);
+      //Route::post('/create', [ControllerAnswer::class, 'create']);
       Route::post('/agregarPR', [ControllerAnswer::class, 'agregarPR']);
     });
   });
