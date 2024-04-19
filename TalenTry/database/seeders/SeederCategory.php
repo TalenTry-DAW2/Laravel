@@ -24,7 +24,7 @@ class SeederCategory extends Seeder
         ["Gestión de proyectos", "Planificación, ejecución y control de proyectos, asignación de recursos y seguimiento de objetivos.", "https://www.ceupe.com.ve/images/easyblog_articles/230/ges_proyec.png"],
         ["Educación y formación", "Desarrollo y entrega de programas de capacitación, educación continua y desarrollo profesional.", "https://www.ofizios.com/imagenes-noticias/avatares-en-clase_g.jpg"],
         ["Salud y bienestar", "Gestión de programas de bienestar laboral, promoción de la salud y seguridad ocupacional.", "https://fundacionasispa.org/wp-content/uploads/2021/09/salud-y-bienestar.jpg"],
-        ["Gobierno y administración pública", "Gestión de políticas públicas, administración de recursos gubernamentales y servicios públicos.", "https://www3.gobiernodecanarias.org/noticias/wp-content/uploads/2024/02/Consejo-de-Administracion-del-ICAP-celebrado-ayer-ern-Santa-Cruz-de-Tenerife.jpeg"]
+        ["Gobierno y administración pública", "Gestión de políticas públicas, administración de recursos gubernamentales y servicios públicos.", "https://us.123rf.com/450wm/yupiramos/yupiramos1506/yupiramos150607547/41362833-voto-de-dise%C3%B1o-sobre-fondo-blanco-ilustraci%C3%B3n-vectorial.jpg?ver=6"]
     ];
 
     foreach ($categories as $category) {
