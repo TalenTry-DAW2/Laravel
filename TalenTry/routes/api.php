@@ -34,10 +34,12 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::put('/logout', [ControllerUser::class, 'logout']);
 
   Route::prefix('/user')->group(function () {
-    Route::get('/self',[ControllerUser::class, 'showSelf']);
-    Route::get('/update',[ControllerUser::class, 'update']);
-    Route::get('/private',[ControllerUser::class, 'togglePrivate']);
-    Route::get('/get-role',[ControllerUser::class, 'getRole']);
+    Route::get('/self', [ControllerUser::class, 'showSelf']);
+    Route::get('/update', [ControllerUser::class, 'update']);
+    Route::get('/private', [ControllerUser::class, 'togglePrivate']);
+    Route::get('/get-role', [ControllerUser::class, 'getRole']);
+    Route::get('/total', [ControllerUser::class, 'totalUsers']);
+    Route::get('/totalPorcentajeEntrevista', [ControllerUser::class, 'calculateUserPercentage']);
   });
 
   //funciones de controlador Share
@@ -138,7 +140,7 @@ Route::middleware('auth:sanctum')->group(function () {
       Route::get('/create', [ControllerAnswer::class, 'create']);
       Route::get('/update', [ControllerAnswer::class, 'update']);
       Route::get('/delete', [ControllerAnswer::class, 'delete']);
-      Route::post('/agregarPR', [ControllerAnswer::class, 'agregarPR']);
+      Route::post('/agregarPRAdmin', [ControllerAnswer::class, 'agregarPR']);
     });
   });
 });

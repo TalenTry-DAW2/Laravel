@@ -118,7 +118,6 @@ class ControllerAnswer extends Controller
     {
         try {
             DB::beginTransaction();
-
             $request->validate([
                 'CategoryID' => 'required',
                 'question' => 'required',
@@ -127,20 +126,21 @@ class ControllerAnswer extends Controller
                 'QuestionPoints' => 'required|array',
                 'QuestionPoints.*' => 'required|numeric', // Puntuación de cada respuesta
             ]);
-
+            
             $question = new ModelQuestion([
                 'question' => $request->input('question'),
                 'CategoryID' => $request->input('CategoryID'),
             ]);
             $question->save();
-
+            $i = 0;
             foreach ($request->input('answers') as $answer) {
                 $resp = new ModelAnswer([
                     'QuestionID' => $question->id,
-                    'answer' => $answer['answer'],
-                    'QuestionPoints' => $answer['QuestionPoints'],
+                    'answer' => $request->input('answers')[$i],
+                    'QuestionPoints' => $request->input('QuestionPoints')[$i],
                 ]);
-
+                $i++;
+            
                 $resp->save();
             }
 

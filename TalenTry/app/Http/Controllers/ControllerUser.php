@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelRecord;
 use Illuminate\Http\Request;
 use App\Models\ModelUsers;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +94,7 @@ class ControllerUser extends Controller
                 return response()->json(['success' => false], 404);
             }
             //makes the $user into a user object
-           
+
             $user = ModelUsers::find($user->UserID);
             $pHash = bcrypt($request->filled('password') ? $request->input('password') : $user->password);
             $user->update([
@@ -174,7 +175,8 @@ class ControllerUser extends Controller
         } catch (\Exception $e) {
             // Database error or other unexpected error
             return response()->json(['success' => false, 'error' => $e], 500);
-        };
+        }
+        ;
     }
 
     //funcion de logout
@@ -229,4 +231,46 @@ class ControllerUser extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
         }
     }
+    
+    public function totalUsers()
+    {
+        try {
+         // Get the total number of unique users in the users table
+         $totalUsers = ModelUsers::distinct('UserID')->count();
+ 
+            return response()->json([$totalUsers], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
+        }
+       
+    }
+    public function calculateUserPercentage()
+    {
+        try {
+         // Get the total number of unique users in the users table
+         $totalUsers = ModelUsers::distinct('UserID')->count();
+
+         // Get the number of users who appear in both tables (assuming 'usuarios' is your users table)
+         $usersInBoth = ModelRecord::distinct('UserID')
+             ->whereIn('UserID', function ($query) {
+                 $query->select('UserID')->from('Users');
+             })
+             ->count();
+ 
+         // Calculate the percentage
+         if ($totalUsers > 0) {
+             $percentage = ($usersInBoth / $totalUsers) * 100;
+         } else {
+             $percentage = 0;
+         }
+ 
+            return response()->json([$percentage], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
+        }
+       
+    }
+
 }
