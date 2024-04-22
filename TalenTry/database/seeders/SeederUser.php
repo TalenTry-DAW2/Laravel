@@ -22,6 +22,7 @@ class SeederUser extends Seeder
                 'email' => 'usuario@gmail.com',
                 'type' => 'Usuario',
                 'phone' => 69420123,
+                'photo' => '',
                 'visibility' => false,
             ]);
             DB::table('Users')->insert([
@@ -31,6 +32,7 @@ class SeederUser extends Seeder
                 'email' => 'adminTalenTry@gmail.com',
                 'type' => 'Administrador',
                 'phone' => 69420124,
+                'photo' => '',
                 'visibility' => false,
             ]);
     }

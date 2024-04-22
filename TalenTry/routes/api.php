@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
   Route::prefix('/user')->group(function () {
     Route::get('/self', [ControllerUser::class, 'showSelf']);
-    Route::get('/update', [ControllerUser::class, 'update']);
+    Route::post('/update', [ControllerUser::class, 'update']);
     Route::get('/private', [ControllerUser::class, 'togglePrivate']);
     Route::get('/get-role', [ControllerUser::class, 'getRole']);
     Route::get('/total', [ControllerUser::class, 'totalUsers']);

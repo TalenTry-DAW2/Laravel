@@ -98,6 +98,7 @@ class ControllerUser extends Controller
             $user = ModelUsers::find($user->UserID);
             $pHash = bcrypt($request->filled('password') ? $request->input('password') : $user->password);
             $user->update([
+                'photo' => $request->filled('photo') ? $request->input('photo') : $user->photo,
                 'email' => $request->filled('email') ? $request->input('email') : $user->email,
                 'phone' => $request->filled('phone') ? $request->input('phone') : $user->phone,
                 'password' => $pHash,

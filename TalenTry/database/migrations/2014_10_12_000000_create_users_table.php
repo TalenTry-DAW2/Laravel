@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('DNI', 9)->nullable(false);
             $table->string('name', 30)->nullable(false);
             $table->string('email', 50)->unique()->nullable(false);
+            $table->string('photo')->nullable(true);
             $table->string('phone')->unique()->nullable(false);
             $table->string('password')->nullable(false);
             $table->enum('type', ['Usuario', 'Empresa', 'Administrador'])->default('Usuario')->nullable(false);

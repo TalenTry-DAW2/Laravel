@@ -19,6 +19,7 @@ class ModelUsers extends Authenticatable
         'password',
         'email',
         'phone',
+        'photo',
         'type',
         'visibility'
     ];
