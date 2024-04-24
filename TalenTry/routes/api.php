@@ -8,6 +8,7 @@ use App\Http\Controllers\ControllerQuestion;
 use App\Http\Controllers\ControllerAnswer;
 use App\Http\Controllers\ControllerCompany;
 use App\Http\Controllers\ControllerShare;
+use App\Http\Controllers\ContactoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/', [ControllerCategory::class, 'index']);
     Route::get('/{id}', [ControllerCategory::class, 'show']);
   });
+
+  //RUTAS PARA CONTACTO
+  Route::post('/contactos', [ContactoController::class, 'store'])->name('contactos.store');
+
 
   //funciones de controlador Question
   Route::prefix('/question')->group(function () {
