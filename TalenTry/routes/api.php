@@ -9,6 +9,7 @@ use App\Http\Controllers\ControllerAnswer;
 use App\Http\Controllers\ControllerCompany;
 use App\Http\Controllers\ControllerShare;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\ControllerContacto;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
   });
 
   //RUTAS PARA CONTACTO
-  Route::post('/contactos', [ContactoController::class, 'store'])->name('contactos.store');
+  Route::post('/contactos', [ControllerContacto::class, 'store']);
 
 
   //funciones de controlador Question
