@@ -46,31 +46,50 @@ class ControllerQA extends Controller
     {
         try {
             DB::beginTransaction();
-            $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
-            $request->merge(['StartDate' => $startDate]);
-            $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
-            $request->merge(['FinishDate' => $finishDate]);
 
-            $request->validate([
-                'RecordID' => 'required',
-                'QuestionID' => 'required',
-                'answer' => 'required',
-                'QuestionPoints' => 'required',
-                'StartDate' => 'required',
-                'FinishDate' => 'required',
-            ]);
-            $QA = new ModelQA([
-                'RecordID' => $request['RecordID'],
-                'QuestionID' => $request['QuestionID'],
-                'answer' => $request['answer'],
-                'QuestionPoints' => $request['QuestionPoints'],
-                'StartDate' => $request['StartDate'],
-                'FinishDate' => $request['FinishDate'],
-            ]);
-            if ($QA->save()) {
-                DB::commit();
-                return response()->json(['success' => true], 200);
+            /*foreach ($request->all() as $qaData) {
+                $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $qaData->input('StartDate'))->format('Y-m-d H:i:s');
+                $qaData->merge(['StartDate' => $startDate]);
+                $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $qaData->input('FinishDate'))->format('Y-m-d H:i:s');
+                $qaData->merge(['FinishDate' => $finishDate]);
+    
+                $qa = new ModelQA([
+                    'RecordID' => $qaData['RecordID'],
+                    'QuestionID' => $qaData['QuestionID'],
+                    'answer' => $qaData['answer'],
+                    'QuestionPoints' => $qaData['QuestionPoints'],
+                    'StartDate' => $startDate,
+                    'FinishDate' => $finishDate,
+                ]);
+    
+                $qa->save();
+            }*/
+
+            $respuestasArray = $request->json()->all();
+
+            // Process the array of Respuestas objects as needed
+            foreach ($respuestasArray as $respuestas) {
+                // Access properties of each Respuestas object
+                $pregunta = $respuestas['pregunta'];
+                $respuesta = $respuestas['respuesta'];
+                $puntuacion = $respuestas['puntuacion'];
+                $FInicio = $respuestas['FInicio'];
+                $FFinal = $respuestas['FFinal'];
+
+                // Create a new ModelQA object with adjusted property names
+                $qa = new ModelQA([
+                    'RecordID' => $respuestas['RecordID'],
+                    'QuestionID' => $respuestas['pregunta'], // Changed property name
+                    'answer' => $respuestas['respuesta'], // Changed property name
+                    'QuestionPoints' => $respuestas['puntuacion'], // Changed property name
+                    'StartDate' => $respuestas['FInicio'], // Changed property name
+                    'FinishDate' => $respuestas['FFinal'], // Changed property name
+                ]);
+
+                $qa->save();
             }
+            DB::commit();
+            return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
