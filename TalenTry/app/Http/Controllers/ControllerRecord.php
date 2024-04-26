@@ -68,6 +68,7 @@ class ControllerRecord extends Controller
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
             $request->merge(['FinishDate' => $finishDate]);
             $request->validate([
+                'CategoryID' => 'required',
                 'score' => 'required',
                 'StartDate' => 'required',
                 'FinishDate' => 'required',
@@ -76,6 +77,7 @@ class ControllerRecord extends Controller
             //creates a ner record with the record model
             $record = new ModelRecord([
                 'UserID' => $user->UserID,
+                'CategoryID' => $request->input('CategoryID'),
                 'score' => $request->input('score'),
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),

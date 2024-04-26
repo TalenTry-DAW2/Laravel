@@ -98,7 +98,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //funciones de controlador Record
     Route::prefix('/record')->group(function () {
-      Route::get('/store', [ControllerRecord::class, 'store']);
+      Route::post('/store', [ControllerRecord::class, 'store']);
     });
   });
 
