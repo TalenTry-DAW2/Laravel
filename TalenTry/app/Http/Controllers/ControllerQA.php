@@ -47,43 +47,20 @@ class ControllerQA extends Controller
         try {
             DB::beginTransaction();
 
-            /*foreach ($request->all() as $qaData) {
-                $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $qaData->input('StartDate'))->format('Y-m-d H:i:s');
-                $qaData->merge(['StartDate' => $startDate]);
-                $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $qaData->input('FinishDate'))->format('Y-m-d H:i:s');
-                $qaData->merge(['FinishDate' => $finishDate]);
-    
-                $qa = new ModelQA([
-                    'RecordID' => $qaData['RecordID'],
-                    'QuestionID' => $qaData['QuestionID'],
-                    'answer' => $qaData['answer'],
-                    'QuestionPoints' => $qaData['QuestionPoints'],
-                    'StartDate' => $startDate,
-                    'FinishDate' => $finishDate,
-                ]);
-    
-                $qa->save();
-            }*/
-
             $respuestasArray = $request->json()->all();
 
             // Process the array of Respuestas objects as needed
             foreach ($respuestasArray as $respuestas) {
-                // Access properties of each Respuestas object
-                $pregunta = $respuestas['pregunta'];
-                $respuesta = $respuestas['respuesta'];
-                $puntuacion = $respuestas['puntuacion'];
-                $FInicio = $respuestas['FInicio'];
-                $FFinal = $respuestas['FFinal'];
-
+                $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $respuestas['StartDate'])->format('Y-m-d H:i:s');
+                $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $respuestas['FinishDate'])->format('Y-m-d H:i:s');
                 // Create a new ModelQA object with adjusted property names
                 $qa = new ModelQA([
                     'RecordID' => $respuestas['RecordID'],
-                    'QuestionID' => $respuestas['pregunta'], // Changed property name
-                    'answer' => $respuestas['respuesta'], // Changed property name
-                    'QuestionPoints' => $respuestas['puntuacion'], // Changed property name
-                    'StartDate' => $respuestas['FInicio'], // Changed property name
-                    'FinishDate' => $respuestas['FFinal'], // Changed property name
+                    'QuestionID' => $respuestas['QuestionID'], // Adjusted property name
+                    'answer' => $respuestas['answer'], // Adjusted property name
+                    'QuestionPoints' => $respuestas['score'], // Adjusted property name
+                    'StartDate' => $startDate, // Adjusted property name
+                    'FinishDate' => $finishDate, // Adjusted property name
                 ]);
 
                 $qa->save();
@@ -144,7 +121,7 @@ class ControllerQA extends Controller
                 $relatedQA->delete();
             }
             DB::commit();
-            return  true;
+            return true;
         } catch (\Exception $e) {
             DB::rollback();
             return false;

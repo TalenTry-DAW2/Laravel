@@ -85,7 +85,6 @@ Route::middleware('auth:sanctum')->group(function () {
   //funciones de controlador QA
   Route::prefix('/QA')->group(function () {
     Route::get('/{id}', [ControllerQA::class, 'show']);
-    Route::get('/store', [ControllerQA::class, 'store']);
   });
 
   Route::middleware(['auth:sanctum', 'check.role:Usuario'])->group(function () {
@@ -100,6 +99,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/record')->group(function () {
       Route::post('/store', [ControllerRecord::class, 'store']);
     });
+
+    Route::prefix('/QA')->group(function () {
+      Route::post('/store', [ControllerQA::class, 'store']);
+    });
+
   });
 
   Route::middleware(['auth:sanctum', 'check.role:Empresa'])->group(function () {

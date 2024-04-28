@@ -21,7 +21,7 @@ class ControllerRecord extends Controller
             }
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -31,15 +31,15 @@ class ControllerRecord extends Controller
         $user = Auth::guard('sanctum')->user();
         try {
             $records = ModelRecord::where('UserID', $user->UserID)
-            ->join('Category', 'Record.CategoryID', '=', 'Category.CategoryID')
-            ->select('Record.*', 'Category.CategoryName')
-            ->get();
+                ->join('Category', 'Record.CategoryID', '=', 'Category.CategoryID')
+                ->select('Record.*', 'Category.CategoryName')
+                ->get();
             if (!$records) {
                 return response()->json(['success' => false], 404);
             }
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -54,7 +54,7 @@ class ControllerRecord extends Controller
             }
             return response()->json([$records], 200);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -63,6 +63,7 @@ class ControllerRecord extends Controller
     {
         try {
             $user = Auth::guard('sanctum')->user();
+           
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
             $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
@@ -73,6 +74,7 @@ class ControllerRecord extends Controller
                 'StartDate' => 'required',
                 'FinishDate' => 'required',
             ]);
+            
             DB::beginTransaction();
             //creates a ner record with the record model
             $record = new ModelRecord([
@@ -82,14 +84,15 @@ class ControllerRecord extends Controller
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
             ]);
-                //save in database
+            //save in database
             if ($record->save()) {
                 DB::commit();
-                return response()->json(['success' => true], 200);
+                $record->get('RecordID');
+                return response()->json(['success' => true, 'RecordID' => $record->id], 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -122,7 +125,7 @@ class ControllerRecord extends Controller
             return response()->json(['success' => true], 200);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -144,7 +147,7 @@ class ControllerRecord extends Controller
             }
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
         }
     }
 }

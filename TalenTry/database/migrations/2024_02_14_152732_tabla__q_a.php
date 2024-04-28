@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id('QAID', 32); // This will automatically create an auto-incrementing primary key
             $table->unsignedBigInteger('RecordID')->notnull();
             $table->unsignedBigInteger('QuestionID')->notnull();
-            $table->string('answer', 100)->notnull();
+            $table->string('answer')->notnull();
             $table->double('QuestionPoints', 5, 2)->notnull();
             $table->dateTime('StartDate')->notnull();
             $table->dateTime('FinishDate')->notnull();

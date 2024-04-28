@@ -17,6 +17,9 @@ class ModelRecord extends Model
         'StartDate',
         'FinishDate'
     ];
+    protected $guarded = [
+        'RecordID'
+    ];
 
     public function user()
     {
