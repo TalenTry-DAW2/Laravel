@@ -13,7 +13,7 @@ class SeederQA extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    /*public function run(): void
     {
         $numeroAleatorio = random_int(1,10);
         $numeroAleatorio2 = random_int(1,10);
@@ -28,5 +28,5 @@ class SeederQA extends Seeder
             'StartDate' => $startDate,
             'FinishDate'=> $finishDate,
         ]);
-    }
+    }*/
 }

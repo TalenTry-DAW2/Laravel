@@ -13,7 +13,7 @@ class SeederRecord extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+   /* public function run(): void
     {
         $user1_id = DB::table('users')->where('DNI', '12345678A')->value('UserID');
         $user2_id = DB::table('users')->where('DNI', '12345678B')->value('UserID');
@@ -43,5 +43,5 @@ class SeederRecord extends Seeder
                 'FinishDate' => $finishDate,
             ]);
         }
-    }
+    }*/
 }
