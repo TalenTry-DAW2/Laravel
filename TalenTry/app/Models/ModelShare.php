@@ -10,6 +10,8 @@ class ModelShare extends Model
     use HasFactory;
     protected $table ="share";
 
+    protected $primaryKey = 'ShareID';
+
     protected $fillable = [
         'UserID',
         'CompanyID',

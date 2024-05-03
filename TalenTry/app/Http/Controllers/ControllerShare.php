@@ -85,9 +85,9 @@ class ControllerShare extends Controller
         $user = Auth::guard('sanctum')->user();
         $request->validate([
             'CompanyID' => 'required',
-            'ExpiredDate' => 'required',
+            'ExpiredDate' => 'required|date_format:Y-m-d',
         ]);
-    
+        
         // Validation logic goes here
         try {
             $share = ModelShare::where('UserID', $user->UserID)
@@ -96,12 +96,10 @@ class ControllerShare extends Controller
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             return response()->json(['success' => false, 'message' => 'Share not found'], 404);
         }
-        
-        // If $share is null here, it means no record was found
-        
-        $share->update([
-            'ExpiredDate' => $request->input('ExpiredDate'),
-        ]);
+
+        $share->ExpiredDate = $request->input('ExpiredDate');
+        $share->save();
+
         DB::commit();
         return response()->json(['success' => true], 200);
     } catch (\Exception $e) {
