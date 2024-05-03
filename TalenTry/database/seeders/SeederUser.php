@@ -29,7 +29,7 @@ class SeederUser extends Seeder
                 'DNI' => '12345678B',
                 'name' => 'TestAdministrador',
                 'password' => $pHash,
-                'email' => 'adminTalenTry@gmail.com',
+                'email' => 'admin@talentry.com',
                 'type' => 'Administrador',
                 'phone' => 69420124,
                 'photo' => '',
