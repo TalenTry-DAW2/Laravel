@@ -87,21 +87,21 @@ class ControllerShare extends Controller
             'CompanyID' => 'required',
             'ExpiredDate' => 'required',
         ]);
-
+    
         // Validation logic goes here
         try {
             $share = ModelShare::where('UserID', $user->UserID)
                                 ->where('CompanyID', $request->CompanyID)
                                 ->firstOrFail();
-        } catch (\Exception $exception) {
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             return response()->json(['success' => false, 'message' => 'Share not found'], 404);
         }
         
         // If $share is null here, it means no record was found
         
-       /* $share->put([
+        $share->update([
             'ExpiredDate' => $request->input('ExpiredDate'),
-        ]);*/
+        ]);
         DB::commit();
         return response()->json(['success' => true], 200);
     } catch (\Exception $e) {
