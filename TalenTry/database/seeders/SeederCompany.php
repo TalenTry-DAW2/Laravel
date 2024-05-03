@@ -26,14 +26,14 @@ class SeederCompany extends Seeder
                 'name' => 'Productos Ecológicos Verdes S.L.',
                 'NIF' => 'ES87654321B',
                 'address' => 'Avenida del Bosque, 25, Barcelona',
-                'UserID' => '2',    
+                'UserID' => '3',    
             ]);
             
             DB::table('Company')->insert([
                 'name' => 'Grupo Logístico Global S.L.',
                 'NIF' => 'ES56789012C',
                 'address' => 'Plaza Central, 7, Valencia',
-                'UserID' => '2',    
+                'UserID' => '4',    
             ]);
         }
     }

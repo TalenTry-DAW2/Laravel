@@ -27,6 +27,36 @@ class SeederUser extends Seeder
             ]);
             DB::table('Users')->insert([
                 'DNI' => '12345678B',
+                'name' => 'TestEmpresa',
+                'password' => $pHash,
+                'email' => 'empresa1@gmail.com',
+                'type' => 'Empresa',
+                'phone' => 69420112,
+                'photo' => '',
+                'visibility' => false,
+            ]);
+            DB::table('Users')->insert([
+                'DNI' => '12345678C',
+                'name' => 'TestEmpresa',
+                'password' => $pHash,
+                'email' => 'empresa2@gmail.com',
+                'type' => 'Empresa',
+                'phone' => 69420122,
+                'photo' => '',
+                'visibility' => false,
+            ]);
+            DB::table('Users')->insert([
+                'DNI' => '12345678D',
+                'name' => 'TestEmpresa',
+                'password' => $pHash,
+                'email' => 'empresa3@gmail.com',
+                'type' => 'Empresa',
+                'phone' => 69420132,
+                'photo' => '',
+                'visibility' => false,
+            ]);
+            DB::table('Users')->insert([
+                'DNI' => '12345678E',
                 'name' => 'TestAdministrador',
                 'password' => $pHash,
                 'email' => 'admin@talentry.com',
