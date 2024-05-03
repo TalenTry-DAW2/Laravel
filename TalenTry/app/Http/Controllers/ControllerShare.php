@@ -68,7 +68,7 @@ class ControllerShare extends Controller
             ]);
             if ($share->save()) {
                 DB::commit();
-                return response()->json(['saved' => true], 200);
+                return response()->json(['success' => true], 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -77,31 +77,38 @@ class ControllerShare extends Controller
     }
 
     //actualiza la fecha de caducidad de un share (alargando su plazo o cancelando esta) (solo para Usuario)
+    
     public function update(Request $request)
-    {
-        try {
-            DB::beginTransaction();
-            $user = Auth::guard('sanctum')->user();
-            $request->validate([
-                'CompanyID' => 'required',
-                'ExpiredDate' => 'required',
-            ]);
+{
+    try {
+        DB::beginTransaction();
+        $user = Auth::guard('sanctum')->user();
+        $request->validate([
+            'CompanyID' => 'required',
+            'ExpiredDate' => 'required',
+        ]);
 
-            // Validation logic goes here
-            $share = ModelShare::where('UserID', $user->UserID)->where('CompanyID', $request->CompanyID)->firstOrFail();;
-            if (!$share) {
-                return response()->json(['success' => false], 404);
-            }
-            $share->update([
-                'ExpiredDate' => $request['ExpiredDate'],
-            ]);
-            DB::commit();
-            return response()->json(['saved' => true], 200);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
+        // Validation logic goes here
+        try {
+            $share = ModelShare::where('UserID', $user->UserID)
+                                ->where('CompanyID', $request->CompanyID)
+                                ->firstOrFail();
+        } catch (\Exception $exception) {
+            return response()->json(['success' => false, 'message' => 'Share not found'], 404);
         }
+        
+        // If $share is null here, it means no record was found
+        
+       /* $share->put([
+            'ExpiredDate' => $request->input('ExpiredDate'),
+        ]);*/
+        DB::commit();
+        return response()->json(['success' => true], 200);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
     }
+}
 
     //elimina un share (!funcion admin!)
     public function delete($id)

@@ -93,6 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/share')->group(function () {
       Route::post('/store', [ControllerShare::class, 'store']);
       Route::put('/update', [ControllerShare::class, 'update']);
+      Route::get('/show', [ControllerShare::class, 'show']);
     });
 
     //funciones de controlador Record
