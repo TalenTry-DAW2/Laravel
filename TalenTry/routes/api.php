@@ -69,6 +69,7 @@ Route::middleware('auth:sanctum')->group(function () {
   Route::prefix('/question')->group(function () {
     // Route::get('/',[ControllerQuestion::class, 'index']);
     Route::get('/getFromCategory', [ControllerQuestion::class, 'showCategory']);
+    Route::get('/getFromCategoryAll', [ControllerQuestion::class, 'showQuestionsCategory']);
   });
 
   //funciones de controlador Answer
