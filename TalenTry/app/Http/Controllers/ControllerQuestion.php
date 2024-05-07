@@ -37,13 +37,15 @@ class ControllerQuestion extends Controller
     }
 
     //obtiene todas las preguntas de una categoria en concreto
-    public function showQuestionsCategory($id)
+    public function showQuestionsCategory(Request $request)
     {
-        try {
-            $questions = ModelQuestion::where('CategoryID', $id)->get();
+        try{
+            $questions = ModelQuestion::where('CategoryID', $request->id)->get();
+           
             if (!$questions) {
                 return response()->json(['success' => false], 404);
             }
+            
             return response()->json([$questions], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
