@@ -59,10 +59,8 @@ class ControllerCompany extends Controller
             }
             DB::commit();
 
-            $User = ModelUsers::where('email', $request['email'])
-                ->where('password', $pHash)
-                ->first();
-            if (!$User) {
+            $user->select();
+            if (!$user) {
                 throw new \Exception('User not found.');
             }
             DB::beginTransaction();
@@ -71,7 +69,7 @@ class ControllerCompany extends Controller
                 'name' => $request['name2'],
                 'NIF' => $request['NIF'],
                 'address' => $request['address'],
-                'UserID' => $User->UserID,
+                'UserID' => $user->UserID,
             ]);
 
             // Save the company

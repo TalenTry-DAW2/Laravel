@@ -25,6 +25,8 @@ use App\Http\Controllers\ControllerContacto;
 // Routes accessible only to unauthenticated users using Sanctum
 Route::post('/registro', [ControllerUser::class, 'store']);
 
+Route::post('/registroEmpresa', [ControllerCompany::class, 'store']);
+
 Route::post('/login', [ControllerUser::class, 'login']);
 
 Route::get('/isLogedIn', [ControllerUser::class, 'isLogedIn']);
