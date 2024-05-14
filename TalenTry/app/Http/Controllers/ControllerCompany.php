@@ -38,7 +38,7 @@ class ControllerCompany extends Controller
         }
     }
 
-    //crea una empresa nueva
+    //crea una empresa nueva y su usuario asociado
     public function store(Request $request)
     {
         try {
@@ -53,7 +53,7 @@ class ControllerCompany extends Controller
                 'type' => 'Empresa',
             ]);
 
-            // Save the user
+            // guarda el usuario
             if (!$user->save()) {
                 throw new \Exception('Failed to create user.');
             }
@@ -64,7 +64,7 @@ class ControllerCompany extends Controller
                 throw new \Exception('User not found.');
             }
             DB::beginTransaction();
-            // Create a new company
+            // Crea la empresa y la guarda
             $company = new ModelCompany([
                 'name' => $request['name2'],
                 'NIF' => $request['NIF'],
@@ -72,7 +72,6 @@ class ControllerCompany extends Controller
                 'UserID' => $user->UserID,
             ]);
 
-            // Save the company
             if (!$company->save()) {
                 throw new \Exception('Failed to create company.');
             }
@@ -89,6 +88,7 @@ class ControllerCompany extends Controller
     {
         try {
             DB::beginTransaction();
+            //valida los datos recividos
             $request->validate([
                 'name' => 'required',
                 'NIF' => 'required',
@@ -96,12 +96,11 @@ class ControllerCompany extends Controller
                 'password' => 'required',
             ]);
 
-            // Validation logic goes here
             $company = ModelCompany::findOrFail($id);
             if (!$company) {
                 return response()->json(['success' => false], 404);
             }
-            // Use the update method to update the record
+            // actualiza la empresa en la base de datos
             $company->update([
                 'name' => $request->input('name'),
                 'NIF' => $request->input('NIF'),

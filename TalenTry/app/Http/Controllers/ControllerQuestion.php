@@ -89,7 +89,7 @@ class ControllerQuestion extends Controller
                 'question' => $request->input('question'),
                 'CategoryID' => $request->input('CategoryID'),
             ]);
-                //save in database
+                //guarda en la base de datos
             if ($question->save()) {
                 DB::commit();
                 return response()->json(['success' => true], 200);
@@ -105,16 +105,17 @@ class ControllerQuestion extends Controller
     {
         try {
             DB::beginTransaction();
+            //valida que esten los datos necesarios
             $request->validate([
                 'question' => 'required',
                 'CategoryID' => 'required',
             ]);
 
-            // Validation logic goes here
             $question = ModelQuestion::findOrFail($id);
             if (!$question) {
                 return response()->json(['success' => false], 404);
             }
+            //crea una pregunta y la guarda en la base de datos
             $question->update([
                 'question' => $request->input('question'),
                 'CategoryID' => $request->input('CategoryID'),

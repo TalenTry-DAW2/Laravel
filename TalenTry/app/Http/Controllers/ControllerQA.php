@@ -27,6 +27,7 @@ class ControllerQA extends Controller
     public function show($id)
     {
         try {
+            //une las QA con sus respectivas preguntas a las que responde
             $QA = DB::table('QA')
                 ->join('question', 'QA.QuestionID', '=', 'question.QuestionID')
                 ->select('QA.*', 'question.question')
@@ -49,18 +50,18 @@ class ControllerQA extends Controller
 
             $respuestasArray = $request->json()->all();
 
-            // Process the array of Respuestas objects as needed
+            // formatea las fechas y guarda las respustas 1 a 1
             foreach ($respuestasArray as $respuestas) {
                 $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $respuestas['StartDate'])->format('Y-m-d H:i:s');
                 $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $respuestas['FinishDate'])->format('Y-m-d H:i:s');
-                // Create a new ModelQA object with adjusted property names
+                // crea el modelo QA y lo guarda en la base de datos
                 $qa = new ModelQA([
                     'RecordID' => $respuestas['RecordID'],
-                    'QuestionID' => $respuestas['QuestionID'], // Adjusted property name
-                    'answer' => $respuestas['answer'], // Adjusted property name
-                    'QuestionPoints' => $respuestas['score'], // Adjusted property name
-                    'StartDate' => $startDate, // Adjusted property name
-                    'FinishDate' => $finishDate, // Adjusted property name
+                    'QuestionID' => $respuestas['QuestionID'],
+                    'answer' => $respuestas['answer'], 
+                    'QuestionPoints' => $respuestas['score'], 
+                    'StartDate' => $startDate, 
+                    'FinishDate' => $finishDate, 
                 ]);
 
                 $qa->save();
@@ -78,6 +79,7 @@ class ControllerQA extends Controller
     {
         try {
             DB::beginTransaction();
+            //formatea las fechas y valida que esten los datos necesarios
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
             $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
@@ -88,12 +90,11 @@ class ControllerQA extends Controller
                 'FinishDate' => 'required',
             ]);
 
-            // Validation logic goes here
             $QA = ModelQA::findOrFail($id);
             if (!$QA) {
                 return response()->json(['success' => false], 404);
             }
-            // Use the update method to update the record
+            //actualiza la respuesta en la base de datos
             $QA->update([
                 'score' => $request->input('score'),
                 'StartDate' => $request->input('StartDate'),
@@ -128,9 +129,9 @@ class ControllerQA extends Controller
         }
     }
 
-    //funciones para estadisticas!!--!!--!!--!!
+    //funciones para estadisticas!!--!!--!!--!!(estas funciones no se usan)
 
-    // muestra todas las respuestas de una pregunta en concreto (funcion de empresa!).!!!!!!!!!!!por comprobar!!!!!!!!!!!!!
+    // muestra todas las respuestas de una pregunta en concreto (funcion de empresa!).!!!!!!!!!!!funcion sin usar!!!!!!!!!!!!!
     public function showQuestionAnswers($id, $comanyID)
     {
         try {

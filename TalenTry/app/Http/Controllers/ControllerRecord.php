@@ -63,7 +63,7 @@ class ControllerRecord extends Controller
     {
         try {
             $user = Auth::guard('sanctum')->user();
-           
+            //formatea las fechas y comprueba que los datos introducidos sean correctos
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
             $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
@@ -76,7 +76,7 @@ class ControllerRecord extends Controller
             ]);
             
             DB::beginTransaction();
-            //creates a ner record with the record model
+            //crea un aentrevista y la guarda en la base de datos
             $record = new ModelRecord([
                 'UserID' => $user->UserID,
                 'CategoryID' => $request->input('CategoryID'),
@@ -84,7 +84,6 @@ class ControllerRecord extends Controller
                 'StartDate' => $request->input('StartDate'),
                 'FinishDate' => $request->input('FinishDate'),
             ]);
-            //save in database
             if ($record->save()) {
                 DB::commit();
                 $record->get('RecordID');
@@ -100,6 +99,7 @@ class ControllerRecord extends Controller
     public function update(Request $request, $id)
     {
         try {
+            //formatea las fechas y comprueba que los datos necesarios esten introducidos
             $startDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('StartDate'))->format('Y-m-d H:i:s');
             $request->merge(['StartDate' => $startDate]);
             $finishDate = Carbon::createFromFormat('d-m-Y H:i:s', $request->input('FinishDate'))->format('Y-m-d H:i:s');
@@ -110,12 +110,11 @@ class ControllerRecord extends Controller
                 'FinishDate' => 'required',
             ]);
             DB::beginTransaction();
-            // Validation logic goes here
             $record = ModelRecord::findOrFail($id);
             if (!$record) {
                 return response()->json(['success' => false], 404);
             }
-            // Use the update method to update the record
+            //crea una entrevista para actualizar la existente en la base de datos
             $record->update([
                 'score' => $request->input('score'),
                 'StartDate' => $request->input('StartDate'),
@@ -139,7 +138,6 @@ class ControllerRecord extends Controller
                 return response()->json(['success' => false], 404);
             }
             $record->delete();
-            // Create an instance of ControllerQA
             $QA = new ControllerQA();
             if ($QA->destroy($id)) {
                 DB::commit();

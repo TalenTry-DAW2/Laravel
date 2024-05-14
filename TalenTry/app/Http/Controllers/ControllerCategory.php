@@ -30,14 +30,17 @@ class ControllerCategory extends Controller
         }
     }
 
+    //guarda una categoria nueva en la base de datos
     public function store(Request $request)
     {
         try {
+            //valida los datos recividos
             $request->validate([
                 'CategoryName' => 'required',
                 'description' => 'required',
             ]);
             DB::beginTransaction();
+            //crea un objeto de Category y lo guarda en la base de datos
             $category = new ModelCategory([
                 'CategoryName' => $request->input('CategoryName'),
                 'description' => $request->input('description'),
@@ -49,6 +52,7 @@ class ControllerCategory extends Controller
         }
     }
 
+    //actualiza la categoria seleccionada en la base de datos
     public function update(Request $request, $id)
     {
         try {
@@ -73,6 +77,7 @@ class ControllerCategory extends Controller
         }
     }
 
+    //elimina la categoria seleccionada
     public function delete(Request $request, $id)
     {
         try {

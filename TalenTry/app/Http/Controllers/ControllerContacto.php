@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 class ControllerContacto extends Controller
 {
 
+    //Guarda un formulario de contacto en la base de datos
     public function store(Request $request)
     {
         try {
@@ -21,14 +22,13 @@ class ControllerContacto extends Controller
                 'mensaje' => 'required',
             ]);
             DB::beginTransaction();
-            //creates a ner record with the record model
+            //crea un nuevo formulario y los guarda
             $record = new ModelContacto([
                 'UserID' => $user->UserID,
                 'nombre' => $request->input('nombre'),
                 'email' => $request->input('email'),
                 'mensaje' => $request->input('mensaje'),
             ]);
-                //save in database
             if ($record->save()) {
                 DB::commit();
                 return response()->json(['success' => true], 200);

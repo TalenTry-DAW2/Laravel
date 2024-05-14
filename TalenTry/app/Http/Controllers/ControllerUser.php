@@ -29,6 +29,7 @@ class ControllerUser extends Controller
     public function store(Request $request)
     {
         try {
+            //valida que los datos necesarios esten introducidos
             $request->validate([
                 'DNI' => 'required',
                 'name' => 'required',
@@ -37,6 +38,7 @@ class ControllerUser extends Controller
                 'phone' => 'required',
             ]);
             DB::beginTransaction();
+            //hashea la contraseña y crea el usuario para guardarlo en la base de datos
             $pHash = bcrypt($request->input('password'));
             $usuario = new ModelUsers([
                 'DNI' => $request->input('DNI'),
@@ -96,6 +98,7 @@ class ControllerUser extends Controller
             //makes the $user into a user object
 
             $user = ModelUsers::find($user->UserID);
+            //hashea la contraseña y crea el usuario para actualizarlo en la base de datos (solo los datos que SÍ ha recibido)
             $pHash = bcrypt($request->filled('password') ? $request->input('password') : $user->password);
             $user->update([
                 'photo' => $request->filled('photo') ? $request->input('photo') : $user->photo,
@@ -121,7 +124,6 @@ class ControllerUser extends Controller
                 return response()->json(['success' => false], 404);
             }
 
-            //makes the $user into a user object
             $user = ModelUsers::find($user->UserID);
             $user->update([
                 'visibility' => !$user->visibility,
@@ -232,7 +234,8 @@ class ControllerUser extends Controller
             return response()->json(['success' => false, 'error' => $e->getMessage()], 404);
         }
     }
-    
+    //funciones para las vistas de admin y empresa
+    //muestraa cuantos usuarios existen
     public function totalUsers()
     {
         try {
@@ -246,20 +249,22 @@ class ControllerUser extends Controller
         }
        
     }
+
+    //calcula que porcentaje de estos usuarios ha hecho al menos 1 entrevista simulada
     public function calculateUserPercentage()
     {
         try {
-         // Get the total number of unique users in the users table
+         // obtiene el numero total de usuarios
          $totalUsers = ModelUsers::distinct('UserID')->count();
 
-         // Get the number of users who appear in both tables (assuming 'usuarios' is your users table)
+         // obtiene el numero de usuarios que aparecen en cada tabla(sin repetir)
          $usersInBoth = ModelRecord::distinct('UserID')
              ->whereIn('UserID', function ($query) {
                  $query->select('UserID')->from('Users');
              })
              ->count();
  
-         // Calculate the percentage
+         // Calcula el porcentaje
          if ($totalUsers > 0) {
              $percentage = ($usersInBoth / $totalUsers) * 100;
          } else {
