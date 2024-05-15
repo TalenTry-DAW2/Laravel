@@ -10,6 +10,22 @@ use Illuminate\Support\Facades\DB;
 class ControllerContacto extends Controller
 {
 
+    public function index()
+    {
+        try {
+            // Obtener todos los registros de contacto
+            $contactos = ModelContacto::all();
+
+            // Devolver los registros como respuesta JSON
+            return response()->json(['success' => true, $contactos], 200);
+        } catch (\Exception $e) {
+            // Manejar cualquier error que ocurra y devolver una respuesta JSON de error
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+
+
+
     //Guarda un formulario de contacto en la base de datos
     public function store(Request $request)
     {
@@ -38,4 +54,6 @@ class ControllerContacto extends Controller
             return response()->json(['success' => false, 'error'=> $e->getMessage()], 500);
         }
     }
+
+
 }

@@ -8,7 +8,6 @@ use App\Http\Controllers\ControllerQuestion;
 use App\Http\Controllers\ControllerAnswer;
 use App\Http\Controllers\ControllerCompany;
 use App\Http\Controllers\ControllerShare;
-use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\ControllerContacto;
 
 /*
@@ -140,6 +139,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/record')->group(function () {
       Route::get('/delete/{id}', [ControllerRecord::class, 'destroy']);
     });
+
+    //funciones para controlar los correos enviados
+
+
+    Route::get('/contactos', [ControllerContacto::class, 'index']);
+
+
+
 
     //funciones de controlador QA
     Route::prefix('/QA')->group(function () {
