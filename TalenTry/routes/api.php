@@ -145,7 +145,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/contactos', [ControllerContacto::class, 'index']);
 
-
+    Route::get('/user', [ControllerUser::class, 'index']);
 
 
     //funciones de controlador QA
