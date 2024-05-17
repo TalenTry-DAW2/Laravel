@@ -22,8 +22,8 @@ return new class extends Migration
             $table->dateTime('FinishDate')->notnull();
     
             // Foreign key constraints
-            $table->foreign('RecordID')->references('RecordID')->on('Record');
-            $table->foreign('QuestionID')->references('QuestionID')->on('Question');
+            $table->foreign('RecordID')->references('RecordID')->on('Record')->onDelete('cascade');
+            $table->foreign('QuestionID')->references('QuestionID')->on('Question')->onDelete('cascade');
         });
     }
 

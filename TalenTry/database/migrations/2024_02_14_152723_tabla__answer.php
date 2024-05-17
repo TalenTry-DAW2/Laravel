@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('QuestionID')->notnull();
             $table->double('QuestionPoints', 5, 2)->notnull();
     
-            $table->foreign('QuestionID')->references('QuestionID')->on('Question'); // Adjust the table name if needed
+            $table->foreign('QuestionID')->references('QuestionID')->on('Question')->onDelete('cascade'); // Adjust the table name if needed
         });
     }
     /**

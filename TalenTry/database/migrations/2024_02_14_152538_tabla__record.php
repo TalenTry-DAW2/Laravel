@@ -20,9 +20,9 @@ return new class extends Migration
             $table->dateTime('StartDate')->nullable(false);
             $table->dateTime('FinishDate')->nullable(false);
     
-            $table->foreign('UserID')->references('UserID')->on('Users');
+            $table->foreign('UserID')->references('UserID')->on('Users')->onDelete('cascade');
 
-            $table->foreign('CategoryID')->references('CategoryID')->on('Category');
+            $table->foreign('CategoryID')->references('CategoryID')->on('Category')->onDelete('cascade');
         });
     }
 

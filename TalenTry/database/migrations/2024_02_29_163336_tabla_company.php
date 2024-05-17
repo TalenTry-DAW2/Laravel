@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address')->nullable(false);
             $table->unsignedBigInteger('UserID')->nullable(false);
 
-            $table->foreign('UserID')->references('UserID')->on('Users');
+            $table->foreign('UserID')->references('UserID')->on('Users')->onDelete('cascade');
         });
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('question')->length(255)->notnull();
             $table->unsignedBigInteger('CategoryID')->notnull();
     
-            $table->foreign('CategoryID')->references('CategoryID')->on('category'); // Adjust the table name if needed
+            $table->foreign('CategoryID')->references('CategoryID')->on('category')->onDelete('cascade'); // Adjust the table name if needed
         });
     }
 

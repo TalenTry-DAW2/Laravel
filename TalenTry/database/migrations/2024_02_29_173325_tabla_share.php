@@ -19,8 +19,8 @@ return new class extends Migration
             $table->date('ExpiredDate')->notnull();
 
             // Foreign key constraints
-            $table->foreign('UserID')->references('UserID')->on('Users');
-            $table->foreign('CompanyID')->references('CompanyID')->on('Company');
+            $table->foreign('UserID')->references('UserID')->on('Users')->onDelete('cascade');
+            $table->foreign('CompanyID')->references('CompanyID')->on('Company')->onDelete('cascade');
         });
     }
 

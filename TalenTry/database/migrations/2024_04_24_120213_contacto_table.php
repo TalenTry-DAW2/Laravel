@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('mensaje');
             $table->timestamps();
 
-            $table->foreign('UserID')->references('UserID')->on('Users');
+            $table->foreign('UserID')->references('UserID')->on('Users')->onDelete('cascade');
         });
     }
 
